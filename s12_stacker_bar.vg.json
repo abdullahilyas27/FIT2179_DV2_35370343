@@ -15,10 +15,10 @@
     "axis": {
       "labelFont": "IBM Plex Mono",
       "labelFontSize": 10.5,
-      "labelColor": "#5C6A75",
+      "labelColor": "#3F4D5A",
       "titleFont": "IBM Plex Mono",
       "titleFontSize": 10.5,
-      "titleColor": "#5C6A75",
+      "titleColor": "#3F4D5A",
       "domain": false,
       "tickColor": "#B7AE99",
       "titleFontWeight": 600,
@@ -32,10 +32,10 @@
     "legend": {
       "labelFont": "IBM Plex Mono",
       "labelFontSize": 10.5,
-      "labelColor": "#5C6A75",
+      "labelColor": "#3F4D5A",
       "titleFont": "IBM Plex Mono",
       "titleFontSize": 10,
-      "titleColor": "#5C6A75",
+      "titleColor": "#3F4D5A",
       "titleFontWeight": 600
     },
     "title": {
@@ -45,13 +45,13 @@
       "color": "#14202C",
       "anchor": "start",
       "subtitleFont": "Spectral",
-      "subtitleColor": "#5C6A75"
+      "subtitleColor": "#3F4D5A"
     },
     "header": {
       "labelFont": "IBM Plex Mono",
       "labelColor": "#14202C",
       "titleFont": "IBM Plex Mono",
-      "titleColor": "#5C6A75"
+      "titleColor": "#3F4D5A"
     }
   },
   "data": {
@@ -134,21 +134,33 @@
           },
           "axis": {
             "title": null,
+            "labelColor": "#14202C",
             "labelFont": "IBM Plex Mono",
-            "labelFontSize": 11,
+            "labelFontSize": 10,
             "labelFontWeight": 500,
-            "labelColor": "#16202A",
-            "labelExpr": "upper(datum.value)",
-            "labelPadding": 12,
-            "domain": false,
-            "ticks": false
+            "labelPadding": 6,
+            "tickColor": "#3F4D5A",
+            "domainColor": "#3F4D5A"
           }
         },
         "x": {
           "field": "n",
           "type": "quantitative",
           "stack": "zero",
-          "axis": null
+          "axis": {
+            "title": "Number of incidents",
+            "titleColor": "#3F4D5A",
+            "titleFont": "IBM Plex Mono",
+            "titleFontSize": 10,
+            "titleFontWeight": 500,
+            "titlePadding": 10,
+            "labelColor": "#3F4D5A",
+            "labelFont": "IBM Plex Mono",
+            "labelFontSize": 9.5,
+            "tickColor": "#3F4D5A",
+            "domainColor": "#3F4D5A",
+            "grid": false
+          }
         },
         "color": {
           "field": "outcome",
@@ -170,7 +182,29 @@
         "order": {
           "field": "outcome_order",
           "type": "ordinal"
-        }
+        },
+        "tooltip": [
+          {
+            "field": "activity",
+            "type": "nominal",
+            "title": "Activity"
+          },
+          {
+            "field": "outcome",
+            "type": "nominal",
+            "title": "Outcome"
+          },
+          {
+            "field": "n",
+            "type": "quantitative",
+            "title": "Incidents"
+          },
+          {
+            "field": "total",
+            "type": "quantitative",
+            "title": "Activity total"
+          }
+        ]
       },
       "transform": [
         {
@@ -193,7 +227,8 @@
         "fontSize": 12,
         "fontWeight": 500,
         "color": "#16202A",
-        "baseline": "middle"
+        "baseline": "middle",
+        "fill": "#14202C"
       },
       "encoding": {
         "y": {
@@ -238,7 +273,8 @@
         "fontSize": 11,
         "fontWeight": 500,
         "color": "#E84545",
-        "baseline": "middle"
+        "baseline": "middle",
+        "fill": "#14202C"
       },
       "encoding": {
         "y": {

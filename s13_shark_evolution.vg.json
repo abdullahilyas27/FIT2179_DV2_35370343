@@ -17,9 +17,9 @@
     "axis": {
       "labelFont": "IBM Plex Mono",
       "labelFontSize": 10.5,
-      "labelColor": "#5C6A75",
+      "labelColor": "#3F4D5A",
       "titleFont": "IBM Plex Mono",
-      "titleColor": "#5C6A75",
+      "titleColor": "#3F4D5A",
       "titleFontSize": 10.5,
       "titleFontWeight": 600,
       "titlePadding": 10,
@@ -33,10 +33,10 @@
     "legend": {
       "labelFont": "IBM Plex Mono",
       "labelFontSize": 10.5,
-      "labelColor": "#5C6A75",
+      "labelColor": "#3F4D5A",
       "titleFont": "IBM Plex Mono",
       "titleFontSize": 10,
-      "titleColor": "#5C6A75",
+      "titleColor": "#3F4D5A",
       "titleFontWeight": 600
     },
     "title": {
@@ -46,449 +46,14 @@
       "color": "#14202C",
       "anchor": "start",
       "subtitleFont": "Spectral",
-      "subtitleColor": "#5C6A75"
+      "subtitleColor": "#3F4D5A"
     },
     "header": {
       "labelFont": "IBM Plex Mono",
       "labelColor": "#14202C",
       "titleFont": "IBM Plex Mono",
-      "titleColor": "#5C6A75"
+      "titleColor": "#3F4D5A"
     }
-  },
-  "datasets": {
-    "decade_species": [
-      {
-        "decade": 1900,
-        "decade_label": "1900s",
-        "species": "White shark",
-        "count": 1,
-        "pct": 3.4
-      },
-      {
-        "decade": 1900,
-        "decade_label": "1900s",
-        "species": "Bull shark",
-        "count": 14,
-        "pct": 48.3
-      },
-      {
-        "decade": 1900,
-        "decade_label": "1900s",
-        "species": "Tiger shark",
-        "count": 9,
-        "pct": 31.0
-      },
-      {
-        "decade": 1900,
-        "decade_label": "1900s",
-        "species": "Other",
-        "count": 5,
-        "pct": 17.2
-      },
-      {
-        "decade": 1910,
-        "decade_label": "1910s",
-        "species": "White shark",
-        "count": 8,
-        "pct": 14.8
-      },
-      {
-        "decade": 1910,
-        "decade_label": "1910s",
-        "species": "Bull shark",
-        "count": 14,
-        "pct": 25.9
-      },
-      {
-        "decade": 1910,
-        "decade_label": "1910s",
-        "species": "Tiger shark",
-        "count": 15,
-        "pct": 27.8
-      },
-      {
-        "decade": 1910,
-        "decade_label": "1910s",
-        "species": "Other",
-        "count": 17,
-        "pct": 31.5
-      },
-      {
-        "decade": 1920,
-        "decade_label": "1920s",
-        "species": "White shark",
-        "count": 18,
-        "pct": 22.2
-      },
-      {
-        "decade": 1920,
-        "decade_label": "1920s",
-        "species": "Bull shark",
-        "count": 17,
-        "pct": 21.0
-      },
-      {
-        "decade": 1920,
-        "decade_label": "1920s",
-        "species": "Tiger shark",
-        "count": 32,
-        "pct": 39.5
-      },
-      {
-        "decade": 1920,
-        "decade_label": "1920s",
-        "species": "Other",
-        "count": 14,
-        "pct": 17.3
-      },
-      {
-        "decade": 1930,
-        "decade_label": "1930s",
-        "species": "White shark",
-        "count": 14,
-        "pct": 15.1
-      },
-      {
-        "decade": 1930,
-        "decade_label": "1930s",
-        "species": "Bull shark",
-        "count": 19,
-        "pct": 20.4
-      },
-      {
-        "decade": 1930,
-        "decade_label": "1930s",
-        "species": "Tiger shark",
-        "count": 42,
-        "pct": 45.2
-      },
-      {
-        "decade": 1930,
-        "decade_label": "1930s",
-        "species": "Other",
-        "count": 18,
-        "pct": 19.4
-      },
-      {
-        "decade": 1940,
-        "decade_label": "1940s",
-        "species": "White shark",
-        "count": 8,
-        "pct": 15.7
-      },
-      {
-        "decade": 1940,
-        "decade_label": "1940s",
-        "species": "Bull shark",
-        "count": 11,
-        "pct": 21.6
-      },
-      {
-        "decade": 1940,
-        "decade_label": "1940s",
-        "species": "Tiger shark",
-        "count": 23,
-        "pct": 45.1
-      },
-      {
-        "decade": 1940,
-        "decade_label": "1940s",
-        "species": "Other",
-        "count": 9,
-        "pct": 17.6
-      },
-      {
-        "decade": 1950,
-        "decade_label": "1950s",
-        "species": "White shark",
-        "count": 16,
-        "pct": 24.2
-      },
-      {
-        "decade": 1950,
-        "decade_label": "1950s",
-        "species": "Bull shark",
-        "count": 9,
-        "pct": 13.6
-      },
-      {
-        "decade": 1950,
-        "decade_label": "1950s",
-        "species": "Tiger shark",
-        "count": 19,
-        "pct": 28.8
-      },
-      {
-        "decade": 1950,
-        "decade_label": "1950s",
-        "species": "Other",
-        "count": 22,
-        "pct": 33.3
-      },
-      {
-        "decade": 1960,
-        "decade_label": "1960s",
-        "species": "White shark",
-        "count": 15,
-        "pct": 28.8
-      },
-      {
-        "decade": 1960,
-        "decade_label": "1960s",
-        "species": "Bull shark",
-        "count": 6,
-        "pct": 11.5
-      },
-      {
-        "decade": 1960,
-        "decade_label": "1960s",
-        "species": "Tiger shark",
-        "count": 4,
-        "pct": 7.7
-      },
-      {
-        "decade": 1960,
-        "decade_label": "1960s",
-        "species": "Other",
-        "count": 27,
-        "pct": 51.9
-      },
-      {
-        "decade": 1970,
-        "decade_label": "1970s",
-        "species": "White shark",
-        "count": 16,
-        "pct": 44.4
-      },
-      {
-        "decade": 1970,
-        "decade_label": "1970s",
-        "species": "Bull shark",
-        "count": 3,
-        "pct": 8.3
-      },
-      {
-        "decade": 1970,
-        "decade_label": "1970s",
-        "species": "Tiger shark",
-        "count": 8,
-        "pct": 22.2
-      },
-      {
-        "decade": 1970,
-        "decade_label": "1970s",
-        "species": "Other",
-        "count": 9,
-        "pct": 25.0
-      },
-      {
-        "decade": 1980,
-        "decade_label": "1980s",
-        "species": "White shark",
-        "count": 23,
-        "pct": 35.4
-      },
-      {
-        "decade": 1980,
-        "decade_label": "1980s",
-        "species": "Bull shark",
-        "count": 3,
-        "pct": 4.6
-      },
-      {
-        "decade": 1980,
-        "decade_label": "1980s",
-        "species": "Tiger shark",
-        "count": 17,
-        "pct": 26.2
-      },
-      {
-        "decade": 1980,
-        "decade_label": "1980s",
-        "species": "Other",
-        "count": 22,
-        "pct": 33.8
-      },
-      {
-        "decade": 1990,
-        "decade_label": "1990s",
-        "species": "White shark",
-        "count": 23,
-        "pct": 28.0
-      },
-      {
-        "decade": 1990,
-        "decade_label": "1990s",
-        "species": "Bull shark",
-        "count": 15,
-        "pct": 18.3
-      },
-      {
-        "decade": 1990,
-        "decade_label": "1990s",
-        "species": "Tiger shark",
-        "count": 10,
-        "pct": 12.2
-      },
-      {
-        "decade": 1990,
-        "decade_label": "1990s",
-        "species": "Other",
-        "count": 34,
-        "pct": 41.5
-      },
-      {
-        "decade": 2000,
-        "decade_label": "2000s",
-        "species": "White shark",
-        "count": 71,
-        "pct": 43.0
-      },
-      {
-        "decade": 2000,
-        "decade_label": "2000s",
-        "species": "Bull shark",
-        "count": 14,
-        "pct": 8.5
-      },
-      {
-        "decade": 2000,
-        "decade_label": "2000s",
-        "species": "Tiger shark",
-        "count": 9,
-        "pct": 5.5
-      },
-      {
-        "decade": 2000,
-        "decade_label": "2000s",
-        "species": "Other",
-        "count": 71,
-        "pct": 43.0
-      },
-      {
-        "decade": 2010,
-        "decade_label": "2010s",
-        "species": "White shark",
-        "count": 99,
-        "pct": 42.5
-      },
-      {
-        "decade": 2010,
-        "decade_label": "2010s",
-        "species": "Bull shark",
-        "count": 17,
-        "pct": 7.3
-      },
-      {
-        "decade": 2010,
-        "decade_label": "2010s",
-        "species": "Tiger shark",
-        "count": 16,
-        "pct": 6.9
-      },
-      {
-        "decade": 2010,
-        "decade_label": "2010s",
-        "species": "Other",
-        "count": 101,
-        "pct": 43.3
-      },
-      {
-        "decade": 2020,
-        "decade_label": "2020s",
-        "species": "White shark",
-        "count": 39,
-        "pct": 28.5
-      },
-      {
-        "decade": 2020,
-        "decade_label": "2020s",
-        "species": "Bull shark",
-        "count": 17,
-        "pct": 12.4
-      },
-      {
-        "decade": 2020,
-        "decade_label": "2020s",
-        "species": "Tiger shark",
-        "count": 8,
-        "pct": 5.8
-      },
-      {
-        "decade": 2020,
-        "decade_label": "2020s",
-        "species": "Other",
-        "count": 73,
-        "pct": 53.3
-      }
-    ],
-    "decade_totals": [
-      {
-        "decade": 1900,
-        "decade_label": "1900s",
-        "total": 29
-      },
-      {
-        "decade": 1910,
-        "decade_label": "1910s",
-        "total": 54
-      },
-      {
-        "decade": 1920,
-        "decade_label": "1920s",
-        "total": 81
-      },
-      {
-        "decade": 1930,
-        "decade_label": "1930s",
-        "total": 93
-      },
-      {
-        "decade": 1940,
-        "decade_label": "1940s",
-        "total": 51
-      },
-      {
-        "decade": 1950,
-        "decade_label": "1950s",
-        "total": 66
-      },
-      {
-        "decade": 1960,
-        "decade_label": "1960s",
-        "total": 52
-      },
-      {
-        "decade": 1970,
-        "decade_label": "1970s",
-        "total": 36
-      },
-      {
-        "decade": 1980,
-        "decade_label": "1980s",
-        "total": 65
-      },
-      {
-        "decade": 1990,
-        "decade_label": "1990s",
-        "total": 82
-      },
-      {
-        "decade": 2000,
-        "decade_label": "2000s",
-        "total": 165
-      },
-      {
-        "decade": 2010,
-        "decade_label": "2010s",
-        "total": 233
-      },
-      {
-        "decade": 2020,
-        "decade_label": "2020s",
-        "total": 137
-      }
-    ]
   },
   "spacing": 30,
   "resolve": {
@@ -512,7 +77,10 @@
         "offset": 10
       },
       "data": {
-        "name": "decade_totals"
+        "url": "data/asid_incidents.csv",
+        "format": {
+          "type": "csv"
+        }
       },
       "width": 870,
       "height": 90,
@@ -527,7 +95,7 @@
       "encoding": {
         "x": {
           "field": "decade_label",
-          "type": "nominal",
+          "type": "ordinal",
           "axis": {
             "labelAngle": 0,
             "title": null,
@@ -535,7 +103,8 @@
             "ticks": false,
             "domain": false,
             "labelFontSize": 10
-          }
+          },
+          "sort": null
         },
         "y": {
           "field": "total",
@@ -559,7 +128,32 @@
             "title": "Incidents"
           }
         ]
-      }
+      },
+      "transform": [
+        {
+          "filter": "datum.year != null && datum.year >= 1900"
+        },
+        {
+          "calculate": "floor(toNumber(datum.year) / 10) * 10",
+          "as": "decade"
+        },
+        {
+          "calculate": "toString(datum.decade) + 's'",
+          "as": "decade_label"
+        },
+        {
+          "aggregate": [
+            {
+              "op": "count",
+              "as": "total"
+            }
+          ],
+          "groupby": [
+            "decade",
+            "decade_label"
+          ]
+        }
+      ]
     },
     {
       "title": {
@@ -576,11 +170,55 @@
         "offset": 10
       },
       "data": {
-        "name": "decade_species"
+        "url": "data/asid_incidents.csv",
+        "format": {
+          "type": "csv"
+        }
       },
       "transform": [
         {
-          "filter": "datum.count > 0"
+          "filter": "datum.year != null && datum.year >= 1900"
+        },
+        {
+          "calculate": "floor(toNumber(datum.year) / 10) * 10",
+          "as": "decade"
+        },
+        {
+          "calculate": "toString(datum.decade) + 's'",
+          "as": "decade_label"
+        },
+        {
+          "calculate": "indexof(['White shark','Bull shark','Tiger shark'], datum.species) >= 0 ? datum.species : 'Other'",
+          "as": "species"
+        },
+        {
+          "aggregate": [
+            {
+              "op": "count",
+              "as": "count"
+            }
+          ],
+          "groupby": [
+            "decade",
+            "decade_label",
+            "species"
+          ]
+        },
+        {
+          "joinaggregate": [
+            {
+              "op": "sum",
+              "field": "count",
+              "as": "decade_total"
+            }
+          ],
+          "groupby": [
+            "decade"
+          ]
+        },
+        {
+          "calculate": "datum.count / datum.decade_total * 100",
+          "as": "pct"
         }
       ],
       "facet": {

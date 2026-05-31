@@ -53,131 +53,6 @@
       "as": "fatality_band"
     },
     {
-      "lookup": "city",
-      "from": {
-        "data": {
-          "values": [
-            {
-              "city": "sydney",
-              "city_label": "Sydney"
-            },
-            {
-              "city": "torres strait",
-              "city_label": "Torres Strait"
-            },
-            {
-              "city": "sydney harbour",
-              "city_label": "Sydney Harbour"
-            },
-            {
-              "city": "perth",
-              "city_label": "Perth"
-            },
-            {
-              "city": "gold coast",
-              "city_label": "Gold Coast"
-            },
-            {
-              "city": "central coast",
-              "city_label": "Central Coast"
-            },
-            {
-              "city": "brisbane river",
-              "city_label": "Brisbane River"
-            },
-            {
-              "city": "townsville",
-              "city_label": "Townsville"
-            },
-            {
-              "city": "port phillip bay",
-              "city_label": "Port Phillip Bay"
-            },
-            {
-              "city": "sunshine coast",
-              "city_label": "Sunshine Coast"
-            },
-            {
-              "city": "byron bay",
-              "city_label": "Byron Bay"
-            },
-            {
-              "city": "moreton bay",
-              "city_label": "Moreton Bay"
-            },
-            {
-              "city": "newcastle",
-              "city_label": "Newcastle"
-            },
-            {
-              "city": "port stephens",
-              "city_label": "Port Stephens"
-            },
-            {
-              "city": "cairns",
-              "city_label": "Cairns"
-            },
-            {
-              "city": "wollongong",
-              "city_label": "Wollongong"
-            },
-            {
-              "city": "yamba",
-              "city_label": "Yamba"
-            },
-            {
-              "city": "adelaide",
-              "city_label": "Adelaide"
-            },
-            {
-              "city": "rottnest island",
-              "city_label": "Rottnest Island"
-            },
-            {
-              "city": "mandurah",
-              "city_label": "Mandurah"
-            },
-            {
-              "city": "fremantle",
-              "city_label": "Fremantle"
-            },
-            {
-              "city": "ballina",
-              "city_label": "Ballina"
-            },
-            {
-              "city": "evans head",
-              "city_label": "Evans Head"
-            },
-            {
-              "city": "coffs harbour",
-              "city_label": "Coffs Harbour"
-            },
-            {
-              "city": "shark bay",
-              "city_label": "Shark Bay"
-            },
-            {
-              "city": "cooktown",
-              "city_label": "Cooktown"
-            },
-            {
-              "city": "esperance",
-              "city_label": "Esperance"
-            }
-          ]
-        },
-        "key": "city",
-        "fields": [
-          "city_label"
-        ]
-      }
-    },
-    {
-      "calculate": "datum.city_label || (upper(slice(datum.city,0,1)) + slice(datum.city,1))",
-      "as": "city_label"
-    },
-    {
       "window": [
         {
           "op": "rank",
@@ -193,13 +68,17 @@
     },
     {
       "filter": "datum.rank <= 20"
+    },
+    {
+      "calculate": "upper(slice(datum.city,0,1)) + replace(replace(replace(replace(replace(replace(replace(replace(slice(datum.city,1),' s',' S'),' h',' H'),' c',' C'),' b',' B'),' p',' P'),' r',' R'),' i',' I'),' m',' M')",
+      "as": "city_label"
     }
   ],
   "layer": [
     {
       "mark": {
         "type": "rule",
-        "stroke": "#5C6A75",
+        "stroke": "#3F4D5A",
         "strokeWidth": 0.8,
         "opacity": 0.6
       },
@@ -299,14 +178,14 @@
         },
         "tooltip": [
           {
-            "field": "city",
+            "field": "city_label",
             "type": "nominal",
             "title": "City"
           },
           {
             "field": "incident_count",
             "type": "quantitative",
-            "title": "Incidents"
+            "title": "Total incidents"
           },
           {
             "field": "fatal_count",
@@ -316,7 +195,7 @@
           {
             "field": "fatality_rate",
             "type": "quantitative",
-            "title": "Fatal share",
+            "title": "Fatality rate",
             "format": ".0%"
           }
         ]
