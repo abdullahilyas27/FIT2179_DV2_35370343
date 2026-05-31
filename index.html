@@ -1,0 +1,1045 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Beneath the Surface · Australian shark incidents, 1791–2026</title>
+<meta name="description" content="An investigation in fourteen charts. Recorded shark bites in Australia are rising — but the risk to each of us has fallen. A story about people, not sharks.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@500;600;700&family=Spectral:ital,wght@0,300;0,400;0,500;1,400;1,500&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+
+<style>
+:root{
+  --paper:#EAE6DB; --paper-2:#E3DECF; --paper-dk:#DED7C5;
+  --ink:#14202C; --ink-soft:#2B3A48; --ink-mut:#5C6A75; --ink-faint:#8E9A98;
+  --rule:#C3BBA6; --rule-faint:#D3CCB9;
+  --red:#C13F2E; --red-deep:#9E2E20;
+  --sea:#0A2A40; --sea-deep:#051A2A; --sea-faint:#6A8AA2;
+  --white-shark:#0072B2; --bull-shark:#D55E00; --tiger-shark:#E6C200; --other-shark:#7C8492;
+  --injured:#E69F00; --uninjured:#0072B2;
+  --contour:rgba(15,60,84,0.045);
+  --col:1180px; --read:680px; --pad:40px;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+html,body{margin:0;padding:0}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:'Spectral',Georgia,'Times New Roman',serif;
+  font-size:16px; line-height:1.6;
+  font-feature-settings:'tnum' 1;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+}
+::selection{background:rgba(193,63,46,0.20); color:var(--ink)}
+img,svg{max-width:100%; height:auto; display:block}
+a{color:var(--ink); text-decoration:underline; text-decoration-thickness:1px; text-underline-offset:3px; text-decoration-color:var(--rule)}
+a:hover{text-decoration-color:var(--red)}
+.vega-bindings{display:none!important}
+
+/* ---------------- SOUNDING GAUGE (scroll indicator) ---------------- */
+.gauge{position:fixed; left:22px; top:50%; transform:translateY(-50%);
+  width:46px; height:260px; z-index:50; pointer-events:none;}
+.gauge .track{position:absolute; left:14px; top:0; width:1px; height:100%; background:var(--rule)}
+.gauge .tick{position:absolute; left:9px; width:6px; height:1px; background:var(--rule)}
+.gauge .lab{position:absolute; left:20px; font-family:'IBM Plex Mono',monospace;
+  font-size:8.5px; letter-spacing:.1em; color:var(--ink-faint); transform:translateY(-50%)}
+.gauge .marker{position:absolute; left:11px; width:7px; height:7px; background:var(--red);
+  border-radius:50%; transition:top .12s ease-out; box-shadow:0 0 0 3px var(--paper)}
+.gauge .cap{position:absolute; left:0; top:-22px; font-family:'IBM Plex Mono',monospace;
+  font-size:8.5px; letter-spacing:.18em; color:var(--ink-faint); writing-mode:vertical-rl}
+@media(max-width:1280px){.gauge{display:none}}
+
+/* ---------------- WIDTH DISCIPLINE ---------------- */
+.wrap{max-width:var(--col); margin:0 auto; padding:0 var(--pad)}
+
+/* ================================================================
+   MASTHEAD
+   ================================================================ */
+.register{border-bottom:1px solid var(--ink)}
+.register .wrap{display:flex; justify-content:space-between; align-items:center; padding-top:9px; padding-bottom:9px;
+  font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:var(--ink-mut)}
+.register .id{color:var(--ink-faint)}
+.masthead{padding-top:92px}
+.masthead-rule{position:absolute; top:32px; left:0; right:0; height:0; border-top:1px solid var(--ink-mut); pointer-events:none}
+.masthead .name{font-family:'Saira Condensed',sans-serif; font-weight:700; margin:0;
+  font-size:clamp(46px,9vw,104px); line-height:.86; letter-spacing:.02em; text-transform:uppercase; color:var(--ink)}
+.masthead .strap{display:flex; justify-content:space-between; align-items:baseline; gap:24px; flex-wrap:wrap;
+  margin-top:14px; padding-bottom:14px; border-bottom:3px double var(--ink);
+  font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-mut)}
+.masthead .strap .thesis{color:var(--ink); font-weight:600}
+.masthead .strap .by{color:var(--ink); font-weight:500}
+
+/* ---------------- HERO / LEDE ---------------- */
+.lede{padding-top:22px; padding-bottom:8px}
+.lede-grid{display:grid; grid-template-columns:minmax(0,1fr) 320px; gap:42px; align-items:start}
+.lede .standfirst{column-count:2; column-gap:34px; column-rule:1px solid var(--rule-faint);
+  font-size:17px; line-height:1.62; color:var(--ink-soft); margin:0; border-top:2px solid var(--ink); padding-top:14px}
+.lede .standfirst p{margin:0 0 13px}
+.lede .standfirst p:first-child::first-letter{float:left; font-family:'Saira Condensed',sans-serif;
+  font-weight:700; font-size:76px; line-height:.66; padding:8px 12px 0 0; color:var(--red)}
+.lede .standfirst strong{font-weight:500; color:var(--ink)}
+.lede .standfirst em{font-style:italic; color:var(--ink)}
+
+.docket{display:grid; grid-template-columns:1fr 1fr; gap:14px 28px; border-top:3px double var(--ink); padding-top:14px}
+.docket .cell{padding:0}
+.docket .cell .n{font-family:'Saira Condensed',sans-serif; font-weight:600; font-size:30px; color:var(--ink); line-height:1}
+.docket .cell.lead .n{font-size:54px; font-weight:700; letter-spacing:.01em}
+.docket .cell .n .red{color:var(--red)}
+.docket .cell .d{font-family:'IBM Plex Mono',monospace; font-size:9.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-mut); margin-top:6px; line-height:1.45}
+
+.cta-row{display:flex; align-items:center; gap:20px; margin-top:26px; padding-top:18px; border-top:1px solid var(--rule); flex-wrap:wrap}
+.cta{font-family:'IBM Plex Mono',monospace; font-size:11px; font-weight:600; letter-spacing:.18em; text-transform:uppercase;
+  background:var(--ink); color:var(--paper); border:none; padding:13px 22px; cursor:pointer; transition:background .15s}
+.cta:hover{background:var(--red)}
+.cta::after{content:' ↓'}
+.cta-row .meta{font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-faint)}
+
+/* contents teaser */
+.contents{margin-top:26px; border-top:1px solid var(--ink); border-bottom:1px solid var(--ink); padding:14px 0;
+  display:grid; grid-template-columns:repeat(6,1fr); gap:0}
+.contents .it{padding:0 16px; border-left:1px solid var(--rule-faint)}
+.contents .it:first-child{padding-left:0; border-left:none}
+.contents .it .r{font-family:'IBM Plex Mono',monospace; font-size:9.5px; font-weight:600; letter-spacing:.14em; color:var(--red)}
+.contents .it .t{font-family:'Saira Condensed',sans-serif; font-weight:600; font-size:15px; color:var(--ink); margin-top:3px; line-height:1.05}
+@media(max-width:860px){.contents{grid-template-columns:repeat(3,1fr); gap:12px 0}
+  .contents .it:nth-child(4){padding-left:0; border-left:none}}
+
+/* ================================================================
+   ACT DIVIDER
+   ================================================================ */
+.act{padding-top:64px}
+.act-inner{border-top:2px solid var(--ink); padding-top:18px; display:grid; grid-template-columns:140px minmax(0,1fr); gap:40px; align-items:start; position:relative}
+.act-inner::before{content:''; position:absolute; top:-5px; left:0; width:8px; height:8px; background:var(--red)}
+.act-tag{font-family:'IBM Plex Mono',monospace; font-size:10.5px; font-weight:600; letter-spacing:.18em; text-transform:uppercase; color:var(--ink-mut); margin:0}
+.act-tag .roman{display:block; font-family:'Saira Condensed',sans-serif; font-weight:700; font-size:46px; letter-spacing:.02em; color:var(--red); line-height:.9; margin-bottom:6px}
+.act-headline{font-family:'Saira Condensed',sans-serif; font-weight:600; font-size:38px; line-height:1; letter-spacing:.005em; color:var(--ink); margin:0 0 12px; max-width:20ch}
+.act-headline em{font-style:italic; font-family:'Spectral',serif; font-weight:400; color:var(--ink-mut); font-size:.78em}
+.act-prose{font-size:16.5px; line-height:1.6; color:var(--ink-soft); margin:0; max-width:62ch}
+.act-prose strong{font-weight:500; color:var(--ink)}
+.act-prose em{font-style:italic; color:var(--ink)}
+@media(max-width:720px){.act-inner{grid-template-columns:1fr; gap:14px}}
+
+/* ================================================================
+   SECTION
+   ================================================================ */
+.sec{padding-top:34px; position:relative}
+.eyebrow{font-family:'IBM Plex Mono',monospace; font-size:11px; font-weight:600; letter-spacing:.2em; text-transform:uppercase;
+  color:var(--red); display:flex; align-items:center; gap:14px; margin:0 0 16px}
+.eyebrow .act-ref{color:var(--ink)}
+.eyebrow .line{flex:1; height:1px; background:var(--rule)}
+.eyebrow .sec-no{color:var(--ink-soft)}
+
+.head{font-family:'Saira Condensed',sans-serif; font-weight:600; font-size:clamp(40px,5.4vw,64px); line-height:.96;
+  letter-spacing:.004em; color:var(--ink); margin:0 0 22px; max-width:20ch}
+.head em{font-family:'Spectral',serif; font-style:italic; font-weight:400; font-size:.62em; color:var(--ink-mut); letter-spacing:0}
+.head .neg{color:var(--red)}
+
+
+/* Soundings rail — true 2-col CSS grid, no cell borders, tabular figures */
+.rail{border-top:2px solid var(--ink); padding-top:14px; display:grid; grid-template-columns:1fr 1fr; column-gap:36px; row-gap:14px; align-content:start}
+.rail .rail-h{grid-column:1 / -1; margin:0 0 -4px 0; font-family:'IBM Plex Mono',monospace; font-size:9.5px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-mut)}
+.rail .sounding{display:flex; flex-direction:column; min-height:62px; padding:0; border:none; margin:0; position:relative}
+.rail .sounding .fig{font-family:'Saira Condensed',sans-serif; font-weight:600; font-size:32px; line-height:1; color:var(--ink); margin:0 0 8px 0; letter-spacing:.005em; font-variant-numeric:tabular-nums; font-feature-settings:"tnum" 1; display:block}
+.rail .sounding .fig .red{color:var(--red)}
+.rail .sounding .fig .u{font-size:.55em; font-weight:500; color:var(--ink-mut); letter-spacing:.04em; margin-left:1px}
+.rail .sounding .lbl{font-family:'IBM Plex Mono',monospace; font-size:9.5px; line-height:1.5; letter-spacing:.07em; text-transform:uppercase; color:var(--ink-mut); margin:0}
+
+.intro{display:grid; grid-template-columns:minmax(0,1fr) 380px; gap:40px; align-items:start; margin-bottom:22px}
+.intro .deck{max-width:none}
+.deck{font-size:16.5px; line-height:1.62; color:var(--ink-soft); margin:0; border-top:2px solid var(--ink); padding-top:14px}
+.deck.two{column-count:2; column-gap:32px; column-rule:1px solid var(--rule-faint)}
+.deck p{margin:0 0 12px}
+.deck strong{font-weight:500; color:var(--ink)}
+.deck em{font-style:italic; color:var(--ink)}
+
+/* soundings rail */
+
+
+
+
+
+
+
+
+
+
+/* findings strip */
+.findings{display:grid; gap:0; border-top:1px solid var(--rule); border-bottom:1px solid var(--rule); margin:0 0 26px}
+.findings.f3{grid-template-columns:repeat(3,1fr)} .findings.f4{grid-template-columns:repeat(4,1fr)}
+.findings .cell{padding:14px 22px 14px 0; border-left:1px solid var(--rule-faint)}
+.findings .cell:first-child{border-left:none; padding-left:0}
+.findings .cell:not(:first-child){padding-left:22px}
+.findings .k{font-family:'Saira Condensed',sans-serif; font-weight:700; font-size:25px; color:var(--ink); line-height:1}
+.findings .k .red{color:var(--red)} .findings .k .u{font-size:13px;color:var(--ink-mut);font-weight:500}
+.findings .d{font-family:'IBM Plex Mono',monospace; font-size:9.5px; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-mut); margin-top:7px; line-height:1.4}
+@media(max-width:720px){.findings.f3,.findings.f4{grid-template-columns:1fr 1fr}}
+
+/* ---------------- PLATE ---------------- */
+.plate{position:relative; border-top:1px solid var(--rule); border-bottom:1px solid var(--rule); padding:16px 0 16px}
+.plate.feature{border-top:2px solid var(--red)}
+.plate.sea{background:var(--sea); border:1px solid var(--sea); padding:14px 16px 16px; box-shadow:inset 0 0 60px rgba(0,0,0,.25)}
+.figtag{display:block; margin:0 0 14px;
+  font-family:'IBM Plex Mono',monospace; font-size:10px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:var(--red)}
+.plate.sea .figtag{color:var(--sea-faint)}
+.plate.feature .figtag{color:var(--red)}
+.viz{width:100%; min-height:200px}
+.viz svg,.viz canvas{display:block; max-width:100%; height:auto; margin:0 auto}
+.plate.sea .viz{display:flex; justify-content:center}
+.err{white-space:pre-wrap; font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--red); background:rgba(193,63,46,.06); padding:14px; border:1px solid var(--red)}
+
+.caption{margin-top:14px; padding-top:11px; border-top:1px solid var(--rule-faint);
+  display:flex; justify-content:space-between; gap:22px; flex-wrap:wrap;
+  font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.07em; text-transform:uppercase; color:var(--ink-soft)}
+.caption .pl{color:var(--ink); font-weight:500}
+.caption .note{text-transform:none; letter-spacing:.02em; flex:1 1 30ch; max-width:56ch; color:var(--ink-soft); font-weight:400}
+.caption .src{color:var(--ink-soft)}
+
+/* ---------------- CONTROLS ---------------- */
+.controls{display:flex; align-items:center; gap:14px; margin:0 0 18px; flex-wrap:wrap}
+.controls .control-label{font-family:'IBM Plex Mono',monospace; font-size:10.5px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-mut); white-space:nowrap}
+.pill-group{display:flex; gap:5px; flex-wrap:wrap}
+.pill{font-family:'IBM Plex Mono',monospace; font-size:10.5px; font-weight:500; letter-spacing:.08em; text-transform:uppercase;
+  border:1px solid var(--rule); background:transparent; color:var(--ink-mut); padding:5px 13px; cursor:pointer; transition:all .12s; line-height:1.5}
+.pill:hover{border-color:var(--ink-mut); color:var(--ink)}
+.pill.active{background:var(--ink); color:var(--paper); border-color:var(--ink)}
+.map-hint{margin-left:auto; font-family:'IBM Plex Mono',monospace; font-size:9.5px; font-weight:500; letter-spacing:.16em; color:var(--ink-mut); padding:4px 0}
+
+/* §2 year range slider */
+.range-wrap{display:flex; align-items:center; gap:16px}
+.range-slider{position:relative; width:300px; height:20px}
+.range-track{position:absolute; top:9px; left:0; right:0; height:2px; background:var(--rule)}
+.range-track-fill{position:absolute; top:9px; height:2px; background:var(--red)}
+.range-input{position:absolute; top:0; left:0; width:100%; height:20px; margin:0; background:none; pointer-events:none; -webkit-appearance:none; appearance:none}
+.range-input::-webkit-slider-thumb{-webkit-appearance:none; pointer-events:auto; width:14px; height:14px; border-radius:50%; background:var(--ink); border:2px solid var(--paper); cursor:pointer; margin-top:0}
+.range-input::-moz-range-thumb{pointer-events:auto; width:12px; height:12px; border-radius:50%; background:var(--ink); border:2px solid var(--paper); cursor:pointer}
+.range-values{font-family:'IBM Plex Mono',monospace; font-size:11px; font-weight:500; color:var(--ink); letter-spacing:.05em}
+.range-values .range-dash{color:var(--ink-faint); margin:0 5px}
+
+/* §2 outcome legend overlay (on dark plate) */
+.legend-overlay{position:absolute; top:30px; right:30px; z-index:6; background:rgba(5,26,42,.7); border:1px solid var(--sea-faint); padding:11px 13px}
+.legend-overlay .legend-title{font-family:'IBM Plex Mono',monospace; font-size:9px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:var(--sea-faint); margin-bottom:9px}
+.outcome-pill{display:flex; align-items:center; gap:8px; padding:3px 4px; cursor:pointer; font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.05em; color:#C2D2DC; opacity:.6; transition:opacity .12s}
+.outcome-pill.active{opacity:1}
+.outcome-pill .dot{width:9px; height:9px; border-radius:50%; display:inline-block}
+.outcome-pill .dot.all{background:#C2D2DC} .outcome-pill .dot.fatal{background:var(--red)}
+.outcome-pill .dot.injured{background:var(--injured)} .outcome-pill .dot.uninjured{background:var(--uninjured)}
+
+/* shared legends */
+.legend-row{display:flex; align-items:center; gap:20px; flex-wrap:wrap; margin:0 0 16px;
+  font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.05em; text-transform:uppercase; color:var(--ink-mut)}
+.legend-row .item{display:flex; align-items:center; gap:8px}
+.legend-row .swatch{width:13px; height:13px; display:inline-block}
+.legend-row .swatch.dot{border-radius:50%} .legend-row .swatch.line{height:3px; width:18px}
+.legend-row .sep{width:1px; height:16px; background:var(--rule)}
+.ramp-legend{display:flex; gap:26px; align-items:center; margin:0 0 16px; flex-wrap:wrap}
+.ramp-legend .swatch-row{display:flex; align-items:center; gap:10px; font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.05em; text-transform:uppercase; color:var(--ink-mut)}
+.ramp{width:120px; height:10px; background:linear-gradient(to right,#3E6E8E,#EAE6DB,var(--red))}
+.ramp-labels{display:flex; justify-content:space-between; font-family:'IBM Plex Mono',monospace; font-size:8.5px; color:var(--ink-faint); margin-top:3px}
+.smoother{width:22px; height:0; border-top:2px solid var(--ink)}
+
+/* ---------------- CONNECT (narration between sections) ---------------- */
+.connect{margin:24px 0 0; padding:16px 0 0 22px; border-left:2px solid var(--red)}
+.connect .label{display:block; font-family:'IBM Plex Mono',monospace; font-size:10px; font-weight:600; letter-spacing:.18em; text-transform:uppercase; color:var(--red); margin-bottom:7px}
+.connect .body{font-size:16.5px; line-height:1.58; color:var(--ink-soft); font-style:italic; margin:0}
+.connect .body strong{font-style:normal; font-weight:500; color:var(--ink)}
+.connect .body em{color:var(--red); font-style:italic}
+
+/* pull quote */
+.pull{margin:26px 0 0; padding:20px 26px; border-left:3px solid var(--red); background:rgba(193,63,46,.05);
+  font-family:'Saira Condensed',sans-serif; font-weight:500; font-size:25px; line-height:1.16; color:var(--ink); letter-spacing:.004em}
+.pull .key{color:var(--red)} .pull .multi{color:var(--bull-shark)}
+
+/* bridge */
+.bridge{padding-top:24px; padding-bottom:0}
+.bridge-inner{max-width:760px; margin:0 auto; padding:22px 30px; border-top:1px solid var(--ink); border-bottom:1px solid var(--ink);
+  text-align:center; font-family:'Spectral',serif; font-style:italic; font-weight:300; font-size:23px; line-height:1.42; color:var(--ink)}
+.bridge-inner strong{font-style:normal; font-weight:500} .bridge-inner em{font-style:normal; color:var(--red); font-weight:400}
+
+/* ---------------- CONCLUSION ---------------- */
+.conclusion{padding-top:38px; padding-bottom:50px}
+.conclusion-inner{border-top:3px double var(--ink); padding-top:26px}
+.conclusion .eyebrow2{font-family:'IBM Plex Mono',monospace; font-size:11px; font-weight:600; letter-spacing:.2em; text-transform:uppercase; color:var(--red); margin:0 0 14px}
+.conclusion h2{font-family:'Saira Condensed',sans-serif; font-weight:600; font-size:clamp(38px,5vw,56px); line-height:.98; color:var(--ink); margin:0 0 22px; max-width:18ch}
+.conclusion h2 em{font-family:'Spectral',serif; font-style:italic; font-weight:400; font-size:.62em; color:var(--ink-mut)}
+.conclusion .body{column-count:2; column-gap:40px; max-width:none; font-size:16.5px; line-height:1.62; color:var(--ink-soft)}
+.conclusion .body p{margin:0 0 14px} .conclusion .body strong{font-weight:500; color:var(--ink)} .conclusion .body em{font-style:italic; color:var(--red)}
+.signature{margin-top:30px; padding-top:18px; border-top:2px solid var(--ink); display:flex; align-items:baseline; gap:16px; flex-wrap:wrap}
+.signature .by{font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-mut)}
+.signature .name{font-family:'Saira Condensed',sans-serif; font-weight:700; font-size:30px; letter-spacing:.06em; text-transform:uppercase; color:var(--ink)}
+.signature .id{font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.1em; color:var(--ink-faint)}
+.meta-grid{display:grid; grid-template-columns:1fr 1fr; gap:36px; margin-top:30px}
+.meta-label{font-family:'IBM Plex Mono',monospace; font-size:10px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:var(--red); margin-bottom:10px; padding-bottom:8px; border-bottom:1px solid var(--rule)}
+.meta-value{font-size:13.5px; line-height:1.55; color:var(--ink-soft)}
+.meta-value strong{font-weight:500; color:var(--ink)}
+.colophon{margin-top:34px; padding-top:14px; border-top:1px solid var(--rule); display:flex; justify-content:space-between; gap:18px; flex-wrap:wrap;
+  font-family:'IBM Plex Mono',monospace; font-size:9.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-mut)}
+@media(max-width:760px){.lede-grid,.intro,.meta-grid{grid-template-columns:1fr; gap:28px} .deck.two,.lede .standfirst,.conclusion .body{column-count:1}}
+
+/* ---------------- SUBTLE SHARK / NAUTICAL ORNAMENTS ---------------- */
+.masthead{position:relative; overflow:hidden}
+.masthead .wrap{position:relative; z-index:2}
+.watermark-shark{position:absolute; right:-30px; bottom:-22px; width:360px; height:auto; z-index:1; opacity:.06; pointer-events:none}
+.watermark-shark path{fill:var(--ink)}
+.act-tag .fin{display:block; width:42px; height:15px; margin:0 0 9px}
+.act-tag .fin path{fill:var(--red); opacity:.9}
+.bridge-inner{position:relative; padding-top:22px}
+.bridge-fin{display:block; width:150px; height:20px; margin:-12px auto 16px; opacity:.55}
+.bridge-fin path{fill:var(--ink)}
+.bridge-fin line{stroke:var(--ink-mut); stroke-dasharray:2 3; stroke-width:1}
+</style>
+</head>
+<body>
+
+<!-- sounding gauge -->
+<div class="gauge" aria-hidden="true">
+  <div class="track"></div>
+  <div class="tick" style="top:0"></div><div class="tick" style="top:65px"></div><div class="tick" style="top:130px"></div><div class="tick" style="top:195px"></div><div class="tick" style="top:259px"></div><div class="marker" id="depthMarker" style="top:0"></div>
+</div>
+
+
+<header class="masthead"><div class="masthead-rule" aria-hidden="true"></div>
+  <div class="wrap">
+  <h1 class="name">Beneath the Surface</h1>
+  <div class="strap">
+    <span class="thesis">Why the headline about shark attacks is wrong</span>
+    <span>Australian shark incidents · 1791–2026</span>
+    <span class="by">By Abdullah Ilyas Siddiqui · ID 35370343</span>
+  </div>
+</div></header>
+
+<section class="lede"><div class="wrap">
+  <div class="lede-grid">
+    <div class="standfirst">
+      <p>Every summer the same sentence returns: shark attacks are on the rise. Counted one way, it is true — Australia records more bites now than at any point in two centuries of keeping track. But a count is not a risk, and the rest of this page is an argument with that headline.</p>
+      <p>Across <strong>1,296 recorded incidents</strong> we follow the numbers down through fourteen charts. The raw tally climbs; the chance that <em>you</em> are bitten falls. The story turns out to be about <em>us</em> — more people, in warmer water, doing more in it — and far less about the sharks.</p>
+    </div>
+    <aside class="docket" aria-label="Key figures">
+      <div class="cell lead">
+        <div class="n">1,296</div>
+        <div class="d">Recorded incidents<br>1791–2026</div>
+      </div>
+      <div class="cell"><div class="n"><span class="red">262</span></div><div class="d">Fatal · 20.2%<br>of all incidents</div></div>
+      <div class="cell"><div class="n">236<span class="u"> yrs</span></div><div class="d">Of continuous<br>coastal records</div></div>
+      <div class="cell"><div class="n">53<span class="u">%</span></div><div class="d">Fall between<br>December–March</div></div>
+      </aside>
+  </div>
+</div></section>
+
+
+<!-- ===================== §2 WHERE ===================== -->
+<section class="sec" id="s2"><div class="wrap">
+  <p class="eyebrow"><span class="sec-no">02 / 14 · Where</span><span class="line"></span></p>
+  <h1 class="head">Every recorded bite.</h1>
+
+  <div class="intro">
+    <div class="deck">
+      <p>Each dot is one ASID-recorded incident with known coordinates. <strong>The dense seam against the east coast is the first thing the eye finds</strong> — Sydney, the Gold Coast, the whole NSW shoreline — with a second front along Western Australia's white-shark country.</p>
+      <p>Geography tells us <em>where</em>, not yet <em>when</em>.</p>
+    </div>
+    <aside class="rail">
+      <p class="rail-h">Soundings</p>
+      <div class="sounding"><div class="fig">470</div><div class="lbl">NSW incidents —<br>highest state count</div></div>
+      <div class="sounding"><div class="fig">~10<span class="u">%</span></div><div class="lbl">Pre-1990 records<br>lack coordinates</div></div>
+    </aside>
+  </div>
+
+  <div class="controls">
+    <span class="control-label">Year</span>
+    <div class="range-wrap">
+      <div class="range-slider">
+        <div class="range-track"></div>
+        <div class="range-track-fill" id="rangeFill"></div>
+        <input type="range" min="1791" max="2026" value="1791" id="yearFrom" class="range-input" aria-label="Year from">
+        <input type="range" min="1791" max="2026" value="2026" id="yearTo" class="range-input" aria-label="Year to">
+      </div>
+      <div class="range-values"><span id="yearFromDisplay">1791</span><span class="range-dash">—</span><span id="yearToDisplay">2026</span></div>
+    </div>
+    <span class="control-label" style="margin-left:8px">Species</span>
+    <div class="pill-group" id="pillGroupSpecies">
+      <button class="pill active" data-value="All">All</button>
+      <button class="pill" data-value="White shark">White shark</button>
+      <button class="pill" data-value="Bull shark">Bull shark</button>
+      <button class="pill" data-value="Tiger shark">Tiger shark</button>
+      <button class="pill" data-value="Other">Other</button>
+    </div>
+    <span class="map-hint">↻ DRAG MAP · SCROLL TO ZOOM · YEAR + SPECIES + OUTCOME PILLS FILTER</span>
+  </div>
+
+  <div class="plate sea">
+    <span class="figtag" style="color:var(--sea-faint)">Fig. 02 — National incident map</span>
+    <div id="viz2" class="viz"></div>
+    <div class="legend-overlay" aria-label="Outcome filter">
+      <div class="legend-title">Outcome</div>
+      <div class="outcome-pill active" data-value="All" role="button" tabindex="0" aria-pressed="true"><span class="dot all"></span><span>All</span></div>
+      <div class="outcome-pill" data-value="Fatal" role="button" tabindex="0" aria-pressed="false"><span class="dot fatal"></span><span>Fatal</span></div>
+      <div class="outcome-pill" data-value="Injured" role="button" tabindex="0" aria-pressed="false"><span class="dot injured"></span><span>Injured</span></div>
+      <div class="outcome-pill" data-value="Uninjured" role="button" tabindex="0" aria-pressed="false"><span class="dot uninjured"></span><span>Uninjured</span></div>
+    </div>
+  </div>
+  <p class="caption">
+    <span class="pl">Fig. 02</span>
+    <span class="note">Mercator projection · drag to pan. Roughly a tenth of pre-1990 records lack coordinates and are omitted from the map only.</span>
+    <span class="src">Source · ASID, May 2026</span>
+  </p>
+
+  <div class="connect"><span class="label">What stands out</span>
+    <p class="body">A tight cluster along the east coast, a second along WA's metro and white-shark waters. <strong>But geography alone is mute on timing.</strong> The next chart adds the year axis — and the trend that makes headlines.</p>
+  </div>
+</div></section>
+
+
+<section class="sec" id="s3"><div class="wrap">
+  <p class="eyebrow"><span class="sec-no">03 / 14 · Ascent</span><span class="line"></span></p>
+  <h1 class="head">Two centuries, climbing.</h1>
+
+  <div class="intro">
+    <div class="deck">
+      <p>Recorded incidents rose sharply after 1900. <strong>Three cultural moments anchor the climb</strong>: NSW shark netting (1937), the release of <em>Jaws</em> (1975), and Western Australia's drumline programme (2014). These are events of public salience — not necessarily causes. This is the line the headline is built on.</p>
+    </div>
+    <aside class="rail">
+      <p class="rail-h">Soundings</p>
+      <div class="sounding"><div class="fig">54<span class="u"> → </span>233</div><div class="lbl">Incidents per decade<br>1910s vs 2010s</div></div>
+      <div class="sounding"><div class="fig">4.3<span class="red">×</span></div><div class="lbl">Raw growth across<br>the century</div></div>
+    </aside>
+  </div>
+
+  <div class="plate">
+    <span class="figtag">Fig. 03 — Recorded incidents per year</span>
+    <div id="viz3" class="viz"></div>
+  </div>
+  <p class="caption">
+    <span class="pl">Fig. 03</span>
+    <span class="note">Annotations mark events of public salience — not necessarily causal drivers of the underlying count.</span>
+    <span class="src">Source · ASID · n = 1,296</span>
+  </p>
+  <p style="font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-mut); margin:14px 0 0" id="readout"><span style="color:var(--red)">↔ Brushed range:</span> <span class="val" style="color:var(--ink-faint)">— all years —</span></p>
+
+  <div class="connect"><span class="label">Reading the line</span>
+    <p class="body">Three moments anchor the climb — but climbing <em>what</em>? Raw counts cannot say whether Australians face more dangerous beach days or simply <strong>more beach days</strong>. The next chart draws the distinction, and it changes everything.</p>
+  </div>
+</div></section>
+
+
+<!-- bridge -->
+<div class="bridge"><div class="wrap"><div class="bridge-inner">
+  <svg class="bridge-fin" viewBox="0 0 150 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><line x1="0" y1="16" x2="62" y2="16"/><path d="M62,16 Q70,15 74,12 Q78,5 81,2 Q84,5 88,12 Q92,15 100,16 Z"/><line x1="100" y1="16" x2="150" y2="16"/></svg>
+  The headline writes itself: <strong>more bites every decade</strong>. But the population doubled, then doubled again. <em>Per person</em>, the very same line tells the opposite story.
+</div></div></div>
+
+
+<section class="sec" id="s4"><div class="wrap">
+  <p class="eyebrow"><span class="sec-no">04 / 14 · The inversion</span><span class="line"></span></p>
+  <h1 class="head">Incidents rose. The risk to each of us <span class="neg">did&nbsp;not.</span></h1>
+
+  <div class="intro">
+    <div class="deck">
+      <p>The headline number climbs; the rate beneath it does the opposite. Population multiplied, recorded incidents rose in absolute terms — <strong>but per-capita risk per million residents has gradually fallen</strong> since the 1930s.</p>
+      <p>Between the 1910s and 2010s incidents grew about <em>4.3-fold</em>; population grew roughly <em>five-fold</em>. Divide one by the other and the alarming line bends quietly toward the floor.</p>
+    </div>
+    <aside class="rail">
+      <p class="rail-h">Soundings</p>
+      <div class="sounding"><div class="fig">~5<span class="red">×</span></div><div class="lbl">Population growth,<br>1910s → 2010s</div></div>
+      <div class="sounding"><div class="fig">≈⅓</div><div class="lbl">Of the early-century<br>per-capita rate today</div></div>
+    </aside>
+  </div>
+
+  <div class="findings f3">
+    <div class="cell"><div class="k">4.3<span class="red">×</span></div><div class="d">Raw incident growth<br>across the century</div></div>
+    <div class="cell"><div class="k">~5<span class="red">×</span></div><div class="d">Population growth<br>over the same span</div></div>
+    <div class="cell"><div class="k">↓</div><div class="d">Net per-capita risk<br>direction since 1930s</div></div>
+  </div>
+
+  <div class="plate feature">
+    <span class="figtag">Fig. 04 — Incidents per million people, per year</span>
+    <div id="viz4" class="viz"></div>
+  </div>
+  <p class="caption">
+    <span class="pl">Fig. 04</span>
+    <span class="note">Annual incidents normalised against ABS resident population. Higher = more incidents per million Australians per year. Hover any year for its rate.</span>
+    <span class="src">Source · ASID + ABS</span>
+  </p>
+
+  <div class="pull">The country grew, but the coast did not. <span class="key">The chance that any one Australian meets a shark in any one year</span> has fallen across the modern era — even as the raw count keeps climbing.</div>
+
+  <div class="connect"><span class="label">What this means</span>
+    <p class="body">If risk per person is falling, something downstream must be growing <strong>faster than the rate declines</strong>. That gap is the rest of this investigation. <em>Two forces</em> emerge.</p>
+  </div>
+</div></section>
+
+
+<section class="sec" id="s6"><div class="wrap">
+  <p class="eyebrow"><span class="sec-no">05 / 14 · Force one · activity</span><span class="line"></span></p>
+  <h1 class="head">Boards changed everything.</h1>
+
+  <div class="intro">
+    <div class="deck">
+      <p>Swimming dominated mid-century exposure. <strong>Surfing and boarding took over after 1980</strong>, tracking the rise of board culture along the east coast and putting far more bodies past the break.</p>
+      <p>Each new wave of water sport creates a new front of exposure: swimmers in the 1920s, boarders in the 1980s, divers and spearfishers since.</p>
+    </div>
+    <aside class="rail">
+      <p class="rail-h">Soundings</p>
+      <div class="sounding"><div class="fig">473</div><div class="lbl">Swimming incidents —<br>the largest group</div></div>
+      <div class="sounding"><div class="fig">280</div><div class="lbl">Boarding incidents,<br>post-1980 surge</div></div>
+    </aside>
+  </div>
+
+  <div class="plate">
+    <span class="figtag">Fig. 05 — Activity composition over time</span>
+    <div id="viz6" class="viz"></div>
+  </div>
+  <p class="caption">
+    <span class="pl">Fig. 05</span>
+    <span class="note">Decadal counts by activity group, 1900–2020. <strong>Click any activity in the legend to isolate it</strong> — the y-axis rescales to that activity's own range. Click again to restore.</span>
+    <span class="src">Source · ASID</span>
+  </p>
+
+  <div class="connect"><span class="label">Force one</span>
+    <p class="body">Australia became an aquatic nation — swimming gave way to boarding, then to a mix of dive, snorkel and freedive. <strong>Each new wave creates new exposure</strong>, and the bite count climbs because more of us are in the water doing more varied things. Now the second force.</p>
+  </div>
+</div></section>
+
+
+<section class="sec" id="s8"><div class="wrap">
+  <p class="eyebrow"><span class="sec-no">06 / 14 · Force two · climate</span><span class="line"></span></p>
+  <h1 class="head">The water has warmed <em>everywhere</em>.</h1>
+
+  <div class="intro">
+    <div class="deck">
+      <p>Sea-surface temperature anomaly against the 1961–1990 baseline, across four marine regions. Bars are annual values; the dark overlay is a LOESS trend. <strong>The Tasman is the fastest-warming region in the set</strong> — and it borders where most east-coast incidents occur.</p>
+      <p>Warm water moves prey, and predators follow. The ocean is reorganising beneath a beach trip that looks unchanged.</p>
+    </div>
+    <aside class="rail">
+        <div class="rail-h">Soundings · °C vs 1961–90</div>
+        <div class="sounding"><div class="fig">+0.85</div><div class="lbl">Tasman Sea —<br>fastest warming region</div></div>
+        <div class="sounding"><div class="fig">+0.79</div><div class="lbl">Bass Strait —<br>also rising rapidly</div></div>
+        <div class="sounding"><div class="fig">+0.58</div><div class="lbl">Coral Sea —<br>moderate but accelerating</div></div>
+        <div class="sounding"><div class="fig">+0.28</div><div class="lbl">SW Australia —<br>slowest, still positive</div></div>
+      </aside>
+  </div>
+
+  <div class="ramp-legend">
+    <div class="swatch-row"><div><div class="ramp"></div><div class="ramp-labels"><span>−1.2°</span><span>0</span><span>+1.5°</span></div></div><span>Annual anomaly</span></div>
+    <div class="swatch-row"><div class="smoother"></div><span>LOESS trend</span></div>
+  </div>
+
+  <div class="plate">
+    <span class="figtag">Fig. 06 — Sea-surface temperature anomaly</span>
+    <div id="viz8" class="viz"></div>
+  </div>
+  <p class="caption">
+    <span class="pl">Fig. 06</span>
+    <span class="note">Smoothing is LOESS (bandwidth 0.32). Endpoint labels are smoothed values, not the raw final reading.</span>
+    <span class="src">Source · Bureau of Meteorology</span>
+  </p>
+
+  <div class="connect"><span class="label">Force two</span>
+    <p class="body">The Tasman has warmed <em>0.85 °C</em> above its 1961–1990 baseline. Warm water moves prey north; sharks follow. <strong>The ocean is reorganising</strong> without anyone rewriting their summer plans. Now we zoom into the geography itself.</p>
+  </div>
+</div></section>
+
+
+<section class="sec" id="s7"><div class="wrap">
+  <p class="eyebrow"><span class="sec-no">07 / 14 · Risk by state</span><span class="line"></span></p>
+  <h1 class="head">Same data, three classifications.</h1>
+
+  <div class="intro">
+    <div class="deck">
+      <p>Incidents per 100,000 residents, by state. <strong>Cartographers split data differently</strong> — quantile, equal-interval and Jenks natural-breaks each tell a slightly different visual truth. Switch methods and watch the rankings shift while the underlying rates hold still.</p>
+      <p>WA and the NT top the per-capita rate on tiny populations; NSW dominates the raw count on a vast beach-going population.</p>
+    </div>
+    <aside class="rail">
+        <div class="rail-h">Soundings · key figures</div>
+        <div class="sounding"><div class="fig">8.11</div><div class="lbl">Western Australia —<br>highest rate · per 100k/yr</div></div>
+        <div class="sounding"><div class="fig">1.05</div><div class="lbl">Victoria —<br>lowest populated-state rate</div></div>
+        <div class="sounding"><div class="fig">470</div><div class="lbl">NSW —<br>highest raw count</div></div>
+        <div class="sounding"><div class="fig">2.85</div><div class="lbl">Australia avg —<br>per 100k per year</div></div>
+      </aside>
+  </div>
+
+  <div class="controls">
+    <span class="control-label">Classification</span>
+    <div class="pill-group" id="method-pills">
+      <button class="pill active" data-val="quantile">Quantile</button>
+      <button class="pill" data-val="equal">Equal interval</button>
+      <button class="pill" data-val="jenks">Jenks</button>
+    </div>
+  </div>
+
+  <div class="plate">
+    <span class="figtag">Fig. 07 — State incident rate</span>
+    <div id="viz7" class="viz"></div>
+  </div>
+  <p class="caption">
+    <span class="pl">Fig. 07</span>
+    <span class="note">Bins pre-computed per method. NSW sits in the top band across all three; the toggle changes the threshold, not the rate.</span>
+    <span class="src">Source · ASID + ABS</span>
+  </p>
+
+  <div class="connect"><span class="label">Numerator vs denominator</span>
+    <p class="body">WA and the NT top the per-capita rate, both with <em>tiny denominators</em>. NSW dominates the absolute count because NSW dominates the beach population. <strong>The state rate hides what the next chart reveals — the specific beaches where incidents actually happen.</strong></p>
+  </div>
+</div></section>
+
+
+<section class="sec" id="s5"><div class="wrap">
+  <p class="eyebrow"><span class="sec-no">08 / 14 · Hotspot beaches</span><span class="line"></span></p>
+  <h1 class="head">The places that drive the numbers.</h1>
+
+  <div class="intro">
+    <div class="deck">
+      <p>The top twenty cities by total recorded incidents, sorted head-to-foot. <strong>Stem length encodes the count; dot colour encodes the share that ended fatally.</strong> Sydney leads at 87 incidents, but Sydney Harbour's 45% fatal share (3rd by count) makes it the most lethal big site. Perth, despite ranking fourth by count, has only a 15% fatal share — the gentlest major site. Geography is already in §2's dot map; this is the ledger.</p>
+    </div>
+    <aside class="rail">
+        <div class="rail-h">Soundings · count · fatality</div>
+        <div class="sounding"><div class="fig">87</div><div class="lbl">Sydney —<br>21% fatal · highest count</div></div>
+        <div class="sounding"><div class="fig">64</div><div class="lbl">Sydney Harbour —<br><span style="color:var(--red)">45% fatal</span> · most lethal</div></div>
+        <div class="sounding"><div class="fig">65</div><div class="lbl">Torres Strait —<br><span style="color:var(--red)">37% fatal</span> · 2nd highest count</div></div>
+        <div class="sounding"><div class="fig">41</div><div class="lbl">Perth —<br>15% fatal · gentlest major site</div></div>
+      </aside>
+  </div>
+
+  <div class="plate feature">
+    <span class="figtag">Fig. 08 — Top 20 cities by count</span>
+    <div id="viz5" class="viz"></div>
+  </div>
+  <p class="caption">
+    <span class="pl">Fig. 08</span>
+    <span class="note">Top twenty cities by count. Stem length = total incidents; dot hue = fatality rate (blue ≈ 0%, dark red ≈ 60%). Numerical labels at right show exact counts. Torres Strait aggregates several pearling grounds.</span>
+    <span class="src">Source · ASID</span>
+  </p>
+
+  <div class="connect"><span class="label">Twenty places, one nation</span>
+    <p class="body">Each beach has its own shark, its own activity mix, its own lethal rate — <strong>the national average hides everything that actually matters</strong>. From the geography of where, we turn to the anatomy of how: <em>who, what, when</em>.</p>
+  </div>
+</div></section>
+
+
+<section class="sec" id="s13"><div class="wrap">
+  <p class="eyebrow"><span class="sec-no">09 / 14 · Anatomy of risk</span><span class="line"></span></p>
+  <h1 class="head">Four beaches, <em>four different stories</em>.</h1>
+
+  <div class="intro">
+    <div class="deck">
+      <p>A multi-metric composite — one card per high-incident beach, each combining species mix, activity, outcome share and time-of-day from the same source. <strong>Sydney Harbour is the most lethal in the set at 45% fatal</strong>; Perth the gentlest at 14%.</p>
+      <p>The species and activity stories diverge just as sharply — a bull-shark, swimmer story in one harbour; an open-ocean white-shark story in another.</p>
+    </div>
+    <aside class="rail">
+      <p class="rail-h">Soundings</p>
+      <div class="sounding"><div class="fig"><span class="red">45%</span></div><div class="lbl">Sydney Harbour —<br>bull sharks, swimmers</div></div>
+      <div class="sounding"><div class="fig">14%</div><div class="lbl">Perth — white sharks,<br>mixed activity</div></div>
+    </aside>
+  </div>
+
+  <div class="plate">
+    <span class="figtag">Fig. 09 — Four-beach composite</span>
+    <div id="viz13" class="viz"></div>
+  </div>
+  <p class="caption">
+    <span class="pl">Fig. 09</span>
+    <span class="note">Cards arranged as small multiples; species and outcome scales fixed across cards; time bars in four-hour bins.</span>
+    <span class="src">Source · ASID (top four locations)</span>
+  </p>
+
+  <div class="pull">Same database, four wildly different stories. <span class="key">Sydney Harbour: bull sharks, swimmers, 45% fatal.</span> Perth: white sharks, mixed activities, 14% fatal. The national average hides everything that matters.</div>
+
+  <div class="connect"><span class="label">The composite</span>
+    <p class="body">Each card answers four questions at once — which shark, doing what, to whom, when. <strong>Sydney Harbour's wedge is the bull-shark story</strong>; Perth's mixed donut the open-ocean white-shark one. The whole nation, four ways. Next: how this picture has <em>changed</em>.</p>
+  </div>
+</div></section>
+
+
+<section class="sec" id="s11"><div class="wrap">
+  <p class="eyebrow"><span class="sec-no">10 / 14 · When · intensity</span><span class="line"></span></p>
+  <h1 class="head">Summer is always shark season.</h1>
+
+  <div class="intro">
+    <div class="deck">
+      <p>Every incident since 1900, mapped to its month and year. <strong>The hot band from December through March holds across every decade</strong> — but overall intensity has climbed since the 1980s.</p>
+      <p>Filter by outcome to see whether the fatal calendar differs from the injured one. It barely does.</p>
+    </div>
+    <aside class="rail">
+      <p class="rail-h">Soundings</p>
+      <div class="sounding"><div class="fig"><span class="red">53%</span></div><div class="lbl">Of dated incidents fall<br>December–March</div></div>
+      <div class="sounding"><div class="fig">235</div><div class="lbl">January — the<br>single peak month</div></div>
+    </aside>
+  </div>
+
+  <div class="controls">
+    <span class="control-label">Outcome</span>
+    <div class="pill-group" id="outcome-pills-11">
+      <button class="pill active" data-value="All">All</button>
+      <button class="pill" data-value="Fatal">Fatal</button>
+      <button class="pill" data-value="Injured">Injured</button>
+      <button class="pill" data-value="Uninjured">Uninjured</button>
+    </div>
+  </div>
+
+  <div class="plate">
+    <span class="figtag">Fig. 10 — Month × year intensity</span>
+    <div id="viz11" class="viz"></div>
+  </div>
+  <p class="caption">
+    <span class="pl">Fig. 10</span>
+    <span class="note">Colour: square-root transform of incident count. Empty cells indicate no recorded incidents.</span>
+    <span class="src">Source · ASID</span>
+  </p>
+
+  <div class="connect"><span class="label">The calendar of risk</span>
+    <p class="body">December through March, every year. Climate change is not moving the season — <em>it is intensifying the calendar we already know</em>.</p>
+  </div>
+</div></section>
+
+
+<section class="sec" id="s9"><div class="wrap">
+  <p class="eyebrow"><span class="sec-no">11 / 14 · Who · species</span><span class="line"></span></p>
+  <h1 class="head">Not all sharks bite at the same&nbsp;rate.</h1>
+
+  <div class="intro">
+    <div class="deck">
+      <p>Each line connects a species' share of <em>all</em> incidents (left) to its share of <em>fatal</em> incidents (right). <strong>Lines that slope up are over-represented in fatalities</strong> — more dangerous per encounter than their headcount suggests.</p>
+      <p>White sharks own the headlines and the most fatal incidents in absolute terms; tigers and bulls own the higher per-encounter rates.</p>
+    </div>
+    <aside class="rail">
+        <div class="rail-h">Soundings · fatality %</div>
+        <div class="sounding"><div class="fig"><span class="red">36%</span></div><div class="lbl">Tiger shark —<br>n=236 · highest rate</div></div>
+        <div class="sounding"><div class="fig"><span class="red">31%</span></div><div class="lbl">Bull shark —<br>n=218 · 2nd highest</div></div>
+        <div class="sounding"><div class="fig">25%</div><div class="lbl">White shark —<br>n=386 · most absolute fatal</div></div>
+        <div class="sounding"><div class="fig">3%</div><div class="lbl">Other species —<br>lowest fatal rate · n=456</div></div>
+      </aside>
+  </div>
+
+  <div class="legend-row">
+    <div class="item"><span class="swatch" style="background:var(--white-shark)"></span><span>White shark</span></div>
+    <div class="item"><span class="swatch" style="background:var(--bull-shark)"></span><span>Bull shark</span></div>
+    <div class="item"><span class="swatch" style="background:var(--tiger-shark)"></span><span>Tiger shark</span></div>
+    <div class="item"><span class="swatch" style="background:var(--other-shark)"></span><span>Other</span></div>
+  </div>
+
+  <div class="plate">
+    <span class="figtag">Fig. 11 — Species: all incidents → fatal share</span>
+    <div id="viz9" class="viz"></div>
+  </div>
+  <p class="caption">
+    <span class="pl">Fig. 11</span>
+    <span class="note">Labels show absolute fatalities over total incidents per species. Rate = fatal share of that species' encounters.</span>
+    <span class="src">Source · ASID</span>
+  </p>
+
+  <div class="pull">White sharks dominate the <em style="font-style:italic">headlines</em>. But <span class="multi">bull and tiger sharks over-index on fatality</span> — a higher proportion of their encounters end in death.</div>
+
+  <div class="connect"><span class="label">The headline lies again</span>
+    <p class="body">Tigers and bulls aren't merely present — they're <em>disproportionately deadly per encounter</em>. White sharks lead the absolute fatal count because we meet them so often, not because each meeting is the most lethal. Next: <strong>what were we doing when bitten?</strong></p>
+  </div>
+</div></section>
+
+
+<section class="sec" id="s10"><div class="wrap">
+  <p class="eyebrow"><span class="sec-no">12 / 14 · What · activity</span><span class="line"></span></p>
+  <h1 class="head">What were they doing when bitten?</h1>
+
+  <div class="intro">
+    <div class="deck">
+      <p>The top eight activities by count, broken down by outcome. Bars are sized by absolute volume; the red ledger on the right is the share that ended fatally. <strong>Swimming sits at the top of both</strong> — biggest by count and deadliest by rate.</p>
+      <p>Boards cushion the impact — more falls, fewer fatal. Below the surface, the rate climbs back.</p>
+    </div>
+    <aside class="rail">
+        <div class="rail-h">Soundings · activity totals</div>
+        <div class="sounding"><div class="fig">473</div><div class="lbl">Swimming —<br>34% fatal · largest group</div></div>
+        <div class="sounding"><div class="fig">280</div><div class="lbl">Boarding —<br>9% fatal · least lethal</div></div>
+        <div class="sounding"><div class="fig">91</div><div class="lbl">Diving —<br>22% fatal · underwater risk</div></div>
+        <div class="sounding"><div class="fig">133</div><div class="lbl">Spearfishing —<br>9% fatal · common but rarely fatal</div></div>
+      </aside>
+  </div>
+
+  <div class="legend-row">
+    <div class="item"><span class="swatch dot" style="background:var(--red)"></span><span>Fatal</span></div>
+    <div class="item"><span class="swatch dot" style="background:var(--injured)"></span><span>Injured</span></div>
+    <div class="item"><span class="swatch dot" style="background:var(--uninjured)"></span><span>Uninjured</span></div>
+    <div class="sep"></div>
+    <div class="item"><span>N% fatal · fatality rate per activity</span></div>
+  </div>
+
+  <div class="plate">
+    <span class="figtag">Fig. 12 — Activity by outcome</span>
+    <div id="viz10" class="viz"></div>
+  </div>
+  <p class="caption">
+    <span class="pl">Fig. 12</span>
+    <span class="note">Top eight activities by count. Fatality rate = fatal ÷ (fatal + injured + uninjured) per activity.</span>
+    <span class="src">Source · ASID</span>
+  </p>
+
+  <div class="pull">Swimming dominates the count — and <span class="key">it is the deadliest per incident</span> too, at 34% fatal. Boarding sports cushion the blow; below the surface, snorkelling and diving, the rate climbs again.</div>
+
+  <div class="connect"><span class="label">A pattern of vulnerability</span>
+    <p class="body">Swimming is the great vulnerability: <em>most-attempted, most-lethal</em>. Boards offer a kind of protection — more bites, fewer fatal. <strong>Finally: when in the year does this happen?</strong></p>
+  </div>
+</div></section>
+
+
+<section class="sec" id="s14"><div class="wrap">
+  <p class="eyebrow"><span class="sec-no">13 / 14 · Evolution</span><span class="line"></span></p>
+  <h1 class="head">The shark in the data <em>has changed</em>.</h1>
+
+  <div class="intro">
+    <div class="deck">
+      <p><strong>Total incidents per decade</strong> run along the top; thirteen mini-donuts below, one per decade since 1900. Watch the colour shift: tigers and "Other" dominated the early 20th century; <strong>white sharks rise as identification improves</strong>.</p>
+      <p>The picture is not merely bigger — it is different. Better attribution is itself part of why modern headlines fixate on the white shark.</p>
+    </div>
+    <aside class="rail">
+      <p class="rail-h">Soundings</p>
+      <div class="sounding"><div class="fig">13</div><div class="lbl">Decades of species<br>composition, 1900–</div></div>
+      <div class="sounding"><div class="fig">1,144</div><div class="lbl">Records with both<br>year and species</div></div>
+    </aside>
+  </div>
+
+  <div class="plate">
+    <span class="figtag">Fig. 13 — Species composition by decade</span>
+    <div id="viz14" class="viz"></div>
+  </div>
+  <p class="caption">
+    <span class="pl">Fig. 13</span>
+    <span class="note">Top strip: count per decade. Bottom row: species-composition donut per decade. Empty wedges suppressed.</span>
+    <span class="src">Source · ASID · n = 1,144 with year + species</span>
+  </p>
+
+  <div class="connect"><span class="label">A moving picture</span>
+    <p class="body">The story is not static. <em>Early-century reports</em> were tiger-heavy with a fat "Other" category — identification was rough and the database caught what it could. <strong>Modern decades show cleaner attribution</strong> and the absolute rise of white-shark incidents that headlines now fixate on.</p>
+  </div>
+</div></section>
+
+
+<!-- bridge -->
+<div class="bridge"><div class="wrap"><div class="bridge-inner">
+  <svg class="bridge-fin" viewBox="0 0 150 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><line x1="0" y1="16" x2="62" y2="16"/><path d="M62,16 Q70,15 74,12 Q78,5 81,2 Q84,5 88,12 Q92,15 100,16 Z"/><line x1="100" y1="16" x2="150" y2="16"/></svg>
+  Numbers can hide what numbers describe. <strong>Each red mark on the chart that follows is a single life lost</strong> — not a percentage, not a rate. <em>Every one.</em>
+</div></div></div>
+
+
+<section class="sec" id="s12"><div class="wrap">
+  <p class="eyebrow"><span class="sec-no">14 / 14 · One dot each</span><span class="line"></span></p>
+  <h1 class="head">Every fatal incident. <em>One dot each.</em></h1>
+
+  <div class="intro">
+    <div class="deck">
+      <p>Fatal incidents in Australian waters, 1900–2026. <strong>Each mark is a single life</strong>, placed in its decade row. The pale curve beneath is fatalities per million Australians — the population-adjusted reality of a declining risk.</p>
+      <p>The dots accumulate; the curve sinks. Both are true at once, and holding them together is the whole point.</p>
+    </div>
+    <aside class="rail">
+      <p class="rail-h">Soundings</p>
+      <div class="sounding"><div class="fig"><span class="red">262</span></div><div class="lbl">Lives lost across<br>the full record</div></div>
+      <div class="sounding"><div class="fig">↓</div><div class="lbl">Fatalities per million —<br>falling per decade</div></div>
+    </aside>
+  </div>
+
+  <div class="legend-row">
+    <div class="item"><span class="swatch dot" style="background:var(--red); opacity:.85"></span><span>Fatal incident</span></div>
+    <div class="item"><span class="swatch line" style="background:var(--ink-mut)"></span><span>Fatalities per million (per decade)</span></div>
+  </div>
+
+  <div class="plate feature">
+    <span class="figtag">Fig. 14 — Fatal incidents, one dot per life</span>
+    <div id="viz12" class="viz"></div>
+  </div>
+  <p class="caption">
+    <span class="pl">Fig. 14</span>
+    <span class="note">Each row is a decade. Population estimates from ABS at decade midpoint.</span>
+    <span class="src">Source · ASID + ABS</span>
+  </p>
+
+  <div class="connect"><span class="label">Holding both truths</span>
+    <p class="body">More dots each decade, a lower curve beneath them. <strong>The risk to any one person has fallen</strong> even as the toll, in absolute lives, has not. <em>Both are real.</em></p>
+  </div>
+</div></section>
+
+
+
+<!-- ===================== CONCLUSION ===================== -->
+<div class="conclusion"><div class="wrap"><div class="conclusion-inner">
+  <p class="eyebrow2">Conclusion</p>
+  <h2>What 236&nbsp;years <em>actually</em> say.</h2>
+  <div class="body">
+    <p><strong>Recorded shark incidents in Australia are rising.</strong> So is the population. So is participation in surfing and diving. So is sea-surface temperature in every region we measure. Per-capita risk, meanwhile, is gently falling — and fatality rates have fallen faster as trauma medicine improved across the twentieth century.</p>
+    <p>The bite count is a story about <em>us</em> being in the water more, not about sharks being in the water more. The fear that something is <em>getting worse</em> is real; the data, read carefully, says otherwise. That is the whole argument of this page — set against a single, stubborn headline.</p>
+  </div>
+
+  <div class="signature">
+    <span class="by">Visualisation by</span>
+    <span class="name">Abdullah Siddiqui</span>
+    <span class="id">ID · 35370343</span>
+  </div>
+
+  <div class="meta-grid">
+    <div class="meta-block">
+      <div class="meta-label">Data sources</div>
+      <div class="meta-value">
+        <strong><a href="https://github.com/cjabradshaw/AustralianSharkIncidentDatabase" target="_blank" rel="noopener">Australian Shark-Incident Database (ASID)</a></strong> — Taronga Conservation Society Australia &amp; Flinders University. Riley M.J. et al. (2024), <em>Scientific Data</em> 11, 783.
+        <br><br>
+        <strong><a href="https://www.abs.gov.au/statistics/people/population/regional-population/latest-release" target="_blank" rel="noopener">Australian Bureau of Statistics</a></strong> — Regional Population, 2024–25 release.
+        <br><br>
+        <strong><a href="https://www.bom.gov.au/climate/change/about/sst_timeseries.shtml" target="_blank" rel="noopener">Bureau of Meteorology</a></strong> — Sea-Surface Temperature Anomaly Time Series.
+      </div>
+    </div>
+    <div class="meta-block">
+      <div class="meta-label">Methods &amp; cleaning</div>
+      <div class="meta-value">
+        Built in <strong>Vega-Lite v5</strong> with Vega-Embed; published as a single-page GitHub Pages site. Location and species text normalised; pre-1990 records without coordinates excluded from maps but kept in time series; calendar years aligned across all three sources; ABS financial-year ERP taken at 30 June for the calendar year. Figures quoted in the text are computed directly from the cleaned source data.
+      </div>
+    </div>
+  </div>
+
+  <div class="colophon">
+    <span>Beneath the Surface · 1791 → 2026</span>
+    <span>FIT2179 · 35370343</span>
+  </div>
+</div></div></div>
+
+
+<!-- ===================== EMBED SCRIPT ===================== -->
+<script>
+'use strict';
+const EMBED_OPTS = { actions: false, renderer: 'svg', tooltip: { theme: 'custom' } };
+
+function embed(t, u, o = {}) {
+  const n = document.querySelector(t);
+  if (!n) return Promise.reject(new Error('Target ' + t + ' not found'));
+  const url = u + (u.includes('?') ? '&' : '?') + 'v=' + Date.now();
+  return vegaEmbed(n, url, Object.assign({}, EMBED_OPTS, o))
+    .then(r => r.view)
+    .catch(e => {
+      console.error('[' + u + ']', e);
+      n.innerHTML = '<pre class="err">Chart failed to load — ' + u + '\n\nServe with: python3 -m http.server 8000\n\n' + String(e && e.message ? e.message : e) + '</pre>';
+      return null;
+    });
+}
+
+// §2 dot map with interactive controls
+(function () {
+  const YMIN = 1791, YMAX = 2026;
+  embed('#viz2', 's2_dot_map.vg.json', { renderer: 'canvas' }).then(view => {
+    if (!view) return;
+    const yf = document.getElementById('yearFrom'), yt = document.getElementById('yearTo');
+    const fd = document.getElementById('yearFromDisplay'), td = document.getElementById('yearToDisplay');
+    const fill = document.getElementById('rangeFill');
+    function paint() {
+      const f = +yf.value, t = +yt.value;
+      fill.style.left = ((f - YMIN) / (YMAX - YMIN) * 100) + '%';
+      fill.style.right = ((1 - (t - YMIN) / (YMAX - YMIN)) * 100) + '%';
+      fd.textContent = f; td.textContent = t;
+    }
+    function push() { view.signal('year_min', +yf.value).signal('year_max', +yt.value).run(); }
+    function onIn(e) {
+      const f = +yf.value, t = +yt.value;
+      if (f > t) { (e.target === yf ? yf : yt).value = (e.target === yf ? t : f); }
+      paint(); push();
+    }
+    yf.addEventListener('input', onIn); yt.addEventListener('input', onIn);
+    paint(); push();
+    document.querySelectorAll('#pillGroupSpecies .pill').forEach(b => {
+      b.addEventListener('click', () => {
+        document.querySelectorAll('#pillGroupSpecies .pill').forEach(x => x.classList.remove('active'));
+        b.classList.add('active'); view.signal('species_pick', b.dataset.value).run();
+      });
+    });
+    document.querySelectorAll('.legend-overlay .outcome-pill').forEach(el => {
+      function go() {
+        document.querySelectorAll('.legend-overlay .outcome-pill').forEach(x => { x.classList.remove('active'); x.setAttribute('aria-pressed', 'false'); });
+        el.classList.add('active'); el.setAttribute('aria-pressed', 'true');
+        view.signal('outcome_pick', el.dataset.value).run();
+      }
+      el.addEventListener('click', go);
+      el.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); } });
+    });
+  });
+})();
+
+// §3 with brush
+(function () {
+  embed('#viz3', 's3_annual_line.vg.json').then(view => {
+    if (!view) return;
+    const readout = document.getElementById('readout');
+    const valEl = readout.querySelector('.val');
+    try {
+      view.addSignalListener('year_brush', (_, v) => {
+        if (v && v.year && v.year.length === 2) {
+          readout.classList.remove('empty');
+          valEl.style.color = 'var(--ink)';
+          valEl.textContent = Math.round(v.year[0]) + ' → ' + Math.round(v.year[1]);
+        } else {
+          readout.classList.add('empty');
+          valEl.style.color = 'var(--ink-faint)';
+          valEl.textContent = '— all years —';
+        }
+      });
+    } catch (e) { console.warn('§3 brush:', e); }
+  });
+})();
+
+embed('#viz4', 's4_per_capita_line.vg.json');
+embed('#viz5', 's8_cities_bar_chart.vg.json');
+embed('#viz6', 's5_stacked_area.vg.json');
+
+(function () {
+  embed('#viz7', 's7_choropleth.vg.json').then(view => {
+    if (!view) return;
+    document.getElementById('method-pills').addEventListener('click', e => {
+      const p = e.target.closest('.pill');
+      if (!p) return;
+      document.querySelectorAll('#method-pills .pill').forEach(x => x.classList.remove('active'));
+      p.classList.add('active');
+      view.signal('method', p.dataset.val).run();
+    });
+  });
+})();
+
+embed('#viz8', 's6_weather_change.vg.json');
+embed('#viz9', 's11_species_fatality.vg.json');
+embed('#viz10', 's12_stacker_bar.vg.json');
+
+(function () {
+  embed('#viz11', 's10_heatmap.vg.json').then(view => {
+    if (!view) return;
+    document.getElementById('outcome-pills-11').addEventListener('click', e => {
+      const p = e.target.closest('.pill');
+      if (!p) return;
+      document.querySelectorAll('#outcome-pills-11 .pill').forEach(x => x.classList.remove('active'));
+      p.classList.add('active');
+      view.signal('outcomeFilter', p.dataset.value).run();
+    });
+  });
+})();
+
+embed('#viz13', 's9_beach_profiles.vg.json');
+embed('#viz14', 's13_shark_evolution.vg.json');
+embed('#viz12', 's14_summary.vg.json');
+
+const ctaEl = document.getElementById('cta');
+if (ctaEl) {
+  ctaEl.addEventListener('click', () => {
+    document.getElementById('s2').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+}
+
+(function() {
+  const m = document.getElementById('depthMarker');
+  if (!m) return;
+  const trackH = 259;
+  function up() {
+    const sc = window.scrollY;
+    const max = (document.documentElement.scrollHeight - window.innerHeight) || 1;
+    const pct = Math.max(0, Math.min(1, sc / max));
+    m.style.top = (pct * trackH) + 'px';
+  }
+  window.addEventListener('scroll', up, { passive: true });
+  window.addEventListener('resize', up); up();
+})();
+</script>
+</body>
+</html>
