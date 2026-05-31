@@ -1,0 +1,357 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "§11 — Year × Month heatmap of Australian shark incidents 1900–2024 with marginal histograms",
+  "data": {
+    "url": "./data/asid_incidents.csv",
+    "format": {
+      "type": "csv",
+      "parse": {
+        "incident_id": "number",
+        "year": "number",
+        "month": "number",
+        "lat": "number",
+        "lon": "number"
+      }
+    }
+  },
+  "params": [
+    {
+      "name": "outcomeFilter",
+      "value": "All"
+    }
+  ],
+  "transform": [
+    {
+      "filter": "datum.year >= 1900 && datum.year <= 2024"
+    },
+    {
+      "filter": "outcomeFilter === 'All' || datum.outcome === outcomeFilter"
+    },
+    {
+      "calculate": "['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][datum.month - 1]",
+      "as": "monthName"
+    }
+  ],
+  "spacing": 3,
+  "resolve": {
+    "scale": {
+      "x": "shared",
+      "color": "shared"
+    }
+  },
+  "background": "transparent",
+  "vconcat": [
+    {
+      "description": "Top marginal — annual incident totals",
+      "width": {
+        "step": 7
+      },
+      "height": 55,
+      "mark": {
+        "type": "bar",
+        "color": "#C08766",
+        "width": {
+          "band": 0.85
+        },
+        "cornerRadiusTopLeft": 1,
+        "cornerRadiusTopRight": 1
+      },
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "ordinal",
+          "scale": {
+            "paddingInner": 0.05
+          },
+          "axis": null
+        },
+        "y": {
+          "aggregate": "count",
+          "type": "quantitative",
+          "title": null,
+          "axis": {
+            "tickCount": 3,
+            "ticks": false,
+            "labels": false,
+            "grid": false,
+            "domain": false
+          }
+        },
+        "tooltip": [
+          {
+            "field": "year",
+            "type": "ordinal",
+            "title": "Year"
+          },
+          {
+            "aggregate": "count",
+            "type": "quantitative",
+            "title": "Incidents"
+          }
+        ]
+      }
+    },
+    {
+      "spacing": 6,
+      "resolve": {
+        "scale": {
+          "y": "shared"
+        }
+      },
+      "hconcat": [
+        {
+          "description": "Main heatmap with decade rule overlay",
+          "layer": [
+            {
+              "width": {
+                "step": 7
+              },
+              "height": {
+                "step": 22
+              },
+              "mark": {
+                "type": "rect",
+                "stroke": null
+              },
+              "encoding": {
+                "x": {
+                  "field": "year",
+                  "type": "ordinal",
+                  "scale": {
+                    "paddingInner": 0.05
+                  },
+                  "axis": {
+                    "labelExpr": "datum.value % 10 === 0 ? datum.value : ''",
+                    "labelAngle": 0,
+                    "labelFontSize": 10,
+                    "labelFont": "IBM Plex Mono",
+                    "labelColor": "#5A6A78",
+                    "tickColor": "#D8D2C2",
+                    "domain": false,
+                    "grid": false,
+                    "title": null,
+                    "offset": 6
+                  }
+                },
+                "y": {
+                  "field": "monthName",
+                  "type": "ordinal",
+                  "sort": [
+                    "Jan",
+                    "Feb",
+                    "Mar",
+                    "Apr",
+                    "May",
+                    "Jun",
+                    "Jul",
+                    "Aug",
+                    "Sep",
+                    "Oct",
+                    "Nov",
+                    "Dec"
+                  ],
+                  "axis": {
+                    "labelFont": "IBM Plex Mono",
+                    "labelFontSize": 10,
+                    "labelColor": "#5A6A78",
+                    "tickColor": "#D8D2C2",
+                    "domain": false,
+                    "grid": false,
+                    "title": null,
+                    "offset": 4
+                  }
+                },
+                "color": {
+                  "aggregate": "count",
+                  "type": "quantitative",
+                  "title": "Incidents",
+                  "scale": {
+                    "type": "sqrt",
+                    "range": [
+                      "#EFE6CF",
+                      "#D9B89A",
+                      "#C08766",
+                      "#D55E00",
+                      "#7A2E1F"
+                    ]
+                  },
+                  "legend": {
+                    "orient": "bottom",
+                    "direction": "horizontal",
+                    "title": "Incident count",
+                    "titleFont": "IBM Plex Mono",
+                    "titleFontSize": 10,
+                    "titleColor": "#5A6A78",
+                    "titleFontWeight": 400,
+                    "labelFont": "IBM Plex Mono",
+                    "labelFontSize": 10,
+                    "labelColor": "#5A6A78",
+                    "gradientLength": 160,
+                    "gradientThickness": 6,
+                    "offset": 20
+                  }
+                },
+                "tooltip": [
+                  {
+                    "field": "year",
+                    "type": "ordinal",
+                    "title": "Year"
+                  },
+                  {
+                    "field": "monthName",
+                    "type": "nominal",
+                    "title": "Month"
+                  },
+                  {
+                    "aggregate": "count",
+                    "type": "quantitative",
+                    "title": "Incidents"
+                  }
+                ]
+              }
+            },
+            {
+              "description": "Decade vertical guide lines",
+              "transform": [
+                {
+                  "filter": "datum.year % 10 === 0"
+                },
+                {
+                  "aggregate": [
+                    {
+                      "op": "count",
+                      "as": "n"
+                    }
+                  ],
+                  "groupby": [
+                    "year"
+                  ]
+                }
+              ],
+              "mark": {
+                "type": "rule",
+                "color": "#16202A",
+                "opacity": 0.18,
+                "strokeWidth": 0.75,
+                "strokeDash": [
+                  3,
+                  3
+                ]
+              },
+              "encoding": {
+                "x": {
+                  "field": "year",
+                  "type": "ordinal"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "description": "Right marginal — monthly incident totals",
+          "width": 55,
+          "height": {
+            "step": 22
+          },
+          "mark": {
+            "type": "bar",
+            "color": "#C08766",
+            "cornerRadiusTopRight": 1,
+            "cornerRadiusBottomRight": 1
+          },
+          "encoding": {
+            "y": {
+              "field": "monthName",
+              "type": "ordinal",
+              "sort": [
+                "Jan",
+                "Feb",
+                "Mar",
+                "Apr",
+                "May",
+                "Jun",
+                "Jul",
+                "Aug",
+                "Sep",
+                "Oct",
+                "Nov",
+                "Dec"
+              ],
+              "axis": null
+            },
+            "x": {
+              "aggregate": "count",
+              "type": "quantitative",
+              "title": null,
+              "axis": {
+                "tickCount": 2,
+                "ticks": false,
+                "labels": false,
+                "grid": false,
+                "domain": false
+              }
+            },
+            "tooltip": [
+              {
+                "field": "monthName",
+                "type": "nominal",
+                "title": "Month"
+              },
+              {
+                "aggregate": "count",
+                "type": "quantitative",
+                "title": "Incidents"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFont": "IBM Plex Mono",
+      "labelFontSize": 10.5,
+      "labelColor": "#5C6A75",
+      "titleFont": "IBM Plex Mono",
+      "titleFontSize": 10.5,
+      "titleColor": "#5C6A75",
+      "titleFontWeight": 600,
+      "titlePadding": 10,
+      "labelPadding": 5,
+      "domainColor": "#14202C",
+      "domainWidth": 1,
+      "tickColor": "#B7AE99",
+      "gridColor": "#14202C",
+      "gridOpacity": 0.07
+    },
+    "legend": {
+      "labelFont": "IBM Plex Mono",
+      "labelFontSize": 10.5,
+      "labelColor": "#5C6A75",
+      "titleFont": "IBM Plex Mono",
+      "titleFontSize": 10,
+      "titleColor": "#5C6A75",
+      "titleFontWeight": 600
+    },
+    "font": "Spectral",
+    "title": {
+      "font": "IBM Plex Mono",
+      "fontSize": 11,
+      "fontWeight": 600,
+      "color": "#14202C",
+      "anchor": "start",
+      "subtitleFont": "Spectral",
+      "subtitleColor": "#5C6A75"
+    },
+    "header": {
+      "labelFont": "IBM Plex Mono",
+      "labelColor": "#14202C",
+      "titleFont": "IBM Plex Mono",
+      "titleColor": "#5C6A75"
+    }
+  }
+}

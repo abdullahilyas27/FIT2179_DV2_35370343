@@ -1,0 +1,415 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "background": null,
+  "padding": {
+    "top": 16,
+    "left": 8,
+    "right": 8,
+    "bottom": 8
+  },
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "font": "Spectral",
+    "axis": {
+      "labelFont": "IBM Plex Mono",
+      "labelFontSize": 10.5,
+      "labelColor": "#5C6A75",
+      "titleFont": "IBM Plex Mono",
+      "titleFontSize": 10.5,
+      "titleColor": "#5C6A75",
+      "domain": false,
+      "tickColor": "#B7AE99",
+      "titleFontWeight": 600,
+      "titlePadding": 10,
+      "labelPadding": 5,
+      "domainColor": "#14202C",
+      "domainWidth": 1,
+      "gridColor": "#14202C",
+      "gridOpacity": 0.07
+    },
+    "legend": {
+      "labelFont": "IBM Plex Mono",
+      "labelFontSize": 10.5,
+      "labelColor": "#5C6A75",
+      "titleFont": "IBM Plex Mono",
+      "titleFontSize": 10,
+      "titleColor": "#5C6A75",
+      "titleFontWeight": 600
+    },
+    "title": {
+      "font": "IBM Plex Mono",
+      "fontSize": 11,
+      "fontWeight": 600,
+      "color": "#14202C",
+      "anchor": "start",
+      "subtitleFont": "Spectral",
+      "subtitleColor": "#5C6A75"
+    },
+    "header": {
+      "labelFont": "IBM Plex Mono",
+      "labelColor": "#14202C",
+      "titleFont": "IBM Plex Mono",
+      "titleColor": "#5C6A75"
+    }
+  },
+  "data": {
+    "url": "./data/asid_incidents.csv",
+    "format": {
+      "type": "csv"
+    }
+  },
+  "transform": [
+    {
+      "filter": "datum.species != null && datum.outcome != null"
+    },
+    {
+      "calculate": "datum.outcome === 'Fatal' ? 1 : 0",
+      "as": "is_fatal"
+    },
+    {
+      "aggregate": [
+        {
+          "op": "count",
+          "as": "n"
+        },
+        {
+          "op": "sum",
+          "field": "is_fatal",
+          "as": "n_fatal"
+        }
+      ],
+      "groupby": [
+        "species"
+      ]
+    },
+    {
+      "joinaggregate": [
+        {
+          "op": "sum",
+          "field": "n",
+          "as": "total_n"
+        },
+        {
+          "op": "sum",
+          "field": "n_fatal",
+          "as": "total_fatal"
+        }
+      ]
+    },
+    {
+      "calculate": "datum.n / datum.total_n",
+      "as": "share_all"
+    },
+    {
+      "calculate": "datum.n_fatal / datum.total_fatal",
+      "as": "share_fatal"
+    },
+    {
+      "calculate": "datum.n_fatal / datum.n",
+      "as": "fatality_rate"
+    },
+    {
+      "calculate": "datum.share_fatal / datum.share_all",
+      "as": "index_ratio"
+    },
+    {
+      "fold": [
+        "share_all",
+        "share_fatal"
+      ],
+      "as": [
+        "metric",
+        "value"
+      ]
+    },
+    {
+      "calculate": "datum.metric === 'share_all' ? 'Of all incidents' : 'Of fatal incidents'",
+      "as": "metric_label"
+    },
+    {
+      "calculate": "format(datum.n, ',') + ' incidents'",
+      "as": "left_sub"
+    },
+    {
+      "calculate": "format(datum.n_fatal, ',') + ' of ' + format(datum.n, ',') + ' · ' + format(datum.fatality_rate, '.0%') + ' rate'",
+      "as": "right_sub"
+    }
+  ],
+  "width": 560,
+  "height": 460,
+  "layer": [
+    {
+      "mark": {
+        "type": "rule",
+        "stroke": "#D8D2C2",
+        "strokeWidth": 1,
+        "opacity": 0.7
+      },
+      "encoding": {
+        "x": {
+          "field": "metric_label",
+          "type": "ordinal",
+          "sort": [
+            "Of all incidents",
+            "Of fatal incidents"
+          ]
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "line",
+        "strokeWidth": 2.2,
+        "opacity": 0.92,
+        "strokeCap": "round"
+      },
+      "encoding": {
+        "x": {
+          "field": "metric_label",
+          "type": "ordinal",
+          "sort": [
+            "Of all incidents",
+            "Of fatal incidents"
+          ],
+          "scale": {
+            "padding": 0.5
+          },
+          "axis": {
+            "orient": "top",
+            "title": null,
+            "labelFont": "IBM Plex Mono",
+            "labelFontSize": 11,
+            "labelFontWeight": 500,
+            "labelColor": "#5A6A78",
+            "labelAngle": 0,
+            "labelExpr": "upper(datum.value)",
+            "labelPadding": 18,
+            "labelLimit": 200,
+            "ticks": false,
+            "domain": false,
+            "grid": false
+          }
+        },
+        "y": {
+          "field": "value",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              0.45
+            ]
+          },
+          "axis": null
+        },
+        "color": {
+          "field": "species",
+          "type": "nominal",
+          "scale": {
+            "domain": [
+              "White shark",
+              "Bull shark",
+              "Tiger shark",
+              "Other"
+            ],
+            "range": [
+              "#0072B2",
+              "#D55E00",
+              "#E6C200",
+              "#7C8492"
+            ]
+          },
+          "legend": null
+        },
+        "detail": {
+          "field": "species"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "size": 96,
+        "stroke": "#F3F0E8",
+        "strokeWidth": 2
+      },
+      "encoding": {
+        "x": {
+          "field": "metric_label",
+          "type": "ordinal",
+          "sort": [
+            "Of all incidents",
+            "Of fatal incidents"
+          ]
+        },
+        "y": {
+          "field": "value",
+          "type": "quantitative"
+        },
+        "color": {
+          "field": "species",
+          "type": "nominal",
+          "scale": {
+            "domain": [
+              "White shark",
+              "Bull shark",
+              "Tiger shark",
+              "Other"
+            ],
+            "range": [
+              "#0072B2",
+              "#D55E00",
+              "#E6C200",
+              "#7C8492"
+            ]
+          },
+          "legend": null
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.metric === 'share_all'"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "right",
+        "dx": -14,
+        "dy": 0,
+        "font": "Inter",
+        "fontSize": 15,
+        "fontWeight": 500,
+        "baseline": "middle"
+      },
+      "encoding": {
+        "x": {
+          "field": "metric_label",
+          "type": "ordinal",
+          "sort": [
+            "Of all incidents",
+            "Of fatal incidents"
+          ]
+        },
+        "y": {
+          "field": "value",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "species"
+        },
+        "color": {
+          "field": "species",
+          "type": "nominal",
+          "scale": {
+            "domain": [
+              "White shark",
+              "Bull shark",
+              "Tiger shark",
+              "Other"
+            ],
+            "range": [
+              "#0072B2",
+              "#D55E00",
+              "#E6C200",
+              "#7C8492"
+            ]
+          },
+          "legend": null
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.metric === 'share_fatal'"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 14,
+        "dy": -2,
+        "font": "IBM Plex Mono",
+        "fontSize": 14,
+        "fontWeight": 500,
+        "baseline": "middle"
+      },
+      "encoding": {
+        "x": {
+          "field": "metric_label",
+          "type": "ordinal",
+          "sort": [
+            "Of all incidents",
+            "Of fatal incidents"
+          ]
+        },
+        "y": {
+          "field": "value",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "value",
+          "type": "quantitative",
+          "format": ".0%"
+        },
+        "color": {
+          "field": "species",
+          "type": "nominal",
+          "scale": {
+            "domain": [
+              "White shark",
+              "Bull shark",
+              "Tiger shark",
+              "Other"
+            ],
+            "range": [
+              "#0072B2",
+              "#D55E00",
+              "#E6C200",
+              "#7C8492"
+            ]
+          },
+          "legend": null
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.metric === 'share_fatal'"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 14,
+        "dy": 14,
+        "font": "IBM Plex Mono",
+        "fontSize": 10,
+        "color": "#A6B4C1",
+        "baseline": "middle"
+      },
+      "encoding": {
+        "x": {
+          "field": "metric_label",
+          "type": "ordinal",
+          "sort": [
+            "Of all incidents",
+            "Of fatal incidents"
+          ]
+        },
+        "y": {
+          "field": "value",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "right_sub"
+        }
+      }
+    }
+  ]
+}

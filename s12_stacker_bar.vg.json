@@ -1,0 +1,263 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "background": null,
+  "padding": {
+    "top": 8,
+    "left": 8,
+    "right": 12,
+    "bottom": 8
+  },
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "font": "Spectral",
+    "axis": {
+      "labelFont": "IBM Plex Mono",
+      "labelFontSize": 10.5,
+      "labelColor": "#5C6A75",
+      "titleFont": "IBM Plex Mono",
+      "titleFontSize": 10.5,
+      "titleColor": "#5C6A75",
+      "domain": false,
+      "tickColor": "#B7AE99",
+      "titleFontWeight": 600,
+      "titlePadding": 10,
+      "labelPadding": 5,
+      "domainColor": "#14202C",
+      "domainWidth": 1,
+      "gridColor": "#14202C",
+      "gridOpacity": 0.07
+    },
+    "legend": {
+      "labelFont": "IBM Plex Mono",
+      "labelFontSize": 10.5,
+      "labelColor": "#5C6A75",
+      "titleFont": "IBM Plex Mono",
+      "titleFontSize": 10,
+      "titleColor": "#5C6A75",
+      "titleFontWeight": 600
+    },
+    "title": {
+      "font": "IBM Plex Mono",
+      "fontSize": 11,
+      "fontWeight": 600,
+      "color": "#14202C",
+      "anchor": "start",
+      "subtitleFont": "Spectral",
+      "subtitleColor": "#5C6A75"
+    },
+    "header": {
+      "labelFont": "IBM Plex Mono",
+      "labelColor": "#14202C",
+      "titleFont": "IBM Plex Mono",
+      "titleColor": "#5C6A75"
+    }
+  },
+  "data": {
+    "url": "./data/asid_incidents.csv",
+    "format": {
+      "type": "csv"
+    }
+  },
+  "transform": [
+    {
+      "filter": "datum.activity != null && datum.activity != '' && datum.outcome != null"
+    },
+    {
+      "aggregate": [
+        {
+          "op": "count",
+          "as": "n"
+        }
+      ],
+      "groupby": [
+        "activity",
+        "outcome"
+      ]
+    },
+    {
+      "joinaggregate": [
+        {
+          "op": "sum",
+          "field": "n",
+          "as": "total"
+        }
+      ],
+      "groupby": [
+        "activity"
+      ]
+    },
+    {
+      "window": [
+        {
+          "op": "dense_rank",
+          "as": "rank"
+        }
+      ],
+      "sort": [
+        {
+          "field": "total",
+          "order": "descending"
+        }
+      ],
+      "frame": [
+        null,
+        null
+      ]
+    },
+    {
+      "filter": "datum.rank <= 8"
+    }
+  ],
+  "width": 480,
+  "height": 340,
+  "layer": [
+    {
+      "mark": {
+        "type": "bar",
+        "stroke": null,
+        "strokeWidth": 2,
+        "cornerRadius": 0,
+        "height": {
+          "band": 0.72
+        }
+      },
+      "encoding": {
+        "y": {
+          "field": "activity",
+          "type": "nominal",
+          "sort": {
+            "field": "total",
+            "op": "max",
+            "order": "descending"
+          },
+          "axis": {
+            "title": null,
+            "labelFont": "IBM Plex Mono",
+            "labelFontSize": 11,
+            "labelFontWeight": 500,
+            "labelColor": "#16202A",
+            "labelExpr": "upper(datum.value)",
+            "labelPadding": 12,
+            "domain": false,
+            "ticks": false
+          }
+        },
+        "x": {
+          "field": "n",
+          "type": "quantitative",
+          "stack": "zero",
+          "axis": null
+        },
+        "color": {
+          "field": "outcome",
+          "type": "nominal",
+          "scale": {
+            "domain": [
+              "Fatal",
+              "Injured",
+              "Uninjured"
+            ],
+            "range": [
+              "#C13F2E",
+              "#E69F00",
+              "#0072B2"
+            ]
+          },
+          "legend": null
+        },
+        "order": {
+          "field": "outcome_order",
+          "type": "ordinal"
+        }
+      },
+      "transform": [
+        {
+          "calculate": "datum.outcome === 'Fatal' ? 1 : datum.outcome === 'Injured' ? 2 : 3",
+          "as": "outcome_order"
+        }
+      ]
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.outcome === 'Fatal'"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 10,
+        "font": "IBM Plex Mono",
+        "fontSize": 12,
+        "fontWeight": 500,
+        "color": "#16202A",
+        "baseline": "middle"
+      },
+      "encoding": {
+        "y": {
+          "field": "activity",
+          "type": "nominal",
+          "sort": {
+            "field": "total",
+            "op": "max",
+            "order": "descending"
+          }
+        },
+        "x": {
+          "field": "total",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "total",
+          "type": "quantitative",
+          "format": ","
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.outcome === 'Fatal'"
+        },
+        {
+          "calculate": "datum.n / datum.total",
+          "as": "fatal_rate"
+        },
+        {
+          "calculate": "format(datum.fatal_rate, '.0%') + ' fatal'",
+          "as": "rate_label"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 64,
+        "font": "IBM Plex Mono",
+        "fontSize": 11,
+        "fontWeight": 500,
+        "color": "#E84545",
+        "baseline": "middle"
+      },
+      "encoding": {
+        "y": {
+          "field": "activity",
+          "type": "nominal",
+          "sort": {
+            "field": "total",
+            "op": "max",
+            "order": "descending"
+          }
+        },
+        "x": {
+          "field": "total",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "rate_label"
+        }
+      }
+    }
+  ]
+}

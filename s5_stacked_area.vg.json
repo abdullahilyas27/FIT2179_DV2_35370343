@@ -1,0 +1,200 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "What were victims doing?",
+    "subtitle": "swimming dominated mid-century · surfing/boarding took over after 1980"
+  },
+  "width": 600,
+  "height": 280,
+  "background": null,
+  "padding": 14,
+  "data": {
+    "url": "./data/asid_incidents.csv",
+    "format": {
+      "type": "csv",
+      "parse": {
+        "year": "number"
+      }
+    }
+  },
+  "transform": [
+    {
+      "filter": "isValid(datum.activity) && datum.activity !== '' && datum.activity !== 'NA' && isValid(datum.year) && datum.year >= 1900"
+    },
+    {
+      "calculate": "datum.activity === 'Surfing' || datum.activity === 'Bodyboarding' || datum.activity === 'Boogie-boarding' || datum.activity === 'Board surfing' ? 'Surfing/Boarding' : datum.activity === 'Swimming' ? 'Swimming' : datum.activity === 'Spearfishing' ? 'Spearfishing' : datum.activity === 'Fishing' || datum.activity === 'Rock fishing' ? 'Fishing' : datum.activity === 'Snorkelling' || datum.activity === 'Snorkeling' || datum.activity === 'Scuba diving' || datum.activity === 'Diving' || datum.activity === 'Scuba' ? 'Diving' : 'Other'",
+      "as": "activity_group"
+    },
+    {
+      "calculate": "floor(datum.year / 10) * 10",
+      "as": "decade"
+    },
+    {
+      "calculate": "datum.activity_group === 'Swimming' ? 0 : datum.activity_group === 'Surfing/Boarding' ? 1 : datum.activity_group === 'Diving' ? 2 : datum.activity_group === 'Spearfishing' ? 3 : datum.activity_group === 'Fishing' ? 4 : 5",
+      "as": "activity_order"
+    },
+    {
+      "aggregate": [
+        {
+          "op": "count",
+          "as": "count"
+        },
+        {
+          "op": "min",
+          "field": "activity_order",
+          "as": "activity_order"
+        }
+      ],
+      "groupby": [
+        "decade",
+        "activity_group"
+      ]
+    },
+    {
+      "filter": {
+        "param": "activitySelect",
+        "empty": true
+      }
+    }
+  ],
+  "params": [
+    {
+      "name": "activitySelect",
+      "select": {
+        "type": "point",
+        "fields": [
+          "activity_group"
+        ],
+        "toggle": true
+      },
+      "bind": "legend"
+    }
+  ],
+  "mark": {
+    "type": "area",
+    "interpolate": "monotone"
+  },
+  "encoding": {
+    "x": {
+      "field": "decade",
+      "type": "quantitative",
+      "axis": {
+        "format": "d",
+        "title": null,
+        "tickMinStep": 10
+      }
+    },
+    "y": {
+      "field": "count",
+      "type": "quantitative",
+      "stack": "zero",
+      "axis": {
+        "title": "Incidents per decade"
+      }
+    },
+    "color": {
+      "field": "activity_group",
+      "type": "nominal",
+      "scale": {
+        "domain": [
+          "Swimming",
+          "Surfing/Boarding",
+          "Diving",
+          "Spearfishing",
+          "Fishing",
+          "Other"
+        ],
+        "range": [
+          "#0072B2",
+          "#D55E00",
+          "#009E73",
+          "#56B4E9",
+          "#E69F00",
+          "#999999"
+        ]
+      },
+      "legend": {
+        "title": "Activity",
+        "orient": "bottom"
+      }
+    },
+    "order": {
+      "field": "activity_order",
+      "type": "quantitative"
+    },
+    "opacity": {
+      "condition": {
+        "param": "activitySelect",
+        "value": 0.95
+      },
+      "value": 0.15
+    },
+    "tooltip": [
+      {
+        "field": "decade",
+        "type": "quantitative",
+        "title": "Decade"
+      },
+      {
+        "field": "activity_group",
+        "type": "nominal",
+        "title": "Activity"
+      },
+      {
+        "field": "count",
+        "type": "quantitative",
+        "title": "Incidents"
+      }
+    ]
+  },
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "domain": false,
+      "ticks": false,
+      "labelFontSize": 10.5,
+      "labelColor": "#5C6A75",
+      "titleFontSize": 10.5,
+      "titleColor": "#5C6A75",
+      "titleFontWeight": 600,
+      "labelFont": "IBM Plex Mono",
+      "titleFont": "IBM Plex Mono",
+      "titlePadding": 10,
+      "labelPadding": 5,
+      "domainColor": "#14202C",
+      "domainWidth": 1,
+      "tickColor": "#B7AE99",
+      "gridColor": "#14202C",
+      "gridOpacity": 0.07
+    },
+    "title": {
+      "fontSize": 11,
+      "fontWeight": 600,
+      "color": "#14202C",
+      "anchor": "start",
+      "subtitleFontSize": 12,
+      "subtitleColor": "#5C6A75",
+      "subtitlePadding": 4,
+      "font": "IBM Plex Mono",
+      "subtitleFont": "Spectral"
+    },
+    "legend": {
+      "labelFontSize": 10.5,
+      "titleFontSize": 10,
+      "titleColor": "#5C6A75",
+      "labelFont": "IBM Plex Mono",
+      "labelColor": "#5C6A75",
+      "titleFont": "IBM Plex Mono",
+      "titleFontWeight": 600
+    },
+    "font": "Spectral",
+    "header": {
+      "labelFont": "IBM Plex Mono",
+      "labelColor": "#14202C",
+      "titleFont": "IBM Plex Mono",
+      "titleColor": "#5C6A75"
+    }
+  }
+}

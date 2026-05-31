@@ -1,0 +1,493 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Section 3 — Annual recorded shark incidents in Australia, 1791–2024, with elbow-style callout annotations (NSW netting 1937, Jaws 1975, WA cull 2014) and a brushable year range.",
+  "width": "container",
+  "height": 380,
+  "background": "transparent",
+  "padding": {
+    "left": 12,
+    "right": 24,
+    "top": 12,
+    "bottom": 8
+  },
+  "config": {
+    "font": "Spectral",
+    "axis": {
+      "labelFont": "IBM Plex Mono",
+      "labelFontSize": 10.5,
+      "labelColor": "#5C6A75",
+      "labelPadding": 5,
+      "labelFontWeight": 400,
+      "titleFont": "IBM Plex Mono",
+      "titleFontSize": 10.5,
+      "titleColor": "#5C6A75",
+      "titleFontWeight": 600,
+      "titlePadding": 10,
+      "domainColor": "#14202C",
+      "domainWidth": 1,
+      "tickColor": "#B7AE99",
+      "tickSize": 4,
+      "gridColor": "#14202C",
+      "gridOpacity": 0.07,
+      "gridDash": []
+    },
+    "view": {
+      "stroke": null
+    },
+    "legend": {
+      "labelFont": "IBM Plex Mono",
+      "labelFontSize": 10.5,
+      "labelColor": "#5C6A75",
+      "titleFont": "IBM Plex Mono",
+      "titleFontSize": 10,
+      "titleColor": "#5C6A75",
+      "titleFontWeight": 600
+    },
+    "title": {
+      "font": "IBM Plex Mono",
+      "fontSize": 11,
+      "fontWeight": 600,
+      "color": "#14202C",
+      "anchor": "start",
+      "subtitleFont": "Spectral",
+      "subtitleColor": "#5C6A75"
+    },
+    "header": {
+      "labelFont": "IBM Plex Mono",
+      "labelColor": "#14202C",
+      "titleFont": "IBM Plex Mono",
+      "titleColor": "#5C6A75"
+    }
+  },
+  "data": {
+    "url": "data/asid_incidents.csv"
+  },
+  "transform": [
+    {
+      "aggregate": [
+        {
+          "op": "count",
+          "as": "incidents"
+        }
+      ],
+      "groupby": [
+        "year"
+      ]
+    },
+    {
+      "impute": "incidents",
+      "key": "year",
+      "keyvals": {
+        "start": 1791,
+        "stop": 2025,
+        "step": 1
+      },
+      "value": 0
+    }
+  ],
+  "encoding": {
+    "x": {
+      "field": "year",
+      "type": "quantitative",
+      "scale": {
+        "domain": [
+          1791,
+          2024
+        ],
+        "nice": false
+      },
+      "axis": {
+        "values": [
+          1800,
+          1850,
+          1900,
+          1950,
+          2000
+        ],
+        "format": "d",
+        "title": null,
+        "grid": false,
+        "labelOverlap": false
+      }
+    },
+    "y": {
+      "field": "incidents",
+      "type": "quantitative",
+      "scale": {
+        "domainMin": 0
+      },
+      "axis": {
+        "title": "INCIDENTS PER YEAR",
+        "tickCount": 5,
+        "grid": true,
+        "labelFlush": false,
+        "titleAnchor": "start",
+        "titleAngle": 0,
+        "titleY": -18,
+        "titleX": -6,
+        "titleAlign": "left",
+        "titleBaseline": "alphabetic"
+      }
+    }
+  },
+  "layer": [
+    {
+      "description": "Sea-gradient area fill + brush selection param.",
+      "mark": {
+        "type": "area",
+        "interpolate": "monotone",
+        "line": false,
+        "color": {
+          "x1": 1,
+          "y1": 1,
+          "x2": 1,
+          "y2": 0,
+          "gradient": "linear",
+          "stops": [
+            {
+              "offset": 0,
+              "color": "#0B2D45",
+              "opacity": 0
+            },
+            {
+              "offset": 1,
+              "color": "#0B2D45",
+              "opacity": 0.13
+            }
+          ]
+        }
+      },
+      "params": [
+        {
+          "name": "year_brush",
+          "select": {
+            "type": "interval",
+            "encodings": [
+              "x"
+            ],
+            "mark": {
+              "fill": "#0B2D45",
+              "fillOpacity": 0.08,
+              "stroke": "#1A4A6A",
+              "strokeOpacity": 0.45,
+              "strokeWidth": 1
+            }
+          }
+        }
+      ]
+    },
+    {
+      "description": "Main navy line.",
+      "mark": {
+        "type": "line",
+        "interpolate": "monotone",
+        "color": "#0B2D45",
+        "strokeWidth": 1.6,
+        "strokeJoin": "round",
+        "strokeCap": "round"
+      }
+    },
+    {
+      "description": "Annotation elbow leaders — horizontal arm at label height, then vertical drop to near the x-axis. Each annotation has 3 ordered points: (label_x, arm_y) → (event_x, arm_y) → (event_x, 1). The 'detail' channel groups them into separate lines.",
+      "data": {
+        "values": [
+          {
+            "id": "nsw",
+            "x": 1895,
+            "y": 37,
+            "ord": 1
+          },
+          {
+            "id": "nsw",
+            "x": 1937,
+            "y": 37,
+            "ord": 2
+          },
+          {
+            "id": "nsw",
+            "x": 1937,
+            "y": 1,
+            "ord": 3
+          },
+          {
+            "id": "jaws",
+            "x": 1950,
+            "y": 65,
+            "ord": 1
+          },
+          {
+            "id": "jaws",
+            "x": 1975,
+            "y": 65,
+            "ord": 2
+          },
+          {
+            "id": "jaws",
+            "x": 1975,
+            "y": 1,
+            "ord": 3
+          },
+          {
+            "id": "cull",
+            "x": 1988,
+            "y": 79,
+            "ord": 1
+          },
+          {
+            "id": "cull",
+            "x": 2014,
+            "y": 79,
+            "ord": 2
+          },
+          {
+            "id": "cull",
+            "x": 2014,
+            "y": 1,
+            "ord": 3
+          }
+        ]
+      },
+      "mark": {
+        "type": "line",
+        "strokeWidth": 0.75,
+        "color": "#A6B4C1"
+      },
+      "encoding": {
+        "x": {
+          "field": "x",
+          "type": "quantitative"
+        },
+        "y": {
+          "field": "y",
+          "type": "quantitative"
+        },
+        "detail": {
+          "field": "id",
+          "type": "nominal"
+        },
+        "order": {
+          "field": "ord",
+          "type": "quantitative"
+        }
+      }
+    },
+    {
+      "description": "Triangle arrowheads at the foot of each vertical drop (y≈1 ≈ x-axis baseline).",
+      "data": {
+        "values": [
+          {
+            "ax": 1937,
+            "primary": false
+          },
+          {
+            "ax": 1975,
+            "primary": true
+          },
+          {
+            "ax": 2014,
+            "primary": false
+          }
+        ]
+      },
+      "mark": {
+        "type": "point",
+        "shape": "triangle-down",
+        "filled": true
+      },
+      "encoding": {
+        "x": {
+          "field": "ax",
+          "type": "quantitative"
+        },
+        "y": {
+          "datum": 1
+        },
+        "size": {
+          "condition": {
+            "test": "datum.primary",
+            "value": 48
+          },
+          "value": 24
+        },
+        "color": {
+          "condition": {
+            "test": "datum.primary",
+            "value": "#16202A"
+          },
+          "value": "#A6B4C1"
+        }
+      }
+    },
+    {
+      "description": "Main label text — non-primary (NSW, WA Cull), right-aligned just above the horizontal arm.",
+      "data": {
+        "values": [
+          {
+            "lx": 1895,
+            "ly": 37,
+            "label": "NSW SHARK NETTING"
+          },
+          {
+            "lx": 1988,
+            "ly": 79,
+            "label": "WA DRUMLINE CULL"
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "font": "IBM Plex Mono",
+        "fontSize": 9,
+        "fontWeight": 500,
+        "align": "right",
+        "baseline": "bottom",
+        "dy": -4,
+        "color": "#5A6A78"
+      },
+      "encoding": {
+        "x": {
+          "field": "lx",
+          "type": "quantitative"
+        },
+        "y": {
+          "field": "ly",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "label"
+        }
+      }
+    },
+    {
+      "description": "Jaws label — primary annotation, larger + darker + heavier weight for visual prominence.",
+      "data": {
+        "values": [
+          {
+            "lx": 1950,
+            "ly": 65,
+            "label": "◆ JAWS RELEASED"
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "font": "IBM Plex Mono",
+        "fontSize": 10.5,
+        "fontWeight": 600,
+        "align": "right",
+        "baseline": "bottom",
+        "dy": -4,
+        "color": "#16202A"
+      },
+      "encoding": {
+        "x": {
+          "field": "lx",
+          "type": "quantitative"
+        },
+        "y": {
+          "field": "ly",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "label"
+        }
+      }
+    },
+    {
+      "description": "Year sub-labels — small, faint, below each arm.",
+      "data": {
+        "values": [
+          {
+            "lx": 1895,
+            "ly": 37,
+            "yr": "1937"
+          },
+          {
+            "lx": 1950,
+            "ly": 65,
+            "yr": "1975"
+          },
+          {
+            "lx": 1988,
+            "ly": 79,
+            "yr": "2014"
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "font": "IBM Plex Mono",
+        "fontSize": 8,
+        "align": "right",
+        "baseline": "top",
+        "dy": 3,
+        "color": "#A6B4C1"
+      },
+      "encoding": {
+        "x": {
+          "field": "lx",
+          "type": "quantitative"
+        },
+        "y": {
+          "field": "ly",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "yr"
+        }
+      }
+    },
+    {
+      "description": "Hover hit area + tooltip — invisible circles that reveal on nearest-point hover.",
+      "mark": {
+        "type": "circle",
+        "color": "#0B2D45"
+      },
+      "encoding": {
+        "opacity": {
+          "condition": {
+            "param": "hover",
+            "empty": false,
+            "value": 1
+          },
+          "value": 0
+        },
+        "size": {
+          "condition": {
+            "param": "hover",
+            "empty": false,
+            "value": 70
+          },
+          "value": 120
+        },
+        "tooltip": [
+          {
+            "field": "year",
+            "type": "quantitative",
+            "title": "Year",
+            "format": "d"
+          },
+          {
+            "field": "incidents",
+            "type": "quantitative",
+            "title": "Incidents"
+          }
+        ]
+      },
+      "params": [
+        {
+          "name": "hover",
+          "select": {
+            "type": "point",
+            "encodings": [
+              "x"
+            ],
+            "on": "pointerover",
+            "clear": "pointerout",
+            "nearest": true
+          }
+        }
+      ]
+    }
+  ]
+}

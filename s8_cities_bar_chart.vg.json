@@ -1,0 +1,362 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Top-20 cities by incident count — horizontal lollipop (stem length = count, dot colour = fatality rate)",
+  "background": "transparent",
+  "padding": {
+    "top": 18,
+    "right": 32,
+    "bottom": 50,
+    "left": 18
+  },
+  "width": "container",
+  "height": 560,
+  "data": {
+    "url": "./data/asid_incidents.csv",
+    "format": {
+      "type": "csv"
+    }
+  },
+  "transform": [
+    {
+      "filter": "isValid(datum.location) && datum.location !== ''"
+    },
+    {
+      "calculate": "indexof(datum.location, ',') >= 0 ? trim(slice(datum.location, 0, indexof(datum.location, ','))) : trim(datum.location)",
+      "as": "city"
+    },
+    {
+      "calculate": "datum.outcome === 'Fatal' ? 1 : 0",
+      "as": "is_fatal"
+    },
+    {
+      "aggregate": [
+        {
+          "op": "count",
+          "as": "incident_count"
+        },
+        {
+          "op": "sum",
+          "field": "is_fatal",
+          "as": "fatal_count"
+        }
+      ],
+      "groupby": [
+        "city"
+      ]
+    },
+    {
+      "calculate": "datum.fatal_count / datum.incident_count",
+      "as": "fatality_rate"
+    },
+    {
+      "calculate": "datum.fatality_rate < 0.20 ? 'Low · <20% fatal' : datum.fatality_rate < 0.40 ? 'Medium · 20–40% fatal' : 'High · ≥40% fatal'",
+      "as": "fatality_band"
+    },
+    {
+      "lookup": "city",
+      "from": {
+        "data": {
+          "values": [
+            {
+              "city": "sydney",
+              "city_label": "Sydney"
+            },
+            {
+              "city": "torres strait",
+              "city_label": "Torres Strait"
+            },
+            {
+              "city": "sydney harbour",
+              "city_label": "Sydney Harbour"
+            },
+            {
+              "city": "perth",
+              "city_label": "Perth"
+            },
+            {
+              "city": "gold coast",
+              "city_label": "Gold Coast"
+            },
+            {
+              "city": "central coast",
+              "city_label": "Central Coast"
+            },
+            {
+              "city": "brisbane river",
+              "city_label": "Brisbane River"
+            },
+            {
+              "city": "townsville",
+              "city_label": "Townsville"
+            },
+            {
+              "city": "port phillip bay",
+              "city_label": "Port Phillip Bay"
+            },
+            {
+              "city": "sunshine coast",
+              "city_label": "Sunshine Coast"
+            },
+            {
+              "city": "byron bay",
+              "city_label": "Byron Bay"
+            },
+            {
+              "city": "moreton bay",
+              "city_label": "Moreton Bay"
+            },
+            {
+              "city": "newcastle",
+              "city_label": "Newcastle"
+            },
+            {
+              "city": "port stephens",
+              "city_label": "Port Stephens"
+            },
+            {
+              "city": "cairns",
+              "city_label": "Cairns"
+            },
+            {
+              "city": "wollongong",
+              "city_label": "Wollongong"
+            },
+            {
+              "city": "yamba",
+              "city_label": "Yamba"
+            },
+            {
+              "city": "adelaide",
+              "city_label": "Adelaide"
+            },
+            {
+              "city": "rottnest island",
+              "city_label": "Rottnest Island"
+            },
+            {
+              "city": "mandurah",
+              "city_label": "Mandurah"
+            },
+            {
+              "city": "fremantle",
+              "city_label": "Fremantle"
+            },
+            {
+              "city": "ballina",
+              "city_label": "Ballina"
+            },
+            {
+              "city": "evans head",
+              "city_label": "Evans Head"
+            },
+            {
+              "city": "coffs harbour",
+              "city_label": "Coffs Harbour"
+            },
+            {
+              "city": "shark bay",
+              "city_label": "Shark Bay"
+            },
+            {
+              "city": "cooktown",
+              "city_label": "Cooktown"
+            },
+            {
+              "city": "esperance",
+              "city_label": "Esperance"
+            }
+          ]
+        },
+        "key": "city",
+        "fields": [
+          "city_label"
+        ]
+      }
+    },
+    {
+      "calculate": "datum.city_label || (upper(slice(datum.city,0,1)) + slice(datum.city,1))",
+      "as": "city_label"
+    },
+    {
+      "window": [
+        {
+          "op": "rank",
+          "as": "rank"
+        }
+      ],
+      "sort": [
+        {
+          "field": "incident_count",
+          "order": "descending"
+        }
+      ]
+    },
+    {
+      "filter": "datum.rank <= 20"
+    }
+  ],
+  "layer": [
+    {
+      "mark": {
+        "type": "rule",
+        "stroke": "#5C6A75",
+        "strokeWidth": 0.8,
+        "opacity": 0.6
+      },
+      "encoding": {
+        "y": {
+          "field": "city_label",
+          "type": "nominal",
+          "sort": {
+            "field": "incident_count",
+            "order": "descending"
+          },
+          "axis": {
+            "title": null,
+            "labelFont": "IBM Plex Mono",
+            "labelFontSize": 10.5,
+            "labelColor": "#2B3A48",
+            "labelPadding": 8,
+            "domain": false,
+            "ticks": false
+          }
+        },
+        "x": {
+          "field": "incident_count",
+          "type": "quantitative"
+        },
+        "x2": {
+          "datum": 0
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "circle",
+        "size": 220
+      },
+      "encoding": {
+        "y": {
+          "field": "city_label",
+          "type": "nominal",
+          "sort": {
+            "field": "incident_count",
+            "order": "descending"
+          }
+        },
+        "x": {
+          "field": "incident_count",
+          "type": "quantitative",
+          "axis": {
+            "title": "Total incidents",
+            "titleFont": "IBM Plex Mono",
+            "titleFontSize": 10,
+            "titleColor": "#2B3A48",
+            "titleAnchor": "start",
+            "titlePadding": 12,
+            "labelFont": "IBM Plex Mono",
+            "labelFontSize": 10,
+            "labelColor": "#2B3A48",
+            "grid": true,
+            "gridColor": "#E0DCC9",
+            "gridDash": [
+              2,
+              3
+            ],
+            "domain": false,
+            "ticks": false
+          }
+        },
+        "color": {
+          "field": "fatality_band",
+          "type": "nominal",
+          "scale": {
+            "domain": [
+              "Low · <20% fatal",
+              "Medium · 20–40% fatal",
+              "High · ≥40% fatal"
+            ],
+            "range": [
+              "#F1C453",
+              "#E66F2A",
+              "#9A1F1A"
+            ]
+          },
+          "legend": {
+            "title": null,
+            "orient": "bottom-right",
+            "offset": 8,
+            "direction": "vertical",
+            "labelFont": "IBM Plex Mono",
+            "labelFontSize": 10,
+            "labelColor": "#2B3A48",
+            "symbolType": "circle",
+            "symbolSize": 140,
+            "symbolStrokeWidth": 0,
+            "padding": 6,
+            "rowPadding": 4
+          }
+        },
+        "tooltip": [
+          {
+            "field": "city",
+            "type": "nominal",
+            "title": "City"
+          },
+          {
+            "field": "incident_count",
+            "type": "quantitative",
+            "title": "Incidents"
+          },
+          {
+            "field": "fatal_count",
+            "type": "quantitative",
+            "title": "Fatal"
+          },
+          {
+            "field": "fatality_rate",
+            "type": "quantitative",
+            "title": "Fatal share",
+            "format": ".0%"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "middle",
+        "dx": 9,
+        "font": "IBM Plex Mono",
+        "fontSize": 9.5,
+        "fontWeight": 500,
+        "color": "#2B3A48"
+      },
+      "encoding": {
+        "y": {
+          "field": "city_label",
+          "type": "nominal",
+          "sort": {
+            "field": "incident_count",
+            "order": "descending"
+          }
+        },
+        "x": {
+          "field": "incident_count",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "incident_count",
+          "type": "quantitative"
+        }
+      }
+    }
+  ],
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "background": "transparent"
+  }
+}

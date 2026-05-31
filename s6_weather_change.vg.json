@@ -1,0 +1,310 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "background": null,
+  "padding": {
+    "top": 8,
+    "left": 4,
+    "right": 8,
+    "bottom": 8
+  },
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "font": "Spectral",
+    "axis": {
+      "labelFont": "IBM Plex Mono",
+      "labelFontSize": 10.5,
+      "labelColor": "#5C6A75",
+      "labelFontWeight": 400,
+      "titleFont": "IBM Plex Mono",
+      "titleFontSize": 10.5,
+      "titleFontWeight": 600,
+      "titleColor": "#5C6A75",
+      "titlePadding": 10,
+      "domain": false,
+      "tickColor": "#B7AE99",
+      "tickSize": 4,
+      "gridColor": "#14202C",
+      "gridOpacity": 0.07,
+      "gridDash": [
+        1,
+        2
+      ],
+      "labelPadding": 5,
+      "domainColor": "#14202C",
+      "domainWidth": 1
+    },
+    "header": {
+      "labelFont": "IBM Plex Mono",
+      "labelFontSize": 11,
+      "labelFontWeight": 500,
+      "labelColor": "#14202C",
+      "labelAnchor": "start",
+      "labelOrient": "top",
+      "labelPadding": 10,
+      "titleFontSize": 0,
+      "titleFont": "IBM Plex Mono",
+      "titleColor": "#5C6A75"
+    },
+    "legend": {
+      "labelFont": "IBM Plex Mono",
+      "labelFontSize": 10.5,
+      "labelColor": "#5C6A75",
+      "titleFont": "IBM Plex Mono",
+      "titleFontSize": 10,
+      "titleColor": "#5C6A75",
+      "titleFontWeight": 600
+    },
+    "title": {
+      "font": "IBM Plex Mono",
+      "fontSize": 11,
+      "fontWeight": 600,
+      "color": "#14202C",
+      "anchor": "start",
+      "subtitleFont": "Spectral",
+      "subtitleColor": "#5C6A75"
+    }
+  },
+  "data": {
+    "url": "./data/bom_sst.csv",
+    "format": {
+      "type": "csv",
+      "parse": {
+        "year": "number",
+        "anomaly": "number"
+      }
+    }
+  },
+  "facet": {
+    "field": "region",
+    "type": "nominal",
+    "sort": [
+      "Tasman Sea",
+      "Coral Sea",
+      "Bass Strait",
+      "Southwest Australia"
+    ],
+    "header": {
+      "title": null,
+      "labelExpr": "upper(datum.value)"
+    }
+  },
+  "columns": 2,
+  "spacing": {
+    "row": 24,
+    "column": 48
+  },
+  "resolve": {
+    "axis": {
+      "x": "shared"
+    }
+  },
+  "spec": {
+    "width": 380,
+    "height": 190,
+    "layer": [
+      {
+        "mark": {
+          "type": "rule",
+          "stroke": "#A6B4C1",
+          "strokeDash": [
+            2,
+            3
+          ],
+          "strokeWidth": 1
+        },
+        "encoding": {
+          "y": {
+            "datum": 0
+          }
+        }
+      },
+      {
+        "mark": {
+          "type": "bar",
+          "width": 2.4,
+          "opacity": 0.88
+        },
+        "encoding": {
+          "x": {
+            "field": "year",
+            "type": "quantitative",
+            "scale": {
+              "nice": false,
+              "padding": 6
+            },
+            "axis": {
+              "format": "d",
+              "title": null,
+              "tickCount": 5,
+              "labelPadding": 6,
+              "grid": false
+            }
+          },
+          "y": {
+            "field": "anomaly",
+            "type": "quantitative",
+            "scale": {
+              "domain": [
+                -1.5,
+                2
+              ]
+            },
+            "axis": {
+              "title": "ANOMALY (°C)",
+              "format": "+.1f",
+              "tickCount": 5,
+              "labelPadding": 6
+            }
+          },
+          "color": {
+            "field": "anomaly",
+            "type": "quantitative",
+            "scale": {
+              "domain": [
+                -1.2,
+                0,
+                1.5
+              ],
+              "range": [
+                "#3E6F8E",
+                "#D8D2C2",
+                "#B8654A"
+              ]
+            },
+            "legend": null
+          }
+        }
+      },
+      {
+        "transform": [
+          {
+            "loess": "anomaly",
+            "on": "year",
+            "bandwidth": 0.32
+          }
+        ],
+        "mark": {
+          "type": "line",
+          "stroke": "#16202A",
+          "strokeWidth": 1.75,
+          "opacity": 0.92,
+          "interpolate": "monotone"
+        },
+        "encoding": {
+          "x": {
+            "field": "year",
+            "type": "quantitative"
+          },
+          "y": {
+            "field": "anomaly",
+            "type": "quantitative"
+          }
+        }
+      },
+      {
+        "transform": [
+          {
+            "loess": "anomaly",
+            "on": "year",
+            "bandwidth": 0.32
+          },
+          {
+            "window": [
+              {
+                "op": "row_number",
+                "as": "rn"
+              }
+            ],
+            "sort": [
+              {
+                "field": "year",
+                "order": "descending"
+              }
+            ],
+            "groupby": [
+              "region"
+            ]
+          },
+          {
+            "filter": "datum.rn == 1"
+          }
+        ],
+        "mark": {
+          "type": "text",
+          "align": "right",
+          "baseline": "bottom",
+          "dx": -2,
+          "dy": -8,
+          "font": "IBM Plex Mono",
+          "fontSize": 10,
+          "fontWeight": 500,
+          "color": "#16202A"
+        },
+        "encoding": {
+          "x": {
+            "field": "year",
+            "type": "quantitative"
+          },
+          "y": {
+            "field": "anomaly",
+            "type": "quantitative"
+          },
+          "text": {
+            "field": "anomaly",
+            "type": "quantitative",
+            "format": "+.2f"
+          }
+        }
+      },
+      {
+        "transform": [
+          {
+            "loess": "anomaly",
+            "on": "year",
+            "bandwidth": 0.32
+          },
+          {
+            "window": [
+              {
+                "op": "row_number",
+                "as": "rn"
+              }
+            ],
+            "sort": [
+              {
+                "field": "year",
+                "order": "descending"
+              }
+            ],
+            "groupby": [
+              "region"
+            ]
+          },
+          {
+            "filter": "datum.rn == 1"
+          }
+        ],
+        "mark": {
+          "type": "point",
+          "filled": true,
+          "size": 32,
+          "color": "#16202A",
+          "stroke": "#FBFAF6",
+          "strokeWidth": 1.5
+        },
+        "encoding": {
+          "x": {
+            "field": "year",
+            "type": "quantitative"
+          },
+          "y": {
+            "field": "anomaly",
+            "type": "quantitative"
+          }
+        }
+      }
+    ]
+  }
+}

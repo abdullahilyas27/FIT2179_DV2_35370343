@@ -1,0 +1,2090 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "§13 — Anatomy of Risk: multi-metric beach profile composite (4 beaches × 4 mini-charts).",
+  "background": null,
+  "padding": {
+    "left": 6,
+    "right": 6,
+    "top": 6,
+    "bottom": 6
+  },
+  "config": {
+    "view": {
+      "stroke": null,
+      "fill": null
+    },
+    "font": "Spectral",
+    "axis": {
+      "labelFont": "IBM Plex Mono",
+      "titleFont": "IBM Plex Mono",
+      "labelColor": "#5C6A75",
+      "titleColor": "#5C6A75",
+      "labelFontSize": 10.5,
+      "titleFontSize": 10.5,
+      "titleFontWeight": 600,
+      "titlePadding": 10,
+      "labelPadding": 5,
+      "domainColor": "#14202C",
+      "domainWidth": 1,
+      "tickColor": "#B7AE99",
+      "gridColor": "#14202C",
+      "gridOpacity": 0.07
+    },
+    "arc": {
+      "stroke": "#FBFAF6"
+    },
+    "legend": {
+      "labelFont": "IBM Plex Mono",
+      "labelFontSize": 10.5,
+      "labelColor": "#5C6A75",
+      "titleFont": "IBM Plex Mono",
+      "titleFontSize": 10,
+      "titleColor": "#5C6A75",
+      "titleFontWeight": 600
+    },
+    "title": {
+      "font": "IBM Plex Mono",
+      "fontSize": 11,
+      "fontWeight": 600,
+      "color": "#14202C",
+      "anchor": "start",
+      "subtitleFont": "Spectral",
+      "subtitleColor": "#5C6A75"
+    },
+    "header": {
+      "labelFont": "IBM Plex Mono",
+      "labelColor": "#14202C",
+      "titleFont": "IBM Plex Mono",
+      "titleColor": "#5C6A75"
+    }
+  },
+  "datasets": {
+    "beach_meta": [
+      {
+        "beach": "Sydney",
+        "subtitle": "Open coast · mixed sharks",
+        "state": "NSW",
+        "n": 88,
+        "fatal": 19,
+        "fatal_pct": 22.0
+      },
+      {
+        "beach": "Sydney Harbour",
+        "subtitle": "Estuary · bull-shark country",
+        "state": "NSW",
+        "n": 64,
+        "fatal": 29,
+        "fatal_pct": 45.0
+      },
+      {
+        "beach": "Gold Coast",
+        "subtitle": "Tourist coast · QLD",
+        "state": "QLD",
+        "n": 38,
+        "fatal": 7,
+        "fatal_pct": 18.0
+      },
+      {
+        "beach": "Perth",
+        "subtitle": "Indian Ocean · white sharks",
+        "state": "WA",
+        "n": 41,
+        "fatal": 6,
+        "fatal_pct": 15.0
+      }
+    ],
+    "species": [
+      {
+        "beach": "Sydney",
+        "species": "White shark",
+        "count": 37
+      },
+      {
+        "beach": "Sydney",
+        "species": "Bull shark",
+        "count": 10
+      },
+      {
+        "beach": "Sydney",
+        "species": "Tiger shark",
+        "count": 3
+      },
+      {
+        "beach": "Sydney",
+        "species": "Other",
+        "count": 39
+      },
+      {
+        "beach": "Sydney Harbour",
+        "species": "White shark",
+        "count": 1
+      },
+      {
+        "beach": "Sydney Harbour",
+        "species": "Bull shark",
+        "count": 53
+      },
+      {
+        "beach": "Sydney Harbour",
+        "species": "Tiger shark",
+        "count": 1
+      },
+      {
+        "beach": "Sydney Harbour",
+        "species": "Other",
+        "count": 9
+      },
+      {
+        "beach": "Gold Coast",
+        "species": "White shark",
+        "count": 4
+      },
+      {
+        "beach": "Gold Coast",
+        "species": "Bull shark",
+        "count": 17
+      },
+      {
+        "beach": "Gold Coast",
+        "species": "Tiger shark",
+        "count": 9
+      },
+      {
+        "beach": "Gold Coast",
+        "species": "Other",
+        "count": 8
+      },
+      {
+        "beach": "Perth",
+        "species": "White shark",
+        "count": 16
+      },
+      {
+        "beach": "Perth",
+        "species": "Bull shark",
+        "count": 9
+      },
+      {
+        "beach": "Perth",
+        "species": "Tiger shark",
+        "count": 1
+      },
+      {
+        "beach": "Perth",
+        "species": "Other",
+        "count": 15
+      }
+    ],
+    "activity": [
+      {
+        "beach": "Sydney",
+        "activity": "Swimming",
+        "count": 44
+      },
+      {
+        "beach": "Sydney",
+        "activity": "Surf/Board",
+        "count": 26
+      },
+      {
+        "beach": "Sydney",
+        "activity": "Diving/Snorkel",
+        "count": 6
+      },
+      {
+        "beach": "Sydney",
+        "activity": "Spearfishing",
+        "count": 9
+      },
+      {
+        "beach": "Sydney",
+        "activity": "Fishing",
+        "count": 1
+      },
+      {
+        "beach": "Sydney",
+        "activity": "Other",
+        "count": 3
+      },
+      {
+        "beach": "Sydney Harbour",
+        "activity": "Swimming",
+        "count": 44
+      },
+      {
+        "beach": "Sydney Harbour",
+        "activity": "Surf/Board",
+        "count": 1
+      },
+      {
+        "beach": "Sydney Harbour",
+        "activity": "Diving/Snorkel",
+        "count": 6
+      },
+      {
+        "beach": "Sydney Harbour",
+        "activity": "Spearfishing",
+        "count": 2
+      },
+      {
+        "beach": "Sydney Harbour",
+        "activity": "Fishing",
+        "count": 2
+      },
+      {
+        "beach": "Sydney Harbour",
+        "activity": "Other",
+        "count": 9
+      },
+      {
+        "beach": "Gold Coast",
+        "activity": "Swimming",
+        "count": 27
+      },
+      {
+        "beach": "Gold Coast",
+        "activity": "Surf/Board",
+        "count": 4
+      },
+      {
+        "beach": "Gold Coast",
+        "activity": "Diving/Snorkel",
+        "count": 2
+      },
+      {
+        "beach": "Gold Coast",
+        "activity": "Spearfishing",
+        "count": 0
+      },
+      {
+        "beach": "Gold Coast",
+        "activity": "Fishing",
+        "count": 0
+      },
+      {
+        "beach": "Gold Coast",
+        "activity": "Other",
+        "count": 5
+      },
+      {
+        "beach": "Perth",
+        "activity": "Swimming",
+        "count": 13
+      },
+      {
+        "beach": "Perth",
+        "activity": "Surf/Board",
+        "count": 7
+      },
+      {
+        "beach": "Perth",
+        "activity": "Diving/Snorkel",
+        "count": 8
+      },
+      {
+        "beach": "Perth",
+        "activity": "Spearfishing",
+        "count": 3
+      },
+      {
+        "beach": "Perth",
+        "activity": "Fishing",
+        "count": 2
+      },
+      {
+        "beach": "Perth",
+        "activity": "Other",
+        "count": 8
+      }
+    ],
+    "outcome": [
+      {
+        "beach": "Sydney",
+        "outcome": "Fatal",
+        "count": 19,
+        "pct": 21.6
+      },
+      {
+        "beach": "Sydney",
+        "outcome": "Injured",
+        "count": 48,
+        "pct": 54.5
+      },
+      {
+        "beach": "Sydney",
+        "outcome": "Uninjured",
+        "count": 21,
+        "pct": 23.9
+      },
+      {
+        "beach": "Sydney Harbour",
+        "outcome": "Fatal",
+        "count": 29,
+        "pct": 45.3
+      },
+      {
+        "beach": "Sydney Harbour",
+        "outcome": "Injured",
+        "count": 22,
+        "pct": 34.4
+      },
+      {
+        "beach": "Sydney Harbour",
+        "outcome": "Uninjured",
+        "count": 13,
+        "pct": 20.3
+      },
+      {
+        "beach": "Gold Coast",
+        "outcome": "Fatal",
+        "count": 7,
+        "pct": 18.4
+      },
+      {
+        "beach": "Gold Coast",
+        "outcome": "Injured",
+        "count": 26,
+        "pct": 68.4
+      },
+      {
+        "beach": "Gold Coast",
+        "outcome": "Uninjured",
+        "count": 5,
+        "pct": 13.2
+      },
+      {
+        "beach": "Perth",
+        "outcome": "Fatal",
+        "count": 6,
+        "pct": 14.6
+      },
+      {
+        "beach": "Perth",
+        "outcome": "Injured",
+        "count": 21,
+        "pct": 51.2
+      },
+      {
+        "beach": "Perth",
+        "outcome": "Uninjured",
+        "count": 14,
+        "pct": 34.1
+      }
+    ],
+    "hour": [
+      {
+        "beach": "Sydney",
+        "hour_bin": "00–04",
+        "count": 0
+      },
+      {
+        "beach": "Sydney",
+        "hour_bin": "04–08",
+        "count": 6
+      },
+      {
+        "beach": "Sydney",
+        "hour_bin": "08–12",
+        "count": 9
+      },
+      {
+        "beach": "Sydney",
+        "hour_bin": "12–16",
+        "count": 14
+      },
+      {
+        "beach": "Sydney",
+        "hour_bin": "16–20",
+        "count": 18
+      },
+      {
+        "beach": "Sydney",
+        "hour_bin": "20–00",
+        "count": 1
+      },
+      {
+        "beach": "Sydney Harbour",
+        "hour_bin": "00–04",
+        "count": 1
+      },
+      {
+        "beach": "Sydney Harbour",
+        "hour_bin": "04–08",
+        "count": 4
+      },
+      {
+        "beach": "Sydney Harbour",
+        "hour_bin": "08–12",
+        "count": 5
+      },
+      {
+        "beach": "Sydney Harbour",
+        "hour_bin": "12–16",
+        "count": 5
+      },
+      {
+        "beach": "Sydney Harbour",
+        "hour_bin": "16–20",
+        "count": 7
+      },
+      {
+        "beach": "Sydney Harbour",
+        "hour_bin": "20–00",
+        "count": 1
+      },
+      {
+        "beach": "Gold Coast",
+        "hour_bin": "00–04",
+        "count": 0
+      },
+      {
+        "beach": "Gold Coast",
+        "hour_bin": "04–08",
+        "count": 4
+      },
+      {
+        "beach": "Gold Coast",
+        "hour_bin": "08–12",
+        "count": 6
+      },
+      {
+        "beach": "Gold Coast",
+        "hour_bin": "12–16",
+        "count": 8
+      },
+      {
+        "beach": "Gold Coast",
+        "hour_bin": "16–20",
+        "count": 7
+      },
+      {
+        "beach": "Gold Coast",
+        "hour_bin": "20–00",
+        "count": 2
+      },
+      {
+        "beach": "Perth",
+        "hour_bin": "00–04",
+        "count": 0
+      },
+      {
+        "beach": "Perth",
+        "hour_bin": "04–08",
+        "count": 6
+      },
+      {
+        "beach": "Perth",
+        "hour_bin": "08–12",
+        "count": 8
+      },
+      {
+        "beach": "Perth",
+        "hour_bin": "12–16",
+        "count": 4
+      },
+      {
+        "beach": "Perth",
+        "hour_bin": "16–20",
+        "count": 2
+      },
+      {
+        "beach": "Perth",
+        "hour_bin": "20–00",
+        "count": 1
+      }
+    ]
+  },
+  "spacing": 28,
+  "vconcat": [
+    {
+      "hconcat": [
+        {
+          "title": {
+            "text": [
+              "Sydney",
+              "Open coast · mixed sharks"
+            ],
+            "subtitle": [
+              "n = 88  ·  NSW"
+            ],
+            "anchor": "start",
+            "fontSize": 16,
+            "font": "Fraunces",
+            "color": "#16202A",
+            "fontWeight": 500,
+            "subtitleFontSize": 10.5,
+            "subtitleFont": "IBM Plex Mono",
+            "subtitleColor": "#5A6A78",
+            "subtitleFontWeight": 500,
+            "offset": 8
+          },
+          "spacing": 10,
+          "vconcat": [
+            {
+              "hconcat": [
+                {
+                  "data": {
+                    "name": "species"
+                  },
+                  "transform": [
+                    {
+                      "filter": "datum.beach === 'Sydney'"
+                    }
+                  ],
+                  "title": {
+                    "text": "Species",
+                    "anchor": "start",
+                    "fontSize": 10,
+                    "font": "IBM Plex Mono",
+                    "color": "#5A6A78",
+                    "fontWeight": 500
+                  },
+                  "width": 130,
+                  "height": 110,
+                  "layer": [
+                    {
+                      "mark": {
+                        "type": "arc",
+                        "innerRadius": 32,
+                        "outerRadius": 52,
+                        "stroke": "#FBFAF6",
+                        "strokeWidth": 1.5
+                      },
+                      "encoding": {
+                        "theta": {
+                          "field": "count",
+                          "type": "quantitative",
+                          "stack": true
+                        },
+                        "color": {
+                          "field": "species",
+                          "type": "nominal",
+                          "scale": {
+                            "domain": [
+                              "White shark",
+                              "Bull shark",
+                              "Tiger shark",
+                              "Other"
+                            ],
+                            "range": [
+                              "#0072B2",
+                              "#D55E00",
+                              "#E6C200",
+                              "#7C8492"
+                            ]
+                          },
+                          "legend": null
+                        },
+                        "tooltip": [
+                          {
+                            "field": "species",
+                            "title": "Species"
+                          },
+                          {
+                            "field": "count",
+                            "title": "Count"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "data": {
+                    "name": "activity"
+                  },
+                  "transform": [
+                    {
+                      "filter": "datum.beach === 'Sydney'"
+                    },
+                    {
+                      "filter": "datum.count > 0"
+                    }
+                  ],
+                  "title": {
+                    "text": "Activity",
+                    "anchor": "start",
+                    "fontSize": 10,
+                    "font": "IBM Plex Mono",
+                    "color": "#5A6A78",
+                    "fontWeight": 500
+                  },
+                  "width": 130,
+                  "height": 110,
+                  "mark": {
+                    "type": "bar",
+                    "color": "#5A6A78",
+                    "cornerRadiusEnd": 2,
+                    "stroke": "#FBFAF6",
+                    "strokeWidth": 0.5
+                  },
+                  "encoding": {
+                    "y": {
+                      "field": "activity",
+                      "type": "nominal",
+                      "sort": "-x",
+                      "axis": {
+                        "title": null,
+                        "labelFontSize": 9,
+                        "labelFont": "Inter",
+                        "labelColor": "#16202A",
+                        "labelPadding": 3,
+                        "ticks": false,
+                        "domain": false
+                      }
+                    },
+                    "x": {
+                      "field": "count",
+                      "type": "quantitative",
+                      "axis": {
+                        "title": null,
+                        "labelFontSize": 8,
+                        "labelFont": "IBM Plex Mono",
+                        "labelColor": "#A6B4C1",
+                        "tickCount": 3,
+                        "grid": false,
+                        "domain": false,
+                        "ticks": false
+                      }
+                    },
+                    "tooltip": [
+                      {
+                        "field": "activity",
+                        "title": "Activity"
+                      },
+                      {
+                        "field": "count",
+                        "title": "Incidents"
+                      }
+                    ]
+                  }
+                }
+              ],
+              "spacing": 10,
+              "resolve": {
+                "scale": {
+                  "color": "independent",
+                  "x": "independent",
+                  "y": "independent",
+                  "theta": "independent"
+                }
+              }
+            },
+            {
+              "hconcat": [
+                {
+                  "data": {
+                    "name": "outcome"
+                  },
+                  "transform": [
+                    {
+                      "filter": "datum.beach === 'Sydney'"
+                    }
+                  ],
+                  "title": {
+                    "text": "Outcome",
+                    "anchor": "start",
+                    "fontSize": 10,
+                    "font": "IBM Plex Mono",
+                    "color": "#5A6A78",
+                    "fontWeight": 500
+                  },
+                  "width": 130,
+                  "height": 110,
+                  "layer": [
+                    {
+                      "mark": {
+                        "type": "arc",
+                        "innerRadius": 36,
+                        "outerRadius": 52,
+                        "stroke": "#FBFAF6",
+                        "strokeWidth": 1.5
+                      },
+                      "encoding": {
+                        "theta": {
+                          "field": "count",
+                          "type": "quantitative",
+                          "stack": true
+                        },
+                        "color": {
+                          "field": "outcome",
+                          "type": "nominal",
+                          "scale": {
+                            "domain": [
+                              "Fatal",
+                              "Injured",
+                              "Uninjured"
+                            ],
+                            "range": [
+                              "#C13F2E",
+                              "#E69F00",
+                              "#0072B2"
+                            ]
+                          },
+                          "legend": null
+                        },
+                        "tooltip": [
+                          {
+                            "field": "outcome",
+                            "title": "Outcome"
+                          },
+                          {
+                            "field": "count",
+                            "title": "Count"
+                          },
+                          {
+                            "field": "pct",
+                            "title": "Share",
+                            "format": ".0f"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "data": {
+                        "values": [
+                          {
+                            "label": "22%"
+                          }
+                        ]
+                      },
+                      "mark": {
+                        "type": "text",
+                        "fontSize": 22,
+                        "font": "Fraunces",
+                        "fontWeight": 400,
+                        "color": "#E84545",
+                        "baseline": "middle",
+                        "align": "center",
+                        "dy": -2
+                      },
+                      "encoding": {
+                        "text": {
+                          "field": "label"
+                        }
+                      }
+                    },
+                    {
+                      "data": {
+                        "values": [
+                          {
+                            "label": "fatal"
+                          }
+                        ]
+                      },
+                      "mark": {
+                        "type": "text",
+                        "fontSize": 8,
+                        "font": "IBM Plex Mono",
+                        "fontWeight": 500,
+                        "color": "#5A6A78",
+                        "baseline": "middle",
+                        "align": "center",
+                        "dy": 16,
+                        "letterSpacing": 1
+                      },
+                      "encoding": {
+                        "text": {
+                          "field": "label"
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  "data": {
+                    "name": "hour"
+                  },
+                  "transform": [
+                    {
+                      "filter": "datum.beach === 'Sydney'"
+                    }
+                  ],
+                  "title": {
+                    "text": "Hour of day",
+                    "anchor": "start",
+                    "fontSize": 10,
+                    "font": "IBM Plex Mono",
+                    "color": "#5A6A78",
+                    "fontWeight": 500
+                  },
+                  "width": 130,
+                  "height": 110,
+                  "mark": {
+                    "type": "bar",
+                    "color": "#0B2D45",
+                    "opacity": 0.78,
+                    "cornerRadiusEnd": 2,
+                    "stroke": "#FBFAF6",
+                    "strokeWidth": 0.5
+                  },
+                  "encoding": {
+                    "x": {
+                      "field": "hour_bin",
+                      "type": "nominal",
+                      "sort": [
+                        "00–04",
+                        "04–08",
+                        "08–12",
+                        "12–16",
+                        "16–20",
+                        "20–00"
+                      ],
+                      "axis": {
+                        "title": null,
+                        "labelAngle": -45,
+                        "labelFontSize": 7.5,
+                        "labelFont": "IBM Plex Mono",
+                        "labelColor": "#5A6A78",
+                        "ticks": false,
+                        "domain": false
+                      }
+                    },
+                    "y": {
+                      "field": "count",
+                      "type": "quantitative",
+                      "axis": {
+                        "title": null,
+                        "labelFontSize": 8,
+                        "labelFont": "IBM Plex Mono",
+                        "labelColor": "#A6B4C1",
+                        "tickCount": 3,
+                        "grid": false,
+                        "domain": false,
+                        "ticks": false
+                      }
+                    },
+                    "tooltip": [
+                      {
+                        "field": "hour_bin",
+                        "title": "Hours"
+                      },
+                      {
+                        "field": "count",
+                        "title": "Incidents"
+                      }
+                    ]
+                  }
+                }
+              ],
+              "spacing": 10,
+              "resolve": {
+                "scale": {
+                  "color": "independent",
+                  "x": "independent",
+                  "y": "independent",
+                  "theta": "independent"
+                }
+              }
+            }
+          ],
+          "resolve": {
+            "scale": {
+              "color": "independent",
+              "x": "independent",
+              "y": "independent",
+              "theta": "independent"
+            }
+          }
+        },
+        {
+          "title": {
+            "text": [
+              "Sydney Harbour",
+              "Estuary · bull-shark country"
+            ],
+            "subtitle": [
+              "n = 64  ·  NSW"
+            ],
+            "anchor": "start",
+            "fontSize": 16,
+            "font": "Fraunces",
+            "color": "#16202A",
+            "fontWeight": 500,
+            "subtitleFontSize": 10.5,
+            "subtitleFont": "IBM Plex Mono",
+            "subtitleColor": "#5A6A78",
+            "subtitleFontWeight": 500,
+            "offset": 8
+          },
+          "spacing": 10,
+          "vconcat": [
+            {
+              "hconcat": [
+                {
+                  "data": {
+                    "name": "species"
+                  },
+                  "transform": [
+                    {
+                      "filter": "datum.beach === 'Sydney Harbour'"
+                    }
+                  ],
+                  "title": {
+                    "text": "Species",
+                    "anchor": "start",
+                    "fontSize": 10,
+                    "font": "IBM Plex Mono",
+                    "color": "#5A6A78",
+                    "fontWeight": 500
+                  },
+                  "width": 130,
+                  "height": 110,
+                  "layer": [
+                    {
+                      "mark": {
+                        "type": "arc",
+                        "innerRadius": 32,
+                        "outerRadius": 52,
+                        "stroke": "#FBFAF6",
+                        "strokeWidth": 1.5
+                      },
+                      "encoding": {
+                        "theta": {
+                          "field": "count",
+                          "type": "quantitative",
+                          "stack": true
+                        },
+                        "color": {
+                          "field": "species",
+                          "type": "nominal",
+                          "scale": {
+                            "domain": [
+                              "White shark",
+                              "Bull shark",
+                              "Tiger shark",
+                              "Other"
+                            ],
+                            "range": [
+                              "#0072B2",
+                              "#D55E00",
+                              "#E6C200",
+                              "#7C8492"
+                            ]
+                          },
+                          "legend": null
+                        },
+                        "tooltip": [
+                          {
+                            "field": "species",
+                            "title": "Species"
+                          },
+                          {
+                            "field": "count",
+                            "title": "Count"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "data": {
+                    "name": "activity"
+                  },
+                  "transform": [
+                    {
+                      "filter": "datum.beach === 'Sydney Harbour'"
+                    },
+                    {
+                      "filter": "datum.count > 0"
+                    }
+                  ],
+                  "title": {
+                    "text": "Activity",
+                    "anchor": "start",
+                    "fontSize": 10,
+                    "font": "IBM Plex Mono",
+                    "color": "#5A6A78",
+                    "fontWeight": 500
+                  },
+                  "width": 130,
+                  "height": 110,
+                  "mark": {
+                    "type": "bar",
+                    "color": "#5A6A78",
+                    "cornerRadiusEnd": 2,
+                    "stroke": "#FBFAF6",
+                    "strokeWidth": 0.5
+                  },
+                  "encoding": {
+                    "y": {
+                      "field": "activity",
+                      "type": "nominal",
+                      "sort": "-x",
+                      "axis": {
+                        "title": null,
+                        "labelFontSize": 9,
+                        "labelFont": "Inter",
+                        "labelColor": "#16202A",
+                        "labelPadding": 3,
+                        "ticks": false,
+                        "domain": false
+                      }
+                    },
+                    "x": {
+                      "field": "count",
+                      "type": "quantitative",
+                      "axis": {
+                        "title": null,
+                        "labelFontSize": 8,
+                        "labelFont": "IBM Plex Mono",
+                        "labelColor": "#A6B4C1",
+                        "tickCount": 3,
+                        "grid": false,
+                        "domain": false,
+                        "ticks": false
+                      }
+                    },
+                    "tooltip": [
+                      {
+                        "field": "activity",
+                        "title": "Activity"
+                      },
+                      {
+                        "field": "count",
+                        "title": "Incidents"
+                      }
+                    ]
+                  }
+                }
+              ],
+              "spacing": 10,
+              "resolve": {
+                "scale": {
+                  "color": "independent",
+                  "x": "independent",
+                  "y": "independent",
+                  "theta": "independent"
+                }
+              }
+            },
+            {
+              "hconcat": [
+                {
+                  "data": {
+                    "name": "outcome"
+                  },
+                  "transform": [
+                    {
+                      "filter": "datum.beach === 'Sydney Harbour'"
+                    }
+                  ],
+                  "title": {
+                    "text": "Outcome",
+                    "anchor": "start",
+                    "fontSize": 10,
+                    "font": "IBM Plex Mono",
+                    "color": "#5A6A78",
+                    "fontWeight": 500
+                  },
+                  "width": 130,
+                  "height": 110,
+                  "layer": [
+                    {
+                      "mark": {
+                        "type": "arc",
+                        "innerRadius": 36,
+                        "outerRadius": 52,
+                        "stroke": "#FBFAF6",
+                        "strokeWidth": 1.5
+                      },
+                      "encoding": {
+                        "theta": {
+                          "field": "count",
+                          "type": "quantitative",
+                          "stack": true
+                        },
+                        "color": {
+                          "field": "outcome",
+                          "type": "nominal",
+                          "scale": {
+                            "domain": [
+                              "Fatal",
+                              "Injured",
+                              "Uninjured"
+                            ],
+                            "range": [
+                              "#C13F2E",
+                              "#E69F00",
+                              "#0072B2"
+                            ]
+                          },
+                          "legend": null
+                        },
+                        "tooltip": [
+                          {
+                            "field": "outcome",
+                            "title": "Outcome"
+                          },
+                          {
+                            "field": "count",
+                            "title": "Count"
+                          },
+                          {
+                            "field": "pct",
+                            "title": "Share",
+                            "format": ".0f"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "data": {
+                        "values": [
+                          {
+                            "label": "45%"
+                          }
+                        ]
+                      },
+                      "mark": {
+                        "type": "text",
+                        "fontSize": 22,
+                        "font": "Fraunces",
+                        "fontWeight": 400,
+                        "color": "#E84545",
+                        "baseline": "middle",
+                        "align": "center",
+                        "dy": -2
+                      },
+                      "encoding": {
+                        "text": {
+                          "field": "label"
+                        }
+                      }
+                    },
+                    {
+                      "data": {
+                        "values": [
+                          {
+                            "label": "fatal"
+                          }
+                        ]
+                      },
+                      "mark": {
+                        "type": "text",
+                        "fontSize": 8,
+                        "font": "IBM Plex Mono",
+                        "fontWeight": 500,
+                        "color": "#5A6A78",
+                        "baseline": "middle",
+                        "align": "center",
+                        "dy": 16,
+                        "letterSpacing": 1
+                      },
+                      "encoding": {
+                        "text": {
+                          "field": "label"
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  "data": {
+                    "name": "hour"
+                  },
+                  "transform": [
+                    {
+                      "filter": "datum.beach === 'Sydney Harbour'"
+                    }
+                  ],
+                  "title": {
+                    "text": "Hour of day",
+                    "anchor": "start",
+                    "fontSize": 10,
+                    "font": "IBM Plex Mono",
+                    "color": "#5A6A78",
+                    "fontWeight": 500
+                  },
+                  "width": 130,
+                  "height": 110,
+                  "mark": {
+                    "type": "bar",
+                    "color": "#0B2D45",
+                    "opacity": 0.78,
+                    "cornerRadiusEnd": 2,
+                    "stroke": "#FBFAF6",
+                    "strokeWidth": 0.5
+                  },
+                  "encoding": {
+                    "x": {
+                      "field": "hour_bin",
+                      "type": "nominal",
+                      "sort": [
+                        "00–04",
+                        "04–08",
+                        "08–12",
+                        "12–16",
+                        "16–20",
+                        "20–00"
+                      ],
+                      "axis": {
+                        "title": null,
+                        "labelAngle": -45,
+                        "labelFontSize": 7.5,
+                        "labelFont": "IBM Plex Mono",
+                        "labelColor": "#5A6A78",
+                        "ticks": false,
+                        "domain": false
+                      }
+                    },
+                    "y": {
+                      "field": "count",
+                      "type": "quantitative",
+                      "axis": {
+                        "title": null,
+                        "labelFontSize": 8,
+                        "labelFont": "IBM Plex Mono",
+                        "labelColor": "#A6B4C1",
+                        "tickCount": 3,
+                        "grid": false,
+                        "domain": false,
+                        "ticks": false
+                      }
+                    },
+                    "tooltip": [
+                      {
+                        "field": "hour_bin",
+                        "title": "Hours"
+                      },
+                      {
+                        "field": "count",
+                        "title": "Incidents"
+                      }
+                    ]
+                  }
+                }
+              ],
+              "spacing": 10,
+              "resolve": {
+                "scale": {
+                  "color": "independent",
+                  "x": "independent",
+                  "y": "independent",
+                  "theta": "independent"
+                }
+              }
+            }
+          ],
+          "resolve": {
+            "scale": {
+              "color": "independent",
+              "x": "independent",
+              "y": "independent",
+              "theta": "independent"
+            }
+          }
+        }
+      ],
+      "spacing": 36,
+      "resolve": {
+        "scale": {
+          "color": "independent",
+          "x": "independent",
+          "y": "independent",
+          "theta": "independent"
+        }
+      }
+    },
+    {
+      "hconcat": [
+        {
+          "title": {
+            "text": [
+              "Gold Coast",
+              "Tourist coast · QLD"
+            ],
+            "subtitle": [
+              "n = 38  ·  QLD"
+            ],
+            "anchor": "start",
+            "fontSize": 16,
+            "font": "Fraunces",
+            "color": "#16202A",
+            "fontWeight": 500,
+            "subtitleFontSize": 10.5,
+            "subtitleFont": "IBM Plex Mono",
+            "subtitleColor": "#5A6A78",
+            "subtitleFontWeight": 500,
+            "offset": 8
+          },
+          "spacing": 10,
+          "vconcat": [
+            {
+              "hconcat": [
+                {
+                  "data": {
+                    "name": "species"
+                  },
+                  "transform": [
+                    {
+                      "filter": "datum.beach === 'Gold Coast'"
+                    }
+                  ],
+                  "title": {
+                    "text": "Species",
+                    "anchor": "start",
+                    "fontSize": 10,
+                    "font": "IBM Plex Mono",
+                    "color": "#5A6A78",
+                    "fontWeight": 500
+                  },
+                  "width": 130,
+                  "height": 110,
+                  "layer": [
+                    {
+                      "mark": {
+                        "type": "arc",
+                        "innerRadius": 32,
+                        "outerRadius": 52,
+                        "stroke": "#FBFAF6",
+                        "strokeWidth": 1.5
+                      },
+                      "encoding": {
+                        "theta": {
+                          "field": "count",
+                          "type": "quantitative",
+                          "stack": true
+                        },
+                        "color": {
+                          "field": "species",
+                          "type": "nominal",
+                          "scale": {
+                            "domain": [
+                              "White shark",
+                              "Bull shark",
+                              "Tiger shark",
+                              "Other"
+                            ],
+                            "range": [
+                              "#0072B2",
+                              "#D55E00",
+                              "#E6C200",
+                              "#7C8492"
+                            ]
+                          },
+                          "legend": null
+                        },
+                        "tooltip": [
+                          {
+                            "field": "species",
+                            "title": "Species"
+                          },
+                          {
+                            "field": "count",
+                            "title": "Count"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "data": {
+                    "name": "activity"
+                  },
+                  "transform": [
+                    {
+                      "filter": "datum.beach === 'Gold Coast'"
+                    },
+                    {
+                      "filter": "datum.count > 0"
+                    }
+                  ],
+                  "title": {
+                    "text": "Activity",
+                    "anchor": "start",
+                    "fontSize": 10,
+                    "font": "IBM Plex Mono",
+                    "color": "#5A6A78",
+                    "fontWeight": 500
+                  },
+                  "width": 130,
+                  "height": 110,
+                  "mark": {
+                    "type": "bar",
+                    "color": "#5A6A78",
+                    "cornerRadiusEnd": 2,
+                    "stroke": "#FBFAF6",
+                    "strokeWidth": 0.5
+                  },
+                  "encoding": {
+                    "y": {
+                      "field": "activity",
+                      "type": "nominal",
+                      "sort": "-x",
+                      "axis": {
+                        "title": null,
+                        "labelFontSize": 9,
+                        "labelFont": "Inter",
+                        "labelColor": "#16202A",
+                        "labelPadding": 3,
+                        "ticks": false,
+                        "domain": false
+                      }
+                    },
+                    "x": {
+                      "field": "count",
+                      "type": "quantitative",
+                      "axis": {
+                        "title": null,
+                        "labelFontSize": 8,
+                        "labelFont": "IBM Plex Mono",
+                        "labelColor": "#A6B4C1",
+                        "tickCount": 3,
+                        "grid": false,
+                        "domain": false,
+                        "ticks": false
+                      }
+                    },
+                    "tooltip": [
+                      {
+                        "field": "activity",
+                        "title": "Activity"
+                      },
+                      {
+                        "field": "count",
+                        "title": "Incidents"
+                      }
+                    ]
+                  }
+                }
+              ],
+              "spacing": 10,
+              "resolve": {
+                "scale": {
+                  "color": "independent",
+                  "x": "independent",
+                  "y": "independent",
+                  "theta": "independent"
+                }
+              }
+            },
+            {
+              "hconcat": [
+                {
+                  "data": {
+                    "name": "outcome"
+                  },
+                  "transform": [
+                    {
+                      "filter": "datum.beach === 'Gold Coast'"
+                    }
+                  ],
+                  "title": {
+                    "text": "Outcome",
+                    "anchor": "start",
+                    "fontSize": 10,
+                    "font": "IBM Plex Mono",
+                    "color": "#5A6A78",
+                    "fontWeight": 500
+                  },
+                  "width": 130,
+                  "height": 110,
+                  "layer": [
+                    {
+                      "mark": {
+                        "type": "arc",
+                        "innerRadius": 36,
+                        "outerRadius": 52,
+                        "stroke": "#FBFAF6",
+                        "strokeWidth": 1.5
+                      },
+                      "encoding": {
+                        "theta": {
+                          "field": "count",
+                          "type": "quantitative",
+                          "stack": true
+                        },
+                        "color": {
+                          "field": "outcome",
+                          "type": "nominal",
+                          "scale": {
+                            "domain": [
+                              "Fatal",
+                              "Injured",
+                              "Uninjured"
+                            ],
+                            "range": [
+                              "#C13F2E",
+                              "#E69F00",
+                              "#0072B2"
+                            ]
+                          },
+                          "legend": null
+                        },
+                        "tooltip": [
+                          {
+                            "field": "outcome",
+                            "title": "Outcome"
+                          },
+                          {
+                            "field": "count",
+                            "title": "Count"
+                          },
+                          {
+                            "field": "pct",
+                            "title": "Share",
+                            "format": ".0f"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "data": {
+                        "values": [
+                          {
+                            "label": "18%"
+                          }
+                        ]
+                      },
+                      "mark": {
+                        "type": "text",
+                        "fontSize": 22,
+                        "font": "Fraunces",
+                        "fontWeight": 400,
+                        "color": "#E84545",
+                        "baseline": "middle",
+                        "align": "center",
+                        "dy": -2
+                      },
+                      "encoding": {
+                        "text": {
+                          "field": "label"
+                        }
+                      }
+                    },
+                    {
+                      "data": {
+                        "values": [
+                          {
+                            "label": "fatal"
+                          }
+                        ]
+                      },
+                      "mark": {
+                        "type": "text",
+                        "fontSize": 8,
+                        "font": "IBM Plex Mono",
+                        "fontWeight": 500,
+                        "color": "#5A6A78",
+                        "baseline": "middle",
+                        "align": "center",
+                        "dy": 16,
+                        "letterSpacing": 1
+                      },
+                      "encoding": {
+                        "text": {
+                          "field": "label"
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  "data": {
+                    "name": "hour"
+                  },
+                  "transform": [
+                    {
+                      "filter": "datum.beach === 'Gold Coast'"
+                    }
+                  ],
+                  "title": {
+                    "text": "Hour of day",
+                    "anchor": "start",
+                    "fontSize": 10,
+                    "font": "IBM Plex Mono",
+                    "color": "#5A6A78",
+                    "fontWeight": 500
+                  },
+                  "width": 130,
+                  "height": 110,
+                  "mark": {
+                    "type": "bar",
+                    "color": "#0B2D45",
+                    "opacity": 0.78,
+                    "cornerRadiusEnd": 2,
+                    "stroke": "#FBFAF6",
+                    "strokeWidth": 0.5
+                  },
+                  "encoding": {
+                    "x": {
+                      "field": "hour_bin",
+                      "type": "nominal",
+                      "sort": [
+                        "00–04",
+                        "04–08",
+                        "08–12",
+                        "12–16",
+                        "16–20",
+                        "20–00"
+                      ],
+                      "axis": {
+                        "title": null,
+                        "labelAngle": -45,
+                        "labelFontSize": 7.5,
+                        "labelFont": "IBM Plex Mono",
+                        "labelColor": "#5A6A78",
+                        "ticks": false,
+                        "domain": false
+                      }
+                    },
+                    "y": {
+                      "field": "count",
+                      "type": "quantitative",
+                      "axis": {
+                        "title": null,
+                        "labelFontSize": 8,
+                        "labelFont": "IBM Plex Mono",
+                        "labelColor": "#A6B4C1",
+                        "tickCount": 3,
+                        "grid": false,
+                        "domain": false,
+                        "ticks": false
+                      }
+                    },
+                    "tooltip": [
+                      {
+                        "field": "hour_bin",
+                        "title": "Hours"
+                      },
+                      {
+                        "field": "count",
+                        "title": "Incidents"
+                      }
+                    ]
+                  }
+                }
+              ],
+              "spacing": 10,
+              "resolve": {
+                "scale": {
+                  "color": "independent",
+                  "x": "independent",
+                  "y": "independent",
+                  "theta": "independent"
+                }
+              }
+            }
+          ],
+          "resolve": {
+            "scale": {
+              "color": "independent",
+              "x": "independent",
+              "y": "independent",
+              "theta": "independent"
+            }
+          }
+        },
+        {
+          "title": {
+            "text": [
+              "Perth",
+              "Indian Ocean · white sharks"
+            ],
+            "subtitle": [
+              "n = 41  ·  WA"
+            ],
+            "anchor": "start",
+            "fontSize": 16,
+            "font": "Fraunces",
+            "color": "#16202A",
+            "fontWeight": 500,
+            "subtitleFontSize": 10.5,
+            "subtitleFont": "IBM Plex Mono",
+            "subtitleColor": "#5A6A78",
+            "subtitleFontWeight": 500,
+            "offset": 8
+          },
+          "spacing": 10,
+          "vconcat": [
+            {
+              "hconcat": [
+                {
+                  "data": {
+                    "name": "species"
+                  },
+                  "transform": [
+                    {
+                      "filter": "datum.beach === 'Perth'"
+                    }
+                  ],
+                  "title": {
+                    "text": "Species",
+                    "anchor": "start",
+                    "fontSize": 10,
+                    "font": "IBM Plex Mono",
+                    "color": "#5A6A78",
+                    "fontWeight": 500
+                  },
+                  "width": 130,
+                  "height": 110,
+                  "layer": [
+                    {
+                      "mark": {
+                        "type": "arc",
+                        "innerRadius": 32,
+                        "outerRadius": 52,
+                        "stroke": "#FBFAF6",
+                        "strokeWidth": 1.5
+                      },
+                      "encoding": {
+                        "theta": {
+                          "field": "count",
+                          "type": "quantitative",
+                          "stack": true
+                        },
+                        "color": {
+                          "field": "species",
+                          "type": "nominal",
+                          "scale": {
+                            "domain": [
+                              "White shark",
+                              "Bull shark",
+                              "Tiger shark",
+                              "Other"
+                            ],
+                            "range": [
+                              "#0072B2",
+                              "#D55E00",
+                              "#E6C200",
+                              "#7C8492"
+                            ]
+                          },
+                          "legend": null
+                        },
+                        "tooltip": [
+                          {
+                            "field": "species",
+                            "title": "Species"
+                          },
+                          {
+                            "field": "count",
+                            "title": "Count"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "data": {
+                    "name": "activity"
+                  },
+                  "transform": [
+                    {
+                      "filter": "datum.beach === 'Perth'"
+                    },
+                    {
+                      "filter": "datum.count > 0"
+                    }
+                  ],
+                  "title": {
+                    "text": "Activity",
+                    "anchor": "start",
+                    "fontSize": 10,
+                    "font": "IBM Plex Mono",
+                    "color": "#5A6A78",
+                    "fontWeight": 500
+                  },
+                  "width": 130,
+                  "height": 110,
+                  "mark": {
+                    "type": "bar",
+                    "color": "#5A6A78",
+                    "cornerRadiusEnd": 2,
+                    "stroke": "#FBFAF6",
+                    "strokeWidth": 0.5
+                  },
+                  "encoding": {
+                    "y": {
+                      "field": "activity",
+                      "type": "nominal",
+                      "sort": "-x",
+                      "axis": {
+                        "title": null,
+                        "labelFontSize": 9,
+                        "labelFont": "Inter",
+                        "labelColor": "#16202A",
+                        "labelPadding": 3,
+                        "ticks": false,
+                        "domain": false
+                      }
+                    },
+                    "x": {
+                      "field": "count",
+                      "type": "quantitative",
+                      "axis": {
+                        "title": null,
+                        "labelFontSize": 8,
+                        "labelFont": "IBM Plex Mono",
+                        "labelColor": "#A6B4C1",
+                        "tickCount": 3,
+                        "grid": false,
+                        "domain": false,
+                        "ticks": false
+                      }
+                    },
+                    "tooltip": [
+                      {
+                        "field": "activity",
+                        "title": "Activity"
+                      },
+                      {
+                        "field": "count",
+                        "title": "Incidents"
+                      }
+                    ]
+                  }
+                }
+              ],
+              "spacing": 10,
+              "resolve": {
+                "scale": {
+                  "color": "independent",
+                  "x": "independent",
+                  "y": "independent",
+                  "theta": "independent"
+                }
+              }
+            },
+            {
+              "hconcat": [
+                {
+                  "data": {
+                    "name": "outcome"
+                  },
+                  "transform": [
+                    {
+                      "filter": "datum.beach === 'Perth'"
+                    }
+                  ],
+                  "title": {
+                    "text": "Outcome",
+                    "anchor": "start",
+                    "fontSize": 10,
+                    "font": "IBM Plex Mono",
+                    "color": "#5A6A78",
+                    "fontWeight": 500
+                  },
+                  "width": 130,
+                  "height": 110,
+                  "layer": [
+                    {
+                      "mark": {
+                        "type": "arc",
+                        "innerRadius": 36,
+                        "outerRadius": 52,
+                        "stroke": "#FBFAF6",
+                        "strokeWidth": 1.5
+                      },
+                      "encoding": {
+                        "theta": {
+                          "field": "count",
+                          "type": "quantitative",
+                          "stack": true
+                        },
+                        "color": {
+                          "field": "outcome",
+                          "type": "nominal",
+                          "scale": {
+                            "domain": [
+                              "Fatal",
+                              "Injured",
+                              "Uninjured"
+                            ],
+                            "range": [
+                              "#C13F2E",
+                              "#E69F00",
+                              "#0072B2"
+                            ]
+                          },
+                          "legend": null
+                        },
+                        "tooltip": [
+                          {
+                            "field": "outcome",
+                            "title": "Outcome"
+                          },
+                          {
+                            "field": "count",
+                            "title": "Count"
+                          },
+                          {
+                            "field": "pct",
+                            "title": "Share",
+                            "format": ".0f"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "data": {
+                        "values": [
+                          {
+                            "label": "15%"
+                          }
+                        ]
+                      },
+                      "mark": {
+                        "type": "text",
+                        "fontSize": 22,
+                        "font": "Fraunces",
+                        "fontWeight": 400,
+                        "color": "#E84545",
+                        "baseline": "middle",
+                        "align": "center",
+                        "dy": -2
+                      },
+                      "encoding": {
+                        "text": {
+                          "field": "label"
+                        }
+                      }
+                    },
+                    {
+                      "data": {
+                        "values": [
+                          {
+                            "label": "fatal"
+                          }
+                        ]
+                      },
+                      "mark": {
+                        "type": "text",
+                        "fontSize": 8,
+                        "font": "IBM Plex Mono",
+                        "fontWeight": 500,
+                        "color": "#5A6A78",
+                        "baseline": "middle",
+                        "align": "center",
+                        "dy": 16,
+                        "letterSpacing": 1
+                      },
+                      "encoding": {
+                        "text": {
+                          "field": "label"
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  "data": {
+                    "name": "hour"
+                  },
+                  "transform": [
+                    {
+                      "filter": "datum.beach === 'Perth'"
+                    }
+                  ],
+                  "title": {
+                    "text": "Hour of day",
+                    "anchor": "start",
+                    "fontSize": 10,
+                    "font": "IBM Plex Mono",
+                    "color": "#5A6A78",
+                    "fontWeight": 500
+                  },
+                  "width": 130,
+                  "height": 110,
+                  "mark": {
+                    "type": "bar",
+                    "color": "#0B2D45",
+                    "opacity": 0.78,
+                    "cornerRadiusEnd": 2,
+                    "stroke": "#FBFAF6",
+                    "strokeWidth": 0.5
+                  },
+                  "encoding": {
+                    "x": {
+                      "field": "hour_bin",
+                      "type": "nominal",
+                      "sort": [
+                        "00–04",
+                        "04–08",
+                        "08–12",
+                        "12–16",
+                        "16–20",
+                        "20–00"
+                      ],
+                      "axis": {
+                        "title": null,
+                        "labelAngle": -45,
+                        "labelFontSize": 7.5,
+                        "labelFont": "IBM Plex Mono",
+                        "labelColor": "#5A6A78",
+                        "ticks": false,
+                        "domain": false
+                      }
+                    },
+                    "y": {
+                      "field": "count",
+                      "type": "quantitative",
+                      "axis": {
+                        "title": null,
+                        "labelFontSize": 8,
+                        "labelFont": "IBM Plex Mono",
+                        "labelColor": "#A6B4C1",
+                        "tickCount": 3,
+                        "grid": false,
+                        "domain": false,
+                        "ticks": false
+                      }
+                    },
+                    "tooltip": [
+                      {
+                        "field": "hour_bin",
+                        "title": "Hours"
+                      },
+                      {
+                        "field": "count",
+                        "title": "Incidents"
+                      }
+                    ]
+                  }
+                }
+              ],
+              "spacing": 10,
+              "resolve": {
+                "scale": {
+                  "color": "independent",
+                  "x": "independent",
+                  "y": "independent",
+                  "theta": "independent"
+                }
+              }
+            }
+          ],
+          "resolve": {
+            "scale": {
+              "color": "independent",
+              "x": "independent",
+              "y": "independent",
+              "theta": "independent"
+            }
+          }
+        }
+      ],
+      "spacing": 36,
+      "resolve": {
+        "scale": {
+          "color": "independent",
+          "x": "independent",
+          "y": "independent",
+          "theta": "independent"
+        }
+      }
+    }
+  ],
+  "resolve": {
+    "scale": {
+      "color": "independent",
+      "x": "independent",
+      "y": "independent",
+      "theta": "independent"
+    }
+  }
+}

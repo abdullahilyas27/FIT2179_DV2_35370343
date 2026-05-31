@@ -1,0 +1,271 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Section 2 — National dot map of Australian shark incidents.",
+  "background": "#0A2A40",
+  "padding": {
+    "left": 20,
+    "right": 20,
+    "top": 22,
+    "bottom": 22
+  },
+  "width": 720,
+  "height": 600,
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "font": "Spectral",
+    "axis": {
+      "domain": false,
+      "ticks": false,
+      "labelColor": "#A9BDCB",
+      "titleColor": "#CBD8E0",
+      "labelFont": "IBM Plex Mono",
+      "titleFont": "IBM Plex Mono",
+      "labelFontSize": 10.5,
+      "titleFontSize": 10.5,
+      "titleFontWeight": 600,
+      "titlePadding": 10,
+      "labelPadding": 5,
+      "domainColor": "#3C5E78",
+      "domainWidth": 1,
+      "tickColor": "#3C5E78",
+      "gridColor": "#3C5E78",
+      "gridOpacity": 0.5
+    },
+    "legend": {
+      "labelFont": "IBM Plex Mono",
+      "labelFontSize": 10.5,
+      "labelColor": "#C2D2DC",
+      "titleFont": "IBM Plex Mono",
+      "titleFontSize": 10,
+      "titleColor": "#9FB4C4",
+      "titleFontWeight": 600
+    },
+    "title": {
+      "font": "IBM Plex Mono",
+      "fontSize": 11,
+      "fontWeight": 600,
+      "color": "#E7EEF2",
+      "anchor": "start",
+      "subtitleFont": "Spectral",
+      "subtitleColor": "#9FB4C4"
+    },
+    "header": {
+      "labelFont": "IBM Plex Mono",
+      "labelColor": "#C2D2DC",
+      "titleFont": "IBM Plex Mono",
+      "titleColor": "#C2D2DC"
+    }
+  },
+  "params": [
+    {
+      "name": "year_min",
+      "value": 1791
+    },
+    {
+      "name": "year_max",
+      "value": 2024
+    },
+    {
+      "name": "species_pick",
+      "value": "All"
+    },
+    {
+      "name": "outcome_pick",
+      "value": "All"
+    },
+    {
+      "name": "scale",
+      "value": 660,
+      "on": [
+        {
+          "events": {
+            "type": "wheel",
+            "consume": true
+          },
+          "update": "clamp(scale * pow(1.0008, -event.deltaY * pow(16, event.deltaMode)), 300, 50000)"
+        }
+      ]
+    },
+    {
+      "name": "tx",
+      "value": 360,
+      "on": [
+        {
+          "events": "[pointerdown, window:pointerup] > window:pointermove",
+          "update": "tx + event.movementX"
+        },
+        {
+          "events": {
+            "type": "wheel",
+            "consume": true
+          },
+          "update": "event.offsetX + (tx - event.offsetX) * (clamp(scale * pow(1.0008, -event.deltaY * pow(16, event.deltaMode)), 300, 50000) / scale)"
+        }
+      ]
+    },
+    {
+      "name": "ty",
+      "value": 300,
+      "on": [
+        {
+          "events": "[pointerdown, window:pointerup] > window:pointermove",
+          "update": "ty + event.movementY"
+        },
+        {
+          "events": {
+            "type": "wheel",
+            "consume": true
+          },
+          "update": "event.offsetY + (ty - event.offsetY) * (clamp(scale * pow(1.0008, -event.deltaY * pow(16, event.deltaMode)), 300, 50000) / scale)"
+        }
+      ]
+    }
+  ],
+  "projection": {
+    "type": "mercator",
+    "center": [
+      134,
+      -28
+    ],
+    "scale": {
+      "expr": "scale"
+    },
+    "translate": {
+      "expr": "[tx, ty]"
+    },
+    "clipExtent": [
+      [
+        0,
+        0
+      ],
+      [
+        720,
+        600
+      ]
+    ]
+  },
+  "layer": [
+    {
+      "data": {
+        "url": "./data/au.json",
+        "format": {
+          "type": "json",
+          "property": "features"
+        }
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "#EFE6CF",
+        "stroke": "#C8BFA8",
+        "strokeWidth": 1.5,
+        "clip": true
+      }
+    },
+    {
+      "data": {
+        "name": "incidents",
+        "url": "./data/asid_incidents.csv",
+        "format": {
+          "type": "csv",
+          "parse": {
+            "incident_id": "number",
+            "year": "number",
+            "lat": "number",
+            "lon": "number"
+          }
+        }
+      },
+      "params": [
+        {
+          "name": "incident_select",
+          "select": {
+            "type": "point",
+            "on": "click",
+            "clear": "dblclick",
+            "fields": [
+              "incident_id"
+            ]
+          }
+        }
+      ],
+      "transform": [
+        {
+          "filter": "datum.year >= year_min && datum.year <= year_max"
+        },
+        {
+          "filter": "species_pick === 'All' || datum.species === species_pick"
+        },
+        {
+          "filter": "outcome_pick === 'All' || datum.outcome === outcome_pick"
+        }
+      ],
+      "mark": {
+        "type": "circle",
+        "size": 50,
+        "stroke": "#FBFAF6",
+        "strokeWidth": 0.6,
+        "cursor": "grab",
+        "clip": true
+      },
+      "encoding": {
+        "longitude": {
+          "field": "lon",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "lat",
+          "type": "quantitative"
+        },
+        "color": {
+          "field": "outcome",
+          "type": "nominal",
+          "scale": {
+            "domain": [
+              "Fatal",
+              "Injured",
+              "Uninjured"
+            ],
+            "range": [
+              "#C13F2E",
+              "#E69F00",
+              "#56B4E9"
+            ]
+          },
+          "legend": null
+        },
+        "opacity": {
+          "condition": {
+            "param": "incident_select",
+            "empty": true,
+            "value": 0.85
+          },
+          "value": 0.15
+        },
+        "tooltip": [
+          {
+            "field": "year",
+            "title": "Year"
+          },
+          {
+            "field": "species",
+            "title": "Species"
+          },
+          {
+            "field": "activity",
+            "title": "Activity"
+          },
+          {
+            "field": "outcome",
+            "title": "Outcome"
+          },
+          {
+            "field": "location",
+            "title": "Location"
+          }
+        ]
+      }
+    }
+  ]
+}

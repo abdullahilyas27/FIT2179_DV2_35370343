@@ -1,0 +1,393 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 640,
+  "height": 480,
+  "background": "transparent",
+  "padding": 14,
+  "projection": {
+    "type": "mercator"
+  },
+  "params": [
+    {
+      "name": "method",
+      "value": "quantile"
+    }
+  ],
+  "layer": [
+    {
+      "data": {
+        "url": "./data/au.json",
+        "format": {
+          "type": "json",
+          "property": "features"
+        }
+      },
+      "transform": [
+        {
+          "lookup": "properties.name",
+          "from": {
+            "data": {
+              "url": "./data/state_rates.csv",
+              "format": {
+                "type": "csv"
+              }
+            },
+            "key": "state",
+            "fields": [
+              "rate",
+              "count",
+              "bin_quantile",
+              "bin_equal",
+              "bin_jenks"
+            ]
+          }
+        },
+        {
+          "calculate": "toNumber(datum.rate)",
+          "as": "rate"
+        },
+        {
+          "calculate": "toNumber(datum.count)",
+          "as": "count"
+        },
+        {
+          "calculate": "toNumber(datum.bin_quantile)",
+          "as": "bin_quantile"
+        },
+        {
+          "calculate": "toNumber(datum.bin_equal)",
+          "as": "bin_equal"
+        },
+        {
+          "calculate": "toNumber(datum.bin_jenks)",
+          "as": "bin_jenks"
+        },
+        {
+          "calculate": "method === 'quantile' ? datum.bin_quantile : (method === 'equal' ? datum.bin_equal : datum.bin_jenks)",
+          "as": "class_bin"
+        },
+        {
+          "calculate": "isValid(datum.class_bin) ? datum.class_bin : -1",
+          "as": "class_bin_safe"
+        }
+      ],
+      "mark": {
+        "type": "geoshape",
+        "stroke": "#555555",
+        "strokeWidth": 0.8
+      },
+      "encoding": {
+        "color": {
+          "field": "class_bin_safe",
+          "type": "ordinal",
+          "scale": {
+            "domain": [
+              -1,
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "range": [
+              "#1A4A6A",
+              "#EFE6CF",
+              "#D9B89A",
+              "#C08766",
+              "#D55E00",
+              "#7A2E1F"
+            ]
+          },
+          "legend": {
+            "title": "Risk class (1–5)",
+            "orient": "bottom-left",
+            "titleColor": "#333333",
+            "labelColor": "#333333",
+            "labelExpr": "datum.value === -1 ? 'No data' : datum.value === 1 ? '1 · Very Low' : datum.value === 2 ? '2 · Low' : datum.value === 3 ? '3 · Moderate' : datum.value === 4 ? '4 · High' : '5 · Very High'",
+            "labelLimit": 140
+          }
+        },
+        "tooltip": [
+          {
+            "field": "properties.name",
+            "type": "nominal",
+            "title": "State"
+          },
+          {
+            "field": "rate",
+            "type": "quantitative",
+            "format": ".1f",
+            "title": "Per 100k residents"
+          },
+          {
+            "field": "count",
+            "type": "quantitative",
+            "title": "Total incidents"
+          },
+          {
+            "field": "class_bin_safe",
+            "type": "quantitative",
+            "title": "Class (1–5)"
+          }
+        ]
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "code": "WA",
+            "lon": 121.0,
+            "lat": -26.5,
+            "white": true
+          },
+          {
+            "code": "NT",
+            "lon": 133.5,
+            "lat": -19.5,
+            "white": true
+          },
+          {
+            "code": "SA",
+            "lon": 135.0,
+            "lat": -30.5,
+            "white": true
+          },
+          {
+            "code": "QLD",
+            "lon": 144.5,
+            "lat": -22.5,
+            "white": true
+          },
+          {
+            "code": "NSW",
+            "lon": 147.0,
+            "lat": -32.5,
+            "white": true
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "fontSize": 10,
+        "fontFamily": "IBM Plex Mono",
+        "fontWeight": 600
+      },
+      "encoding": {
+        "longitude": {
+          "field": "lon",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "lat",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "code",
+          "type": "nominal"
+        },
+        "color": {
+          "condition": {
+            "test": "datum.white",
+            "value": "#ffffff"
+          },
+          "value": "#16202A"
+        }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "code": "VIC",
+            "lon": 145.5,
+            "lat": -37.0,
+            "lon2": 150.8,
+            "lat2": -37.8
+          },
+          {
+            "code": "TAS",
+            "lon": 146.8,
+            "lat": -41.8,
+            "lon2": 150.8,
+            "lat2": -41.5
+          },
+          {
+            "code": "ACT",
+            "lon": 149.1,
+            "lat": -35.6,
+            "lon2": 152.0,
+            "lat2": -34.0
+          }
+        ]
+      },
+      "mark": {
+        "type": "rule",
+        "color": "#777777",
+        "strokeWidth": 0.8,
+        "strokeDash": [
+          4,
+          3
+        ]
+      },
+      "encoding": {
+        "longitude": {
+          "field": "lon",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "lat",
+          "type": "quantitative"
+        },
+        "longitude2": {
+          "field": "lon2",
+          "type": "quantitative"
+        },
+        "latitude2": {
+          "field": "lat2",
+          "type": "quantitative"
+        }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "code": "VIC",
+            "lon": 145.5,
+            "lat": -37.0,
+            "lon2": 150.8,
+            "lat2": -37.8
+          },
+          {
+            "code": "TAS",
+            "lon": 146.8,
+            "lat": -41.8,
+            "lon2": 150.8,
+            "lat2": -41.5
+          },
+          {
+            "code": "ACT",
+            "lon": 149.1,
+            "lat": -35.6,
+            "lon2": 152.0,
+            "lat2": -34.0
+          }
+        ]
+      },
+      "mark": {
+        "type": "point",
+        "size": 22,
+        "color": "#777777",
+        "filled": true,
+        "opacity": 0.9
+      },
+      "encoding": {
+        "longitude": {
+          "field": "lon",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "lat",
+          "type": "quantitative"
+        }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "code": "VIC",
+            "lon": 145.5,
+            "lat": -37.0,
+            "lon2": 150.8,
+            "lat2": -37.8
+          },
+          {
+            "code": "TAS",
+            "lon": 146.8,
+            "lat": -41.8,
+            "lon2": 150.8,
+            "lat2": -41.5
+          },
+          {
+            "code": "ACT",
+            "lon": 149.1,
+            "lat": -35.6,
+            "lon2": 152.0,
+            "lat2": -34.0
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "fontSize": 10,
+        "fontFamily": "IBM Plex Mono",
+        "fontWeight": 600,
+        "fill": "#333333",
+        "align": "left",
+        "dx": 5
+      },
+      "encoding": {
+        "longitude": {
+          "field": "lon2",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "lat2",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "code",
+          "type": "nominal"
+        }
+      }
+    }
+  ],
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "legend": {
+      "labelFontSize": 10.5,
+      "titleFontSize": 10,
+      "titleFontWeight": 600,
+      "labelFont": "IBM Plex Mono",
+      "labelColor": "#5C6A75",
+      "titleFont": "IBM Plex Mono",
+      "titleColor": "#5C6A75"
+    },
+    "font": "Spectral",
+    "axis": {
+      "labelFont": "IBM Plex Mono",
+      "labelFontSize": 10.5,
+      "labelColor": "#5C6A75",
+      "titleFont": "IBM Plex Mono",
+      "titleFontSize": 10.5,
+      "titleColor": "#5C6A75",
+      "titleFontWeight": 600,
+      "titlePadding": 10,
+      "labelPadding": 5,
+      "domainColor": "#14202C",
+      "domainWidth": 1,
+      "tickColor": "#B7AE99",
+      "gridColor": "#14202C",
+      "gridOpacity": 0.07
+    },
+    "title": {
+      "font": "IBM Plex Mono",
+      "fontSize": 11,
+      "fontWeight": 600,
+      "color": "#14202C",
+      "anchor": "start",
+      "subtitleFont": "Spectral",
+      "subtitleColor": "#5C6A75"
+    },
+    "header": {
+      "labelFont": "IBM Plex Mono",
+      "labelColor": "#14202C",
+      "titleFont": "IBM Plex Mono",
+      "titleColor": "#5C6A75"
+    }
+  }
+}
