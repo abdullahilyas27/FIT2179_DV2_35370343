@@ -1,0 +1,9 @@
+id,state,rate,count,bin_quantile,bin_equal,bin_jenks
+5,New South Wales,5.55,470,3,4,2
+4,Queensland,6.69,378,4,5,3
+1,Western Australia,8.11,243,5,5,4
+3,South Australia,4.54,85,2,3,2
+6,Victoria,1.05,73,1,1,1
+7,Tasmania,4.87,28,3,4,2
+2,Northern Territory,7.54,19,5,5,4
+8,Australian Capital Territory,0.0,0,1,1,1

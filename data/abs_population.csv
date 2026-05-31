@@ -1,0 +1,976 @@
+state,state_code,year,population
+Australia,AUS,1920,2310980
+Australia,AUS,1921,2402579
+Australia,AUS,1922,2481060
+Australia,AUS,1923,2555340
+Australia,AUS,1924,2631750
+Australia,AUS,1925,2704210
+Australia,AUS,1926,2779330
+Australia,AUS,1927,2852610
+Australia,AUS,1928,2914220
+Australia,AUS,1929,3050200
+Australia,AUS,1930,3058670
+Australia,AUS,1931,3072800
+Australia,AUS,1932,3099800
+Australia,AUS,1933,3127221
+Australia,AUS,1934,3141940
+Australia,AUS,1935,3160360
+Australia,AUS,1936,3187940
+Australia,AUS,1937,3212130
+Australia,AUS,1938,3246737
+Australia,AUS,1939,3285010
+Australia,AUS,1940,3353970
+Australia,AUS,1941,3457110
+Australia,AUS,1942,3537080
+Australia,AUS,1943,3617470
+Australia,AUS,1944,3688620
+Australia,AUS,1945,3749170
+Australia,AUS,1946,3802090
+Australia,AUS,1947,3880788
+Australia,AUS,1948,3944390
+Australia,AUS,1949,4043610
+Australia,AUS,1950,4156330
+Australia,AUS,1951,4239170
+Australia,AUS,1952,4322070
+Australia,AUS,1953,4394270
+Australia,AUS,1954,4853301
+Australia,AUS,1955,4992478
+Australia,AUS,1956,5137736
+Australia,AUS,1957,5271481
+Australia,AUS,1958,5407372
+Australia,AUS,1959,5547519
+Australia,AUS,1960,5689468
+Australia,AUS,1961,6318721
+Australia,AUS,1962,6450860
+Australia,AUS,1963,6607931
+Australia,AUS,1964,6792310
+Australia,AUS,1965,6945345
+Australia,AUS,1966,7138348
+Australia,AUS,1967,7296588
+Australia,AUS,1968,7460580
+Australia,AUS,1969,7659425
+Australia,AUS,1970,7858530
+Australia,AUS,1971,8556469
+Australia,AUS,1972,8706692
+Australia,AUS,1973,8834506
+Australia,AUS,1974,8975341
+Australia,AUS,1975,9076407
+Australia,AUS,1976,9173740
+Australia,AUS,1977,9274788
+Australia,AUS,1978,9376181
+Australia,AUS,1979,9461997
+Australia,AUS,1980,9563191
+Australia,AUS,1981,9676544
+Australia,AUS,1982,9835474
+Australia,AUS,1983,9966601
+Australia,AUS,1984,10084787
+Australia,AUS,1985,10217213
+Australia,AUS,1986,10368161
+Australia,AUS,1987,10532413
+Australia,AUS,1988,10710790
+Australia,AUS,1989,10884292
+Australia,AUS,1990,11032823
+Australia,AUS,1991,11165682
+Australia,AUS,1992,11285768
+Australia,AUS,1993,11378699
+Australia,AUS,1994,11484774
+Australia,AUS,1995,11624977
+Australia,AUS,1996,11785446
+Australia,AUS,1997,11922465
+Australia,AUS,1998,12050186
+Australia,AUS,1999,12194100
+Australia,AUS,2000,12347924
+Australia,AUS,2001,12526973
+Australia,AUS,2002,12677495
+Australia,AUS,2003,12831118
+Australia,AUS,2004,12978905
+Australia,AUS,2005,13149542
+Australia,AUS,2006,13344725
+Australia,AUS,2007,13625097
+Australia,AUS,2008,13934331
+Australia,AUS,2009,14261527
+Australia,AUS,2010,14508214
+Australia,AUS,2011,14736773
+Australia,AUS,2012,15037353
+Australia,AUS,2013,15343969
+Australia,AUS,2014,15626454
+Australia,AUS,2015,15911439
+Australia,AUS,2016,16221421
+Australia,AUS,2017,16528849
+Australia,AUS,2018,16802772
+Australia,AUS,2019,17078448
+Australia,AUS,2020,17295766
+Australia,AUS,2021,17249740
+Australian Capital Territory,ACT,1920,2222
+Australian Capital Territory,ACT,1921,1150
+Australian Capital Territory,ACT,1922,1500
+Australian Capital Territory,ACT,1923,2000
+Australian Capital Territory,ACT,1924,2600
+Australian Capital Territory,ACT,1925,3500
+Australian Capital Territory,ACT,1926,4900
+Australian Capital Territory,ACT,1927,6150
+Australian Capital Territory,ACT,1928,6640
+Australian Capital Territory,ACT,1929,6880
+Australian Capital Territory,ACT,1930,7290
+Australian Capital Territory,ACT,1931,7050
+Australian Capital Territory,ACT,1932,7030
+Australian Capital Territory,ACT,1933,7325
+Australian Capital Territory,ACT,1934,7500
+Australian Capital Territory,ACT,1935,7700
+Australian Capital Territory,ACT,1936,8030
+Australian Capital Territory,ACT,1937,8410
+Australian Capital Territory,ACT,1938,9827
+Australian Capital Territory,ACT,1939,10800
+Australian Capital Territory,ACT,1940,12000
+Australian Capital Territory,ACT,1941,13300
+Australian Capital Territory,ACT,1942,12650
+Australian Capital Territory,ACT,1943,11650
+Australian Capital Territory,ACT,1944,12450
+Australian Capital Territory,ACT,1945,13250
+Australian Capital Territory,ACT,1946,14100
+Australian Capital Territory,ACT,1947,15156
+Australian Capital Territory,ACT,1948,18040
+Australian Capital Territory,ACT,1949,19640
+Australian Capital Territory,ACT,1950,22080
+Australian Capital Territory,ACT,1951,23140
+Australian Capital Territory,ACT,1952,24530
+Australian Capital Territory,ACT,1953,26710
+Australian Capital Territory,ACT,1954,28277
+Australian Capital Territory,ACT,1955,30710
+Australian Capital Territory,ACT,1956,33100
+Australian Capital Territory,ACT,1957,35827
+Australian Capital Territory,ACT,1958,39061
+Australian Capital Territory,ACT,1959,43973
+Australian Capital Territory,ACT,1960,50237
+Australian Capital Territory,ACT,1961,56449
+Australian Capital Territory,ACT,1962,63821
+Australian Capital Territory,ACT,1963,70775
+Australian Capital Territory,ACT,1964,77644
+Australian Capital Territory,ACT,1965,85690
+Australian Capital Territory,ACT,1966,93314
+Australian Capital Territory,ACT,1967,100938
+Australian Capital Territory,ACT,1968,109550
+Australian Capital Territory,ACT,1969,119235
+Australian Capital Territory,ACT,1970,129000
+Australian Capital Territory,ACT,1971,151169
+Australian Capital Territory,ACT,1972,159792
+Australian Capital Territory,ACT,1973,173306
+Australian Capital Territory,ACT,1974,186241
+Australian Capital Territory,ACT,1975,199007
+Australian Capital Territory,ACT,1976,207740
+Australian Capital Territory,ACT,1977,213688
+Australian Capital Territory,ACT,1978,217981
+Australian Capital Territory,ACT,1979,220797
+Australian Capital Territory,ACT,1980,224291
+Australian Capital Territory,ACT,1981,226821
+Australian Capital Territory,ACT,1982,232304
+Australian Capital Territory,ACT,1983,238261
+Australian Capital Territory,ACT,1984,244409
+Australian Capital Territory,ACT,1985,250705
+Australian Capital Territory,ACT,1986,258246
+Australian Capital Territory,ACT,1987,264801
+Australian Capital Territory,ACT,1988,271439
+Australian Capital Territory,ACT,1989,275728
+Australian Capital Territory,ACT,1990,281492
+Australian Capital Territory,ACT,1991,288586
+Australian Capital Territory,ACT,1992,294230
+Australian Capital Territory,ACT,1993,299114
+Australian Capital Territory,ACT,1994,302194
+Australian Capital Territory,ACT,1995,305838
+Australian Capital Territory,ACT,1996,309629
+Australian Capital Territory,ACT,1997,310533
+Australian Capital Territory,ACT,1998,311532
+Australian Capital Territory,ACT,1999,314171
+Australian Capital Territory,ACT,2000,317235
+Australian Capital Territory,ACT,2001,321538
+Australian Capital Territory,ACT,2002,324627
+Australian Capital Territory,ACT,2003,327357
+Australian Capital Territory,ACT,2004,328940
+Australian Capital Territory,ACT,2005,331399
+Australian Capital Territory,ACT,2006,335170
+Australian Capital Territory,ACT,2007,342644
+Australian Capital Territory,ACT,2008,348368
+Australian Capital Territory,ACT,2009,354785
+Australian Capital Territory,ACT,2010,361766
+Australian Capital Territory,ACT,2011,367985
+Australian Capital Territory,ACT,2012,376539
+Australian Capital Territory,ACT,2013,383257
+Australian Capital Territory,ACT,2014,388799
+Australian Capital Territory,ACT,2015,395813
+Australian Capital Territory,ACT,2016,403104
+Australian Capital Territory,ACT,2017,415046
+Australian Capital Territory,ACT,2018,426081
+Australian Capital Territory,ACT,2019,435730
+Australian Capital Territory,ACT,2020,444903
+Australian Capital Territory,ACT,2021,452508
+Australian Capital Territory,ACT,2022,461262
+Australian Capital Territory,ACT,2023,471340
+Australian Capital Territory,ACT,2024,478430
+Australian Capital Territory,ACT,2025,484630
+New South Wales,NSW,1920,885000
+New South Wales,NSW,1921,912750
+New South Wales,NSW,1922,934540
+New South Wales,NSW,1923,952620
+New South Wales,NSW,1924,974540
+New South Wales,NSW,1925,996100
+New South Wales,NSW,1926,1019860
+New South Wales,NSW,1927,1044770
+New South Wales,NSW,1928,1066400
+New South Wales,NSW,1929,1176900
+New South Wales,NSW,1930,1190590
+New South Wales,NSW,1931,1200830
+New South Wales,NSW,1932,1213880
+New South Wales,NSW,1933,1237130
+New South Wales,NSW,1934,1241900
+New South Wales,NSW,1935,1245590
+New South Wales,NSW,1936,1251150
+New South Wales,NSW,1937,1256500
+New South Wales,NSW,1938,1263220
+New South Wales,NSW,1939,1274930
+New South Wales,NSW,1940,1294080
+New South Wales,NSW,1941,1331290
+New South Wales,NSW,1942,1363010
+New South Wales,NSW,1943,1402790
+New South Wales,NSW,1944,1433000
+New South Wales,NSW,1945,1456350
+New South Wales,NSW,1946,1475150
+New South Wales,NSW,1947,1489620
+New South Wales,NSW,1948,1503740
+New South Wales,NSW,1949,1530060
+New South Wales,NSW,1950,1557220
+New South Wales,NSW,1951,1574880
+New South Wales,NSW,1952,1579790
+New South Wales,NSW,1953,1576480
+New South Wales,NSW,1954,1863161
+New South Wales,NSW,1955,1906340
+New South Wales,NSW,1956,1949400
+New South Wales,NSW,1957,1996010
+New South Wales,NSW,1958,2043200
+New South Wales,NSW,1959,2085790
+New South Wales,NSW,1960,2132680
+New South Wales,NSW,1961,2303807
+New South Wales,NSW,1962,2353280
+New South Wales,NSW,1963,2397620
+New South Wales,NSW,1964,2441570
+New South Wales,NSW,1965,2491320
+New South Wales,NSW,1966,2542207
+New South Wales,NSW,1967,2583650
+New South Wales,NSW,1968,2630690
+New South Wales,NSW,1969,2690580
+New South Wales,NSW,1970,2751830
+New South Wales,NSW,1971,3015900
+New South Wales,NSW,1972,3053900
+New South Wales,NSW,1973,3079600
+New South Wales,NSW,1974,3108500
+New South Wales,NSW,1975,3129000
+New South Wales,NSW,1976,3143800
+New South Wales,NSW,1977,3168100
+New South Wales,NSW,1978,3197700
+New South Wales,NSW,1979,3226800
+New South Wales,NSW,1980,3257500
+New South Wales,NSW,1981,3279539
+New South Wales,NSW,1982,3319302
+New South Wales,NSW,1983,3351105
+New South Wales,NSW,1984,3385017
+New South Wales,NSW,1985,3424594
+New South Wales,NSW,1986,3471489
+New South Wales,NSW,1987,3526166
+New South Wales,NSW,1988,3587999
+New South Wales,NSW,1989,3621273
+New South Wales,NSW,1990,3642763
+New South Wales,NSW,1991,3672914
+New South Wales,NSW,1992,3708310
+New South Wales,NSW,1993,3728426
+New South Wales,NSW,1994,3758844
+New South Wales,NSW,1995,3802786
+New South Wales,NSW,1996,3856646
+New South Wales,NSW,1997,3905123
+New South Wales,NSW,1998,3945098
+New South Wales,NSW,1999,3991974
+New South Wales,NSW,2000,4041730
+New South Wales,NSW,2001,4102580
+New South Wales,NSW,2002,4135637
+New South Wales,NSW,2003,4162593
+New South Wales,NSW,2004,4184763
+New South Wales,NSW,2005,4217563
+New South Wales,NSW,2006,4256161
+New South Wales,NSW,2007,4325525
+New South Wales,NSW,2008,4409562
+New South Wales,NSW,2009,4492380
+New South Wales,NSW,2010,4555516
+New South Wales,NSW,2011,4608949
+New South Wales,NSW,2012,4677196
+New South Wales,NSW,2013,4757364
+New South Wales,NSW,2014,4841349
+New South Wales,NSW,2015,4930189
+New South Wales,NSW,2016,5024923
+New South Wales,NSW,2017,5119495
+New South Wales,NSW,2018,5190353
+New South Wales,NSW,2019,5256836
+New South Wales,NSW,2020,5295529
+New South Wales,NSW,2021,5261801
+New South Wales,NSW,2022,8182098
+New South Wales,NSW,2023,8356387
+New South Wales,NSW,2024,8492050
+New South Wales,NSW,2025,8592524
+Northern Territory,NT,1920,3989
+Northern Territory,NT,1921,1399
+Northern Territory,NT,1922,3612
+Northern Territory,NT,1923,3650
+Northern Territory,NT,1924,3728
+Northern Territory,NT,1925,3821
+Northern Territory,NT,1926,4097
+Northern Territory,NT,1927,4596
+Northern Territory,NT,1928,4254
+Northern Territory,NT,1929,4780
+Northern Territory,NT,1930,4964
+Northern Territory,NT,1931,4846
+Northern Territory,NT,1932,4786
+Northern Territory,NT,1933,1566
+Northern Territory,NT,1934,4968
+Northern Territory,NT,1935,5130
+Northern Territory,NT,1936,5361
+Northern Territory,NT,1937,5426
+Northern Territory,NT,1938,5730
+Northern Territory,NT,1939,7287
+Northern Territory,NT,1940,8974
+Northern Territory,NT,1941,9769
+Northern Territory,NT,1942,8291
+Northern Territory,NT,1943,10405
+Northern Territory,NT,1944,10477
+Northern Territory,NT,1945,10546
+Northern Territory,NT,1946,10642
+Northern Territory,NT,1947,2538
+Northern Territory,NT,1948,12185
+Northern Territory,NT,1949,13339
+Northern Territory,NT,1950,14420
+Northern Territory,NT,1951,14614
+Northern Territory,NT,1952,14771
+Northern Territory,NT,1953,15635
+Northern Territory,NT,1954,8071
+Northern Territory,NT,1955,8600
+Northern Territory,NT,1956,8900
+Northern Territory,NT,1957,21061
+Northern Territory,NT,1958,22097
+Northern Territory,NT,1959,24089
+Northern Territory,NT,1960,25573
+Northern Territory,NT,1961,15477
+Northern Territory,NT,1962,46004
+Northern Territory,NT,1963,48461
+Northern Territory,NT,1964,17800
+Northern Territory,NT,1965,53858
+Northern Territory,NT,1966,21671
+Northern Territory,NT,1967,23400
+Northern Territory,NT,1968,26300
+Northern Territory,NT,1969,29300
+Northern Territory,NT,1970,32900
+Northern Territory,NT,1971,39000
+Northern Territory,NT,1972,43200
+Northern Territory,NT,1973,46900
+Northern Territory,NT,1974,51700
+Northern Territory,NT,1975,35300
+Northern Territory,NT,1976,47300
+Northern Territory,NT,1977,51000
+Northern Territory,NT,1978,54900
+Northern Territory,NT,1979,57200
+Northern Territory,NT,1980,59600
+Northern Territory,NT,1981,62078
+Northern Territory,NT,1982,67052
+Northern Territory,NT,1983,70807
+Northern Territory,NT,1984,74959
+Northern Territory,NT,1985,79114
+Northern Territory,NT,1986,82814
+Northern Territory,NT,1987,85014
+Northern Territory,NT,1988,84009
+Northern Territory,NT,1989,84588
+Northern Territory,NT,1990,85694
+Northern Territory,NT,1991,86414
+Northern Territory,NT,1992,87834
+Northern Territory,NT,1993,89570
+Northern Territory,NT,1994,91424
+Northern Territory,NT,1995,94429
+Northern Territory,NT,1996,97247
+Northern Territory,NT,1997,100518
+Northern Territory,NT,1998,102395
+Northern Territory,NT,1999,104345
+Northern Territory,NT,2000,106412
+Northern Territory,NT,2001,108280
+Northern Territory,NT,2002,108679
+Northern Territory,NT,2003,108433
+Northern Territory,NT,2004,109211
+Northern Territory,NT,2005,111388
+Northern Territory,NT,2006,113461
+Northern Territory,NT,2007,116935
+Northern Territory,NT,2008,121210
+Northern Territory,NT,2009,125315
+Northern Territory,NT,2010,127829
+Northern Territory,NT,2011,129106
+Northern Territory,NT,2012,133105
+Northern Territory,NT,2013,138471
+Northern Territory,NT,2014,141169
+Northern Territory,NT,2015,144914
+Northern Territory,NT,2016,147102
+Northern Territory,NT,2017,148752
+Northern Territory,NT,2018,148273
+Northern Territory,NT,2019,147251
+Northern Territory,NT,2020,147673
+Northern Territory,NT,2021,147971
+Northern Territory,NT,2022,253100
+Northern Territory,NT,2023,257508
+Northern Territory,NT,2024,260884
+Northern Territory,NT,2025,264556
+Other Territories,OT,2001,2584
+Other Territories,OT,2002,2397
+Other Territories,OT,2003,2336
+Other Territories,OT,2004,2356
+Other Territories,OT,2005,2381
+Other Territories,OT,2006,2379
+Other Territories,OT,2007,2514
+Other Territories,OT,2008,2683
+Other Territories,OT,2009,2876
+Other Territories,OT,2010,3055
+Other Territories,OT,2011,3117
+Other Territories,OT,2012,3033
+Other Territories,OT,2013,2962
+Other Territories,OT,2014,2896
+Other Territories,OT,2015,2851
+Other Territories,OT,2016,4608
+Other Territories,OT,2017,4671
+Other Territories,OT,2018,4725
+Other Territories,OT,2019,4776
+Other Territories,OT,2020,4803
+Other Territories,OT,2021,4850
+Other Territories,OT,2022,4921
+Other Territories,OT,2023,4970
+Other Territories,OT,2024,4995
+Other Territories,OT,2025,5013
+Queensland,QLD,1920,205980
+Queensland,QLD,1921,217710
+Queensland,QLD,1922,230200
+Queensland,QLD,1923,235690
+Queensland,QLD,1924,245020
+Queensland,QLD,1925,253220
+Queensland,QLD,1926,258620
+Queensland,QLD,1927,264030
+Queensland,QLD,1928,275780
+Queensland,QLD,1929,284760
+Queensland,QLD,1930,279950
+Queensland,QLD,1931,283440
+Queensland,QLD,1932,298140
+Queensland,QLD,1933,301250
+Queensland,QLD,1934,304930
+Queensland,QLD,1935,306150
+Queensland,QLD,1936,313430
+Queensland,QLD,1937,318430
+Queensland,QLD,1938,325890
+Queensland,QLD,1939,330000
+Queensland,QLD,1940,335520
+Queensland,QLD,1941,344230
+Queensland,QLD,1942,353590
+Queensland,QLD,1943,370460
+Queensland,QLD,1944,384040
+Queensland,QLD,1945,393580
+Queensland,QLD,1946,399530
+Queensland,QLD,1947,404640
+Queensland,QLD,1948,414500
+Queensland,QLD,1949,429530
+Queensland,QLD,1950,444650
+Queensland,QLD,1951,453660
+Queensland,QLD,1952,469000
+Queensland,QLD,1953,488000
+Queensland,QLD,1954,502320
+Queensland,QLD,1955,515000
+Queensland,QLD,1956,527500
+Queensland,QLD,1957,543000
+Queensland,QLD,1958,555000
+Queensland,QLD,1959,567000
+Queensland,QLD,1960,578000
+Queensland,QLD,1961,692924
+Queensland,QLD,1962,706679
+Queensland,QLD,1963,721756
+Queensland,QLD,1964,740306
+Queensland,QLD,1965,759085
+Queensland,QLD,1966,778193
+Queensland,QLD,1967,793960
+Queensland,QLD,1968,810410
+Queensland,QLD,1969,829070
+Queensland,QLD,1970,847220
+Queensland,QLD,1971,957900
+Queensland,QLD,1972,977800
+Queensland,QLD,1973,1000700
+Queensland,QLD,1974,1024900
+Queensland,QLD,1975,1042100
+Queensland,QLD,1976,1058100
+Queensland,QLD,1977,1073700
+Queensland,QLD,1978,1090100
+Queensland,QLD,1979,1105900
+Queensland,QLD,1980,1126100
+Queensland,QLD,1981,1154705
+Queensland,QLD,1982,1190830
+Queensland,QLD,1983,1213607
+Queensland,QLD,1984,1227454
+Queensland,QLD,1985,1245078
+Queensland,QLD,1986,1265114
+Queensland,QLD,1987,1286535
+Queensland,QLD,1988,1313047
+Queensland,QLD,1989,1349743
+Queensland,QLD,1990,1382453
+Queensland,QLD,1991,1411773
+Queensland,QLD,1992,1435614
+Queensland,QLD,1993,1464508
+Queensland,QLD,1994,1494739
+Queensland,QLD,1995,1527888
+Queensland,QLD,1996,1560296
+Queensland,QLD,1997,1584086
+Queensland,QLD,1998,1607386
+Queensland,QLD,1999,1632209
+Queensland,QLD,2000,1660663
+Queensland,QLD,2001,1693556
+Queensland,QLD,2002,1735730
+Queensland,QLD,2003,1780650
+Queensland,QLD,2004,1823496
+Queensland,QLD,2005,1866210
+Queensland,QLD,2006,1908265
+Queensland,QLD,2007,1958907
+Queensland,QLD,2008,2012204
+Queensland,QLD,2009,2068479
+Queensland,QLD,2010,2108348
+Queensland,QLD,2011,2147436
+Queensland,QLD,2012,2196288
+Queensland,QLD,2013,2241944
+Queensland,QLD,2014,2281740
+Queensland,QLD,2015,2318653
+Queensland,QLD,2016,2362672
+Queensland,QLD,2017,2409466
+Queensland,QLD,2018,2454907
+Queensland,QLD,2019,2503078
+Queensland,QLD,2020,2545379
+Queensland,QLD,2021,2567714
+Queensland,QLD,2022,5310905
+Queensland,QLD,2023,5450235
+Queensland,QLD,2024,5571890
+Queensland,QLD,2025,5669764
+South Australia,SA,1920,255000
+South Australia,SA,1921,259590
+South Australia,SA,1922,267570
+South Australia,SA,1923,274520
+South Australia,SA,1924,283540
+South Australia,SA,1925,294710
+South Australia,SA,1926,305510
+South Australia,SA,1927,314330
+South Australia,SA,1928,316390
+South Australia,SA,1929,310920
+South Australia,SA,1930,310530
+South Australia,SA,1931,310460
+South Australia,SA,1932,311840
+South Australia,SA,1933,313000
+South Australia,SA,1934,314000
+South Australia,SA,1935,315000
+South Australia,SA,1936,317000
+South Australia,SA,1937,318000
+South Australia,SA,1938,321500
+South Australia,SA,1939,323000
+South Australia,SA,1940,330000
+South Australia,SA,1941,350000
+South Australia,SA,1942,355000
+South Australia,SA,1943,360000
+South Australia,SA,1944,365000
+South Australia,SA,1945,372000
+South Australia,SA,1946,380000
+South Australia,SA,1947,388000
+South Australia,SA,1948,399000
+South Australia,SA,1949,415500
+South Australia,SA,1950,433500
+South Australia,SA,1951,447500
+South Australia,SA,1952,464000
+South Australia,SA,1953,476000
+South Australia,SA,1954,483508
+South Australia,SA,1955,499100
+South Australia,SA,1956,517900
+South Australia,SA,1957,533600
+South Australia,SA,1958,547400
+South Australia,SA,1959,562300
+South Australia,SA,1960,576600
+South Australia,SA,1961,659316
+South Australia,SA,1962,673750
+South Australia,SA,1963,695700
+South Australia,SA,1964,720900
+South Australia,SA,1965,748350
+South Australia,SA,1966,771561
+South Australia,SA,1967,784450
+South Australia,SA,1968,795000
+South Australia,SA,1969,809650
+South Australia,SA,1970,826850
+South Australia,SA,1971,883900
+South Australia,SA,1972,894900
+South Australia,SA,1973,905500
+South Australia,SA,1974,915500
+South Australia,SA,1975,933200
+South Australia,SA,1976,940100
+South Australia,SA,1977,951300
+South Australia,SA,1978,960700
+South Australia,SA,1979,964800
+South Australia,SA,1980,970900
+South Australia,SA,1981,979895
+South Australia,SA,1982,989474
+South Australia,SA,1983,1001244
+South Australia,SA,1984,1013446
+South Australia,SA,1985,1024259
+South Australia,SA,1986,1034960
+South Australia,SA,1987,1043949
+South Australia,SA,1988,1054472
+South Australia,SA,1989,1067855
+South Australia,SA,1990,1080060
+South Australia,SA,1991,1093525
+South Australia,SA,1992,1100976
+South Australia,SA,1993,1103868
+South Australia,SA,1994,1108322
+South Australia,SA,1995,1111739
+South Australia,SA,1996,1116237
+South Australia,SA,1997,1122518
+South Australia,SA,1998,1129489
+South Australia,SA,1999,1136427
+South Australia,SA,2000,1142726
+South Australia,SA,2001,1148006
+South Australia,SA,2002,1154981
+South Australia,SA,2003,1162250
+South Australia,SA,2004,1168541
+South Australia,SA,2005,1177345
+South Australia,SA,2006,1189243
+South Australia,SA,2007,1204210
+South Australia,SA,2008,1219523
+South Australia,SA,2009,1237354
+South Australia,SA,2010,1253097
+South Australia,SA,2011,1264091
+South Australia,SA,2012,1277850
+South Australia,SA,2013,1289696
+South Australia,SA,2014,1302079
+South Australia,SA,2015,1313419
+South Australia,SA,2016,1324057
+South Australia,SA,2017,1338270
+South Australia,SA,2018,1353662
+South Australia,SA,2019,1372414
+South Australia,SA,2020,1392755
+South Australia,SA,2021,1401872
+South Australia,SA,2022,1824969
+South Australia,SA,2023,1857646
+South Australia,SA,2024,1882164
+South Australia,SA,2025,1902665
+Tasmania,TAS,1920,50000
+Tasmania,TAS,1921,53870
+Tasmania,TAS,1922,54420
+Tasmania,TAS,1923,54980
+Tasmania,TAS,1924,55540
+Tasmania,TAS,1925,56100
+Tasmania,TAS,1926,56680
+Tasmania,TAS,1927,57250
+Tasmania,TAS,1928,57840
+Tasmania,TAS,1929,58430
+Tasmania,TAS,1930,59020
+Tasmania,TAS,1931,59620
+Tasmania,TAS,1932,60230
+Tasmania,TAS,1933,62150
+Tasmania,TAS,1934,62610
+Tasmania,TAS,1935,63620
+Tasmania,TAS,1936,64830
+Tasmania,TAS,1937,66490
+Tasmania,TAS,1938,67700
+Tasmania,TAS,1939,68580
+Tasmania,TAS,1940,69370
+Tasmania,TAS,1941,69390
+Tasmania,TAS,1942,69930
+Tasmania,TAS,1943,70970
+Tasmania,TAS,1944,72230
+Tasmania,TAS,1945,73790
+Tasmania,TAS,1946,75510
+Tasmania,TAS,1947,76534
+Tasmania,TAS,1948,78310
+Tasmania,TAS,1949,80580
+Tasmania,TAS,1950,83680
+Tasmania,TAS,1951,87190
+Tasmania,TAS,1952,90650
+Tasmania,TAS,1953,93280
+Tasmania,TAS,1954,95206
+Tasmania,TAS,1955,97428
+Tasmania,TAS,1956,99536
+Tasmania,TAS,1957,103944
+Tasmania,TAS,1958,105611
+Tasmania,TAS,1959,109756
+Tasmania,TAS,1960,111851
+Tasmania,TAS,1961,130236
+Tasmania,TAS,1962,132790
+Tasmania,TAS,1963,135320
+Tasmania,TAS,1964,137310
+Tasmania,TAS,1965,139400
+Tasmania,TAS,1966,141311
+Tasmania,TAS,1967,143390
+Tasmania,TAS,1968,145830
+Tasmania,TAS,1969,149090
+Tasmania,TAS,1970,151230
+Tasmania,TAS,1971,157100
+Tasmania,TAS,1972,158300
+Tasmania,TAS,1973,160100
+Tasmania,TAS,1974,162400
+Tasmania,TAS,1975,165200
+Tasmania,TAS,1976,166900
+Tasmania,TAS,1977,168300
+Tasmania,TAS,1978,169600
+Tasmania,TAS,1979,171000
+Tasmania,TAS,1980,172300
+Tasmania,TAS,1981,174120
+Tasmania,TAS,1982,175226
+Tasmania,TAS,1983,176477
+Tasmania,TAS,1984,178844
+Tasmania,TAS,1985,181228
+Tasmania,TAS,1986,182846
+Tasmania,TAS,1987,183837
+Tasmania,TAS,1988,184413
+Tasmania,TAS,1989,185982
+Tasmania,TAS,1990,189070
+Tasmania,TAS,1991,191648
+Tasmania,TAS,1992,193505
+Tasmania,TAS,1993,194906
+Tasmania,TAS,1994,195899
+Tasmania,TAS,1995,196758
+Tasmania,TAS,1996,197124
+Tasmania,TAS,1997,196892
+Tasmania,TAS,1998,196533
+Tasmania,TAS,1999,196618
+Tasmania,TAS,2000,196966
+Tasmania,TAS,2001,197403
+Tasmania,TAS,2002,197726
+Tasmania,TAS,2003,199788
+Tasmania,TAS,2004,201771
+Tasmania,TAS,2005,203288
+Tasmania,TAS,2006,204753
+Tasmania,TAS,2007,206649
+Tasmania,TAS,2008,209166
+Tasmania,TAS,2009,212085
+Tasmania,TAS,2010,214669
+Tasmania,TAS,2011,216273
+Tasmania,TAS,2012,217670
+Tasmania,TAS,2013,219315
+Tasmania,TAS,2014,221365
+Tasmania,TAS,2015,223502
+Tasmania,TAS,2016,225913
+Tasmania,TAS,2017,231291
+Tasmania,TAS,2018,236954
+Tasmania,TAS,2019,242498
+Tasmania,TAS,2020,246859
+Tasmania,TAS,2021,250717
+Tasmania,TAS,2022,572300
+Tasmania,TAS,2023,573731
+Tasmania,TAS,2024,574765
+Tasmania,TAS,2025,576261
+Victoria,VIC,1920,763000
+Victoria,VIC,1921,800520
+Victoria,VIC,1922,831060
+Victoria,VIC,1923,861760
+Victoria,VIC,1924,889720
+Victoria,VIC,1925,917080
+Victoria,VIC,1926,945500
+Victoria,VIC,1927,971000
+Victoria,VIC,1928,990650
+Victoria,VIC,1929,1006000
+Victoria,VIC,1930,999650
+Victoria,VIC,1931,995600
+Victoria,VIC,1932,993800
+Victoria,VIC,1933,995800
+Victoria,VIC,1934,1000000
+Victoria,VIC,1935,1008300
+Victoria,VIC,1936,1016500
+Victoria,VIC,1937,1024300
+Victoria,VIC,1938,1035600
+Victoria,VIC,1939,1050700
+Victoria,VIC,1940,1083000
+Victoria,VIC,1941,1114900
+Victoria,VIC,1942,1143900
+Victoria,VIC,1943,1156600
+Victoria,VIC,1944,1168900
+Victoria,VIC,1945,1180200
+Victoria,VIC,1946,1189800
+Victoria,VIC,1947,1228300
+Victoria,VIC,1948,1247800
+Victoria,VIC,1949,1272300
+Victoria,VIC,1950,1302200
+Victoria,VIC,1951,1330800
+Victoria,VIC,1952,1359100
+Victoria,VIC,1953,1388800
+Victoria,VIC,1954,1524111
+Victoria,VIC,1955,1575300
+Victoria,VIC,1956,1629400
+Victoria,VIC,1957,1677100
+Victoria,VIC,1958,1726100
+Victoria,VIC,1959,1777700
+Victoria,VIC,1960,1831100
+Victoria,VIC,1961,1984936
+Victoria,VIC,1962,2029240
+Victoria,VIC,1963,2077560
+Victoria,VIC,1964,2130980
+Victoria,VIC,1965,2180800
+Victoria,VIC,1966,2230793
+Victoria,VIC,1967,2283000
+Victoria,VIC,1968,2331000
+Victoria,VIC,1969,2389700
+Victoria,VIC,1970,2447600
+Victoria,VIC,1971,2606900
+Victoria,VIC,1972,2651600
+Victoria,VIC,1973,2686400
+Victoria,VIC,1974,2722400
+Victoria,VIC,1975,2746200
+Victoria,VIC,1976,2764100
+Victoria,VIC,1977,2782600
+Victoria,VIC,1978,2800700
+Victoria,VIC,1979,2816300
+Victoria,VIC,1980,2835500
+Victoria,VIC,1981,2857907
+Victoria,VIC,1982,2887744
+Victoria,VIC,1983,2916524
+Victoria,VIC,1984,2942787
+Victoria,VIC,1985,2970627
+Victoria,VIC,1986,2996733
+Victoria,VIC,1987,3035229
+Victoria,VIC,1988,3075917
+Victoria,VIC,1989,3121026
+Victoria,VIC,1990,3163590
+Victoria,VIC,1991,3194707
+Victoria,VIC,1992,3217776
+Victoria,VIC,1993,3231603
+Victoria,VIC,1994,3243516
+Victoria,VIC,1995,3268881
+Victoria,VIC,1996,3304912
+Victoria,VIC,1997,3336088
+Victoria,VIC,1998,3368966
+Victoria,VIC,1999,3407286
+Victoria,VIC,2000,3450077
+Victoria,VIC,2001,3500249
+Victoria,VIC,2002,3545579
+Victoria,VIC,2003,3594031
+Victoria,VIC,2004,3641951
+Victoria,VIC,2005,3697372
+Victoria,VIC,2006,3760760
+Victoria,VIC,2007,3841760
+Victoria,VIC,2008,3931438
+Victoria,VIC,2009,4031787
+Victoria,VIC,2010,4105857
+Victoria,VIC,2011,4169366
+Victoria,VIC,2012,4265843
+Victoria,VIC,2013,4370067
+Victoria,VIC,2014,4476030
+Victoria,VIC,2015,4586012
+Victoria,VIC,2016,4714387
+Victoria,VIC,2017,4820116
+Victoria,VIC,2018,4916589
+Victoria,VIC,2019,5006457
+Victoria,VIC,2020,5061107
+Victoria,VIC,2021,4975319
+Victoria,VIC,2022,6615232
+Victoria,VIC,2023,6797169
+Victoria,VIC,2024,6950961
+Victoria,VIC,2025,7073859
+Western Australia,WA,1920,152000
+Western Australia,WA,1921,155590
+Western Australia,WA,1922,161770
+Western Australia,WA,1923,173770
+Western Australia,WA,1924,180790
+Western Australia,WA,1925,183500
+Western Australia,WA,1926,188260
+Western Australia,WA,1927,195080
+Western Australia,WA,1928,200520
+Western Australia,WA,1929,206310
+Western Australia,WA,1930,211640
+Western Australia,WA,1931,215800
+Western Australia,WA,1932,214880
+Western Australia,WA,1933,209000
+Western Australia,WA,1934,211000
+Western Australia,WA,1935,214000
+Western Australia,WA,1936,217000
+Western Australia,WA,1937,220000
+Western Australia,WA,1938,223000
+Western Australia,WA,1939,227000
+Western Australia,WA,1940,230000
+Western Australia,WA,1941,234000
+Western Australia,WA,1942,239000
+Western Australia,WA,1943,245000
+Western Australia,WA,1944,253000
+Western Australia,WA,1945,260000
+Western Australia,WA,1946,268000
+Western Australia,WA,1947,276000
+Western Australia,WA,1948,283000
+Western Australia,WA,1949,296000
+Western Australia,WA,1950,313000
+Western Australia,WA,1951,322000
+Western Australia,WA,1952,335000
+Western Australia,WA,1953,345000
+Western Australia,WA,1954,348647
+Western Australia,WA,1955,360000
+Western Australia,WA,1956,372000
+Western Australia,WA,1957,382000
+Western Australia,WA,1958,391000
+Western Australia,WA,1959,401000
+Western Australia,WA,1960,409000
+Western Australia,WA,1961,475576
+Western Australia,WA,1962,491300
+Western Australia,WA,1963,509200
+Western Australia,WA,1964,525800
+Western Australia,WA,1965,540700
+Western Australia,WA,1966,559298
+Western Australia,WA,1967,583800
+Western Australia,WA,1968,611800
+Western Australia,WA,1969,642800
+Western Australia,WA,1970,671900
+Western Australia,WA,1971,744600
+Western Australia,WA,1972,767200
+Western Australia,WA,1973,782000
+Western Australia,WA,1974,803700
+Western Australia,WA,1975,826400
+Western Australia,WA,1976,845700
+Western Australia,WA,1977,866100
+Western Australia,WA,1978,884500
+Western Australia,WA,1979,899200
+Western Australia,WA,1980,917000
+Western Australia,WA,1981,941479
+Western Australia,WA,1982,973542
+Western Australia,WA,1983,998576
+Western Australia,WA,1984,1017871
+Western Australia,WA,1985,1041608
+Western Australia,WA,1986,1075959
+Western Australia,WA,1987,1106882
+Western Australia,WA,1988,1139494
+Western Australia,WA,1989,1178097
+Western Australia,WA,1990,1207701
+Western Australia,WA,1991,1226115
+Western Australia,WA,1992,1247523
+Western Australia,WA,1993,1266704
+Western Australia,WA,1994,1289836
+Western Australia,WA,1995,1316658
+Western Australia,WA,1996,1343355
+Western Australia,WA,1997,1366707
+Western Australia,WA,1998,1388787
+Western Australia,WA,1999,1411070
+Western Australia,WA,2000,1432115
+Western Australia,WA,2001,1455361
+Western Australia,WA,2002,1474536
+Western Australia,WA,2003,1496016
+Western Australia,WA,2004,1520232
+Western Australia,WA,2005,1544977
+Western Australia,WA,2006,1576912
+Western Australia,WA,2007,1628467
+Western Australia,WA,2008,1682860
+Western Australia,WA,2009,1739342
+Western Australia,WA,2010,1781132
+Western Australia,WA,2011,1833567
+Western Australia,WA,2012,1892862
+Western Australia,WA,2013,1943855
+Western Australia,WA,2014,1973923
+Western Australia,WA,2015,1998937
+Western Australia,WA,2016,2019263
+Western Australia,WA,2017,2046413
+Western Australia,WA,2018,2075953
+Western Australia,WA,2019,2114184
+Western Australia,WA,2020,2161561
+Western Australia,WA,2021,2191838
+Western Australia,WA,2022,2793934
+Western Australia,WA,2023,2890936
+Western Australia,WA,2024,2978147
+Western Australia,WA,2025,3044382
